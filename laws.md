@@ -36,13 +36,34 @@ Version:
 
     FEATURE-3-UserClass
     BUG-5-PersistanceNoSaveUsername
-    DOCUMENTATION-10-TestingDocu    
+    DOCUMENTATION-10-TestingDocu  
+
+   To create: 
+        git checkout -b label-issuenumber-briefdescription
+    To push:
+        git push origin branch_name
+
+    You must change to master branch after pushing it.
+        git checkout -b master
+        git pull
+
+    To check in which branch you currently are.
+        git branch (green indicates the one you are in).
 
 3. ## COMMITS:
 
     Add only the necessary.
     Brief description.
 
+    git commit
+
+    You MUST be in your issue branch, then if you want to add some files to commit:
+        git add file_route
+        -git add . (all changes will be uploaded)-
+
+        DANGER: you should use this commands just before doing the commit. 
+
+        git commit
 
 4. ## ISSUES:
 
