@@ -9,7 +9,6 @@ import java.io.IOException;
 import java.util.List;
 
 public class CtrlItem implements ICtrlItem {
-    /* THATS FOR TEST THE CSVREADER
     public static void main(String[] args) {
         CSVReader reader = new CSVReader();
         List<List<String>> fileData = reader.readFile("items");
@@ -21,5 +20,5 @@ public class CtrlItem implements ICtrlItem {
 
 
     }
-    */
+
 }
