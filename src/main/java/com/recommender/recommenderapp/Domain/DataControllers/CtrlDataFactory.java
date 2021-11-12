@@ -15,7 +15,7 @@ public class CtrlDataFactory {
     }
 
     public ICtrlItem getCtrlItem(){
-        return new CtrlItem();
+        return new CtrlCSVItemList();
     }
 
     public ICtrlUser getCtrlUser(){
