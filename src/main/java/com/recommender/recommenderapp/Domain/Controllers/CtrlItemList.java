@@ -27,7 +27,4 @@ public class CtrlItemList {
         return itemList;
     }
 
-    public Item getItem(String itemId){
-        return itemList.getItem(itemId);
-    }
 }
