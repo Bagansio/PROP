@@ -3,7 +3,7 @@ package com.recommender.recommenderapp.Domain.Models;
 
 import com.recommender.recommenderapp.Domain.Utils.ItemTypes;
 
-import java.util.List;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
@@ -16,14 +16,41 @@ public class Item {
 
     private Map<String, String> stringAttributes;
     private Map<String, Integer> intAttributes;
-    private Map<String, Float> floatAttributes;
+    private Map<String, Double> doubleAttributes;
     private Map<String, Set<String>> setAttributes;
 
-    public Item(String id, String title, ItemTypes type, Map<String, String> strings, Map<String, List<String>> arrayAttributes) {
+    public Item(String id, String title, ItemTypes type) {
         this.id = id;
         this.title = title;
         this.type = type;
 
+        stringAttributes = new HashMap<>();
+        intAttributes = new HashMap<>();
+        doubleAttributes = new HashMap<>();
+        setAttributes = new HashMap<>();
+    }
+
+    public Item() {
+        stringAttributes = new HashMap<>();
+        intAttributes = new HashMap<>();
+        doubleAttributes = new HashMap<>();
+        setAttributes = new HashMap<>();
+    }
+
+    public void addIntAttribute(String attributeName, Integer value){
+        intAttributes.put(attributeName,value);
+    }
+
+    public void addDoubleAttribute(String attributeName, Double value){
+        doubleAttributes.put(attributeName,value);
+    }
+
+    public void addSetAttribute(String attributeName, Set<String> value){
+        setAttributes.put(attributeName,value);
+    }
+
+    public void addStringAttribute(String attributeName, String value){
+        stringAttributes.put(attributeName,value);
     }
 
     public Map<String, String> getStringAttributes() {
@@ -42,12 +69,12 @@ public class Item {
         this.intAttributes = intAttributes;
     }
 
-    public Map<String, Float> getFloatAttributes() {
-        return floatAttributes;
+    public Map<String, Double> getDoubleAttributes() {
+        return doubleAttributes;
     }
 
-    public void setFloatAttributes(Map<String, Float> floatAttributes) {
-        this.floatAttributes = floatAttributes;
+    public void setDoubleAttributes(Map<String, Double> doubleAttributes) {
+        this.doubleAttributes = doubleAttributes;
     }
 
     public Map<String, Set<String>> getSetAttributes() {
