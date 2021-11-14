@@ -16,8 +16,8 @@ public class User {
 
     public User(String id) {
         this.id = id;
-        this.items = new HashMap<String, Item>();
-        this.ratings = new HashMap<String, Float>();
+        this.items = new HashMap<>();
+        this.ratings = new HashMap<>();
     }
 
     public void addItem(Item item) {
@@ -33,9 +33,7 @@ public class User {
     }
 
     public void rateItem(String itemId, Float rate) {
-        if (items.containsKey(itemId)) {
             ratings.put(itemId, rate);
-        }
     }
 
     public void setRate(String itemId, Float newRate) {
