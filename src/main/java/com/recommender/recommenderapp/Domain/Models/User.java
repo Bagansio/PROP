@@ -11,7 +11,7 @@ public class User {
     private String id;
     private String name;
     private Map<String, Item> items;
-    private Map<String, Float> ratings;
+    private Map<String, Double> ratings;
 
 
     public User(String id) {
@@ -32,11 +32,11 @@ public class User {
         return items.get(itemId);
     }
 
-    public void rateItem(String itemId, Float rate) {
+    public void rateItem(String itemId, Double rate) {
             ratings.put(itemId, rate);
     }
 
-    public void setRate(String itemId, Float newRate) {
+    public void setRate(String itemId, Double newRate) {
         if (ratings.containsKey(itemId)) {
             ratings.replace(itemId, newRate);
         }
@@ -62,7 +62,7 @@ public class User {
         return items;
     }
 
-    public Map<String, Float> getRatings() {
+    public Map<String, Double> getRatings() {
         return ratings;
     }
 
