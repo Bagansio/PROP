@@ -10,8 +10,8 @@ public class User {
 
     private String id;
     private String name;
-    private final Map<String, Item> items;
-    private final Map<String, Float> ratings;
+    private Map<String, Item> items;
+    private Map<String, Float> ratings;
 
 
     public User(String id) {
