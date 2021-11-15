@@ -13,7 +13,7 @@ import static com.recommender.recommenderapp.Domain.Utils.ItemTypes.movie;
 public class ContendBased {
 
     //Fund the min and max values for each numerical value related
-    private Map<String,PairDoubleDouble> findMinMAx(Map<String, Item> items) {
+    private static Map<String,PairDoubleDouble> findMinMAx(Map<String, Item> items) {
         Map<String, PairDoubleDouble> minMax = new HashMap<String, PairDoubleDouble>();
         for (Map.Entry<String, Item> eachitem : items.entrySet()) {
             String key = eachitem.getKey();
@@ -60,9 +60,23 @@ public class ContendBased {
         return minMax;
     }
     //Rescale numerical values to the range 0-1
+    private static Double normalizevalue(Double value, Double min , Double max){
+       /* System.out.println("minMaxyeso ");
+        System.out.println(value);
+        System.out.println(min);
+        System.out.println(max);
+        System.out.println((value - min) / (max-min));*/
+        if(max>min){
+            return ((value - min) / (max-min));
+        }
+        else {
+            return max;
+        }
+
+    }
 
     //Locate k most similar neighbours
-    private static List<PairStringDouble>  getNeighbours(Item itemTarget, Map<String, Item> itemList, int k){
+    private static List<PairStringDouble>  getNeighbours(Item itemTarget, Map<String, Item> itemList, int k, Map<String,PairDoubleDouble> minMax){
         //PairStringDouble neighbour= new PairStringDouble();
         List<PairStringDouble> neighbours = new ArrayList<PairStringDouble>();
         List<PairStringDouble> result = new ArrayList<PairStringDouble>();
@@ -92,7 +106,8 @@ public class ContendBased {
                 Integer value = attribute.getValue();
                 Integer valueIntOfTarget= intAttributesOfTarget.get(name);
                 if (valueIntOfTarget != null){
-                    distance.getAndSet(distance.get() + Math.pow(valueIntOfTarget - value, 2));
+                    PairDoubleDouble minMaxOfAttrib = minMax.get(name);
+                    distance.getAndSet(distance.get() + Math.pow(normalizevalue(valueIntOfTarget.doubleValue(), minMaxOfAttrib.x, minMaxOfAttrib.y) - normalizevalue(value.doubleValue(), minMaxOfAttrib.x, minMaxOfAttrib.y), 2));
                     System.out.println(key + name);
                     System.out.println(valueIntOfTarget);
                     System.out.println(value);
@@ -111,7 +126,8 @@ public class ContendBased {
                 Double value = attribute.getValue();
                 Double valueDoubleOfTarget= doubleAttributesOfTarget.get(name);
                 if (valueDoubleOfTarget != null){
-                    distance.getAndSet(distance.get() + Math.pow(valueDoubleOfTarget - value, 2));
+                    PairDoubleDouble minMaxOfAttrib = minMax.get(name);
+                    distance.getAndSet(distance.get() + Math.pow(normalizevalue(valueDoubleOfTarget, minMaxOfAttrib.x, minMaxOfAttrib.y) - normalizevalue(value, minMaxOfAttrib.x, minMaxOfAttrib.y), 2));
                 }
 
             }
@@ -219,7 +235,7 @@ public class ContendBased {
        itemList.put("test1",test1);
        itemList.put("test2",test2);
        Item itemTarget = test2;
-       List<PairStringDouble> neigh=  getNeighbours(itemTarget ,itemList, 2);
+       List<PairStringDouble> neigh=  getNeighbours(itemTarget ,itemList, 2, findMinMAx(itemList));
         System.out.println("test first neigh");
         System.out.println(neigh.get(0).x);
        System.out.println(neigh.get(0).y);
@@ -227,6 +243,23 @@ public class ContendBased {
         System.out.println(neigh.get(1).x);
         System.out.println(neigh.get(1).y);
         System.out.println("WOrks?");
+
+        /*
+        Map<String, Item> items = User.getItems();
+
+        Item itemTargetFinal = items.get(858);
+
+        List<PairStringDouble> neighbour=  getNeighbours(itemTargetFinal ,items, 2, findMinMAx(items));
+        System.out.println("test neigh with all ");
+        System.out.println(neighbour.get(0).x);
+        System.out.println(neighbour.get(0).y);
+
+        System.out.println(neighbour.get(1).x);
+        System.out.println(neighbour.get(1).y);
+        System.out.println("Maybe works");
+
+*/
+
 
     }
 

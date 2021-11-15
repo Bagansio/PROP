@@ -58,7 +58,7 @@ public class User {
         this.name = name;
     }
 
-    public Map<String, Item> getItems() {
+    public  Map<String, Item> getItems() {
         return items;
     }
 
