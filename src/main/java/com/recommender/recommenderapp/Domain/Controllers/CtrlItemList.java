@@ -1,7 +1,10 @@
 package com.recommender.recommenderapp.Domain.Controllers;
 
+import com.recommender.recommenderapp.Domain.DataControllers.CtrlDataFactory;
+import com.recommender.recommenderapp.Domain.DataControllers.ICtrlCSVItemList;
 import com.recommender.recommenderapp.Domain.Models.Item;
-import com.recommender.recommenderapp.Domain.Models.ItemList;
+
+import java.util.Map;
 
 /**
  * @author Alex
@@ -9,7 +12,8 @@ import com.recommender.recommenderapp.Domain.Models.ItemList;
  * Its a Singleton
  */
 public class CtrlItemList {
-    private ItemList itemList;
+    private final CtrlDataFactory  ctrlDataFactory = new CtrlDataFactory();
+    private Map<String,Item> itemList;
     private static CtrlItemList _instance = null;
 
     public static CtrlItemList Instance(){
@@ -19,12 +23,19 @@ public class CtrlItemList {
         return _instance;
     }
 
-    public void setItemList(ItemList itemList){
+    public void setItemList(Map<String,Item> itemList){
         this.itemList = itemList;
     }
 
-    public ItemList getItemList(){
+    public Map<String,Item> getItemList(){
+        if(itemList == null){
+            loadItemList();
+        }
         return itemList;
     }
 
+    private void loadItemList(){
+        ICtrlCSVItemList loader = ctrlDataFactory.getICtrlCSVItemList();
+        itemList = loader.getItemList();
+    }
 }

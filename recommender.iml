@@ -7,6 +7,14 @@
       <sourceFolder url="file://$MODULE_DIR$/src/main/java" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/main/resources" type="java-resource" />
       <excludeFolder url="file://$MODULE_DIR$/target" />
+      <excludeFolder url="file://$MODULE_DIR$/.idea/sonarlint/issuestore/1/6" />
+      <excludeFolder url="file://$MODULE_DIR$/.idea/sonarlint/issuestore/1/8" />
+      <excludeFolder url="file://$MODULE_DIR$/.idea/sonarlint/issuestore/1/f" />
+      <excludeFolder url="file://$MODULE_DIR$/.idea/sonarlint/issuestore/4/6" />
+      <excludeFolder url="file://$MODULE_DIR$/.idea/sonarlint/issuestore/f/3" />
+      <excludeFolder url="file://$MODULE_DIR$/.idea/sonarlint/issuestore/6" />
+      <excludeFolder url="file://$MODULE_DIR$/.idea/sonarlint/issuestore/a" />
+      <excludeFolder url="file://$MODULE_DIR$/.idea/sonarlint/issuestore/e" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
