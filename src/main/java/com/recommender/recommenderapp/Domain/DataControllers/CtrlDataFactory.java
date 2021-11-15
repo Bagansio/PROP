@@ -14,11 +14,11 @@ public class CtrlDataFactory {
         return _instance;
     }
 
-    public ICtrlItem getCtrlItem(){
+    public ICtrlCSVItemList getICtrlCSVItemList(){
         return new CtrlCSVItemList();
     }
 
-    public ICtrlUser getCtrlUser(){
-        return new CtrlUser();
+    public ICtrlCSVUser getICtrlCSVUser(){
+        return new CtrlCSVUsers();
     }
 }
