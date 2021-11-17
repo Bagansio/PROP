@@ -211,24 +211,24 @@ public class ContendBased {
     //Find the k-closest neighbours of the User
     private static List<PairStringDouble> getNeighboursOfUser(User userTarget, int k) {
         List<PairStringDouble> result = new ArrayList<PairStringDouble>();
-        Map<String, Float> ratings = userTarget.getRatings();
+        Map<String, Double> ratings = userTarget.getRatings();
         Map<String, Item> items = userTarget.getItems();
         Map<String, List<PairStringDouble>> neighbours = new HashMap<String, List<PairStringDouble>>();
         Double min = 0.0;
         Double max = 0.0;
         Map<String, PairDoubleDouble> minMax = findMinMAx(items);
-        for (Map.Entry<String, Float> currentRating : ratings.entrySet()) { // we find the min and max values
+        for (Map.Entry<String, Double> currentRating : ratings.entrySet()) { // we find the min and max values
             String name = currentRating.getKey();
-            Float value = currentRating.getValue();
+            Double value = currentRating.getValue();
             if (max < value) {
                 max = value.doubleValue();
             } else if (min > value) {
                 min = value.doubleValue();
             }
         }
-        for (Map.Entry<String, Float> currentRating : ratings.entrySet()) { // loop for each rating
+        for (Map.Entry<String, Double> currentRating : ratings.entrySet()) { // loop for each rating
             String name = currentRating.getKey();
-            Float value = currentRating.getValue();
+            Double value = currentRating.getValue();
             if (value >= (max - min) * 0.5) { //if value is greater than the mean of values we calculate their neighbours
                 Item item = items.get(name);
                 Map<String, Item> itemList = items;
