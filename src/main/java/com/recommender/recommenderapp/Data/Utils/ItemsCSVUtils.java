@@ -6,9 +6,18 @@ import java.util.Map;
 
 public class ItemsCSVUtils {
 
-    private static final Map<Integer,String[]> attributesPositions;
+    private Map<Integer,String[]> attributesPositions;
 
-    static{
+
+    public ItemsCSVUtils(Datasets dataset){
+        if(dataset.equals(Datasets.movies)){
+            chargeMovies();
+        }
+        else chargeSeries();
+    }
+
+
+    private void chargeMovies(){
         attributesPositions = new HashMap<>();
         attributesPositions.put(0, new String[]{"adult", "Boolean"});
         attributesPositions.put(2, new String[]{"budget", "Integer"});
@@ -28,6 +37,20 @@ public class ItemsCSVUtils {
         attributesPositions.put(22, new String[]{"vote_average", "Double"});
         attributesPositions.put(23, new String[]{"vote_count", "Double"});
         attributesPositions.put(24, new String[]{"keywords", "Set"});
+    }
+
+    private void chargeSeries(){
+        attributesPositions = new HashMap<>();
+        attributesPositions.put(0,new String[]{"id","String"});
+        attributesPositions.put(1,new String[]{"title","String"});
+        attributesPositions.put(2,new String[]{"synopsis","String"});
+        attributesPositions.put(3,new String[]{"genres","Set"});
+        attributesPositions.put(4,new String[]{"releaseDate","String"});
+        //attributesPositions.put(5,new String[]{"episodes","Integer"});
+        attributesPositions.put(6,new String[]{"members","Integer"});
+        attributesPositions.put(7,new String[]{"popularity","Double"});
+        //attributesPositions.put(8,new String[]{"ranked","Integer"});
+        attributesPositions.put(9,new String[]{"score","Double"});
     }
 
     public boolean relevantAttribute(Integer index){

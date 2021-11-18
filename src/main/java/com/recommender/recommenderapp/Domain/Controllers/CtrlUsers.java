@@ -1,5 +1,6 @@
 package com.recommender.recommenderapp.Domain.Controllers;
 
+import com.recommender.recommenderapp.Data.Utils.Datasets;
 import com.recommender.recommenderapp.Domain.DataControllers.CtrlDataFactory;
 import com.recommender.recommenderapp.Domain.DataControllers.ICtrlCSVUser;
 import com.recommender.recommenderapp.Domain.Models.User;
@@ -7,6 +8,7 @@ import com.recommender.recommenderapp.Domain.Models.User;
 import java.util.Map;
 
 public class CtrlUsers {
+    private Datasets dataset = Datasets.movies;
     private CtrlDataFactory ctrlDataFactory = new CtrlDataFactory();
     private Map<String, User> users;
     private static CtrlUsers _instance = null;
@@ -25,10 +27,15 @@ public class CtrlUsers {
         return users;
     }
 
+    public void setDataset(Datasets dataset) {
+        this.dataset = dataset;
+    }
+
     private void loadUsers(){
         ICtrlCSVUser ctrlCSVUser = ctrlDataFactory.getICtrlCSVUser();
         CtrlItemList ctrlItemList = new CtrlItemList();
-        users = ctrlCSVUser.loadUserRatings(ctrlItemList.getItemList());
+        ctrlItemList.setDataset(dataset);
+        users = ctrlCSVUser.loadUserRatings(ctrlItemList.getItemList(),dataset);
     }
 
 }

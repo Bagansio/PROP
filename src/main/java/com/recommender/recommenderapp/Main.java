@@ -1,5 +1,6 @@
 package com.recommender.recommenderapp;
 
+import com.recommender.recommenderapp.Data.Utils.Datasets;
 import com.recommender.recommenderapp.Domain.Controllers.CtrlItemList;
 import com.recommender.recommenderapp.Domain.Controllers.CtrlUsers;
 import com.recommender.recommenderapp.Domain.Models.Item;
@@ -12,7 +13,7 @@ public class Main {
     public static void main(String args[]){
 
         CtrlItemList ctrlItemList = new CtrlItemList();
-
+        ctrlItemList.setDataset(Datasets.series);
         Map<String, Item> items = ctrlItemList.getItemList();
         /*
         items.forEach((k,v) -> {
@@ -30,6 +31,7 @@ public class Main {
         */
 
         CtrlUsers ctrlUsers = new CtrlUsers();
+        ctrlUsers.setDataset(Datasets.series);
         Map<String, User> users = ctrlUsers.getUsers();
 
         users.forEach((k,v) -> {
