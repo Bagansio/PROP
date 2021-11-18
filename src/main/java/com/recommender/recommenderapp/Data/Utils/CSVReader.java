@@ -4,6 +4,7 @@ package com.recommender.recommenderapp.Data.Utils;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,7 +15,6 @@ import java.util.Scanner;
  * @author  Alex
  */
 public class CSVReader {
-
 
     private static final String PATH = "src\\main\\resources\\datasets\\";
     private static final String EXTENSION = ".csv";
@@ -45,9 +45,10 @@ public class CSVReader {
      * @param filename -> file to read
      * @return A list that contains each line of CSV separated by the DELIMITER
      */
-    public List<List<String>> readFile(String filename) {
+    public List<List<String>> readFile(String filename, String dataset) {
         List<List<String>> fileData = new ArrayList<>();
-        try (Scanner scanner = new Scanner(Paths.get(PATH+filename+EXTENSION).toFile())) {
+        String currentPath = PATH + "\\" + dataset + "\\" + filename + ".csv";
+        try (Scanner scanner = new Scanner(Paths.get(currentPath).toFile())) {
 
             while(scanner.hasNextLine()) {
                 String line = scanner.nextLine();
@@ -56,10 +57,7 @@ public class CSVReader {
             }
 
         }
-        catch (FileNotFoundException ex) {
-            ex.printStackTrace();
-        }
-        catch (IOException ex) {
+        catch (Exception ex) {
             ex.printStackTrace();
         }
         return fileData;
