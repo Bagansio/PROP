@@ -1,6 +1,7 @@
 package com.recommender.recommenderapp.Domain.Models;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class ContentBasedFiltering extends Algorithm{
 
@@ -18,9 +19,15 @@ public class ContentBasedFiltering extends Algorithm{
 
     private Double normalizeValue(Double value, Double min, Double max){
         // if max != min we normalize value
-        if(max > min)
-            return ((value-min)/(max-min));
+        if(value > max)
+            return 1.0;
 
+        if(value < min)
+            return 0.0;
+
+        if(max > min) {
+            return ((value - min) / (max - min));
+        }
         return max; //min == max we return max because all the attributes of this type are equal
     }
 
@@ -83,6 +90,37 @@ public class ContentBasedFiltering extends Algorithm{
         return filteredKnownItems;
     }
 
+    private Map<String,Double> filterNearestNeighbours(Map<String,Double> neighbours){
+        Map<String,Double> nearestNeighbours = new LinkedHashMap<>();
+        /*
+        System.out.println("-------------------------");
+
+        neighbours.forEach((k,v)-> {
+            System.out.println(k +": " + v);
+        });
+        */
+        neighbours = neighbours.entrySet().stream()
+                .sorted(Map.Entry.comparingByValue()).collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (oldValue, newValue) -> oldValue, LinkedHashMap::new));
+
+        Iterator<Map.Entry<String,Double>> it = neighbours.entrySet().iterator();
+        int i = 0;
+        while(i < limit && it.hasNext()){
+            Map.Entry<String,Double> entry = it.next();
+            nearestNeighbours.put(entry.getKey(),entry.getValue());
+            ++i;
+        }
+        /*
+        System.out.println("++++++++++++++++++++++");
+        nearestNeighbours.forEach((k,v) -> {
+            System.out.println(k + ": " + v);
+        });
+
+        System.out.println("////////////////////");
+
+        */
+        return nearestNeighbours;
+    }
+
     /**
      *
      * @param filteredKnownItems
@@ -95,7 +133,8 @@ public class ContentBasedFiltering extends Algorithm{
         Map<String,Map<String,Double>> neighbours = new HashMap<>();
         for(String itemId : filteredKnownItems.keySet()){
             Item knownItem = filteredKnownItems.get(itemId);
-            neighbours.put(itemId,getDistances(knownItem,unknownItems, attributesMinMax));
+            Map<String,Double> nearestNeighbours = filterNearestNeighbours(getDistances(knownItem,unknownItems, attributesMinMax));
+            neighbours.put(itemId,nearestNeighbours);
         }
         return neighbours;
     }
@@ -180,7 +219,7 @@ public class ContentBasedFiltering extends Algorithm{
      */
     public Map<String,Double> query(User user, Map<String,Item> unknownItems, int limit){
         this.limit = limit;
-        Map<String,Item> filteredKnownItems = filterKnownItems(user);
+        Map<String,Item> filteredKnownItems = user.getItems();//= filterKnownItems(user);
         Map<String,Map<String,Double>> neighbours = getNeighbours(filteredKnownItems,unknownItems);
 
         neighbours.forEach((k,v) -> {
