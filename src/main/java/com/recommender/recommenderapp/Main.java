@@ -122,7 +122,7 @@ public class Main {
 
     }
     public static void main(String args[]){
-        //testContentBased();
-        testContentBasedItemsEqual();
+        testContentBased();
+        //testContentBasedItemsEqual();
     }
 }
