@@ -3,9 +3,13 @@ package com.recommender.recommenderapp.Domain.Models;
 import java.util.*;
 import java.util.stream.Collectors;
 
+
+/**
+ *
+ */
 public class ContentBasedFiltering extends Algorithm{
 
-    private Integer limit;
+    private Integer limit = 3;
     @Override
     public void preprocessingData() {
 
@@ -16,7 +20,13 @@ public class ContentBasedFiltering extends Algorithm{
 
     }
 
-
+    /**
+     *
+     * @param value -> result previous normalized
+     * @param min -> min value used to normalize
+     * @param max -> max value used to normalize
+     * @return value normalized
+     */
     private Double normalizeValue(Double value, Double min, Double max){
         // if max != min we normalize value
         if(value > max)
@@ -31,6 +41,12 @@ public class ContentBasedFiltering extends Algorithm{
         return max; //min == max we return max because all the attributes of this type are equal
     }
 
+    /**
+     *
+     * @param  items Map - key (ItemId) value(item itself)
+     * @return  A map with key (attributeName) and value (an Array with two values [0] min Value of this attribute and
+     *          [1] max value of this attribute.
+     */
     private Map<String,Double[]> findMinMaxOfItems(Map<String,Item> items){
         Map<String,Double[]> minMax = new HashMap<>();
         for(Item item : items.values()){
@@ -73,7 +89,11 @@ public class ContentBasedFiltering extends Algorithm{
     }
 
 
-
+    /**
+     * Giving a User user filter the items using the average of the item rates.
+     * @param  user User that contains knownItems (items / itemList)
+     * @return Map key (itemId) and value an Item that have biggest rating than average.
+     */
     private Map<String,Item> filterKnownItems(User user){
         Double average = 0.0;
         Map<String,Double> knownRates = user.getRatings();
@@ -90,15 +110,14 @@ public class ContentBasedFiltering extends Algorithm{
         return filteredKnownItems;
     }
 
+    /**
+     * Giving a neighbours this function sort by value (distance) and then take the "limit" best
+     * @param neighbours  Map - key (itemUnknownId) value (distance between itemUnknown and an itemKnown)
+     * @return            Sorted Map key (itemId) and value (Distance) with max size = limit(k).
+     */
     private Map<String,Double> filterNearestNeighbours(Map<String,Double> neighbours){
         Map<String,Double> nearestNeighbours = new LinkedHashMap<>();
-        /*
-        System.out.println("-------------------------");
 
-        neighbours.forEach((k,v)-> {
-            System.out.println(k +": " + v);
-        });
-        */
         neighbours = neighbours.entrySet().stream()
                 .sorted(Map.Entry.comparingByValue()).collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (oldValue, newValue) -> oldValue, LinkedHashMap::new));
 
@@ -109,24 +128,15 @@ public class ContentBasedFiltering extends Algorithm{
             nearestNeighbours.put(entry.getKey(),entry.getValue());
             ++i;
         }
-        /*
-        System.out.println("++++++++++++++++++++++");
-        nearestNeighbours.forEach((k,v) -> {
-            System.out.println(k + ": " + v);
-        });
-
-        System.out.println("////////////////////");
-
-        */
         return nearestNeighbours;
     }
 
     /**
      *
-     * @param filteredKnownItems
-     * @param unknownItems
-     * @return Map {key->ItemKnwonId}, {value -> Map (key -> itemUnknownId) (value -> Distance between itemKnown and itemUnknown}
-     *         This has size = limit
+     * @param filteredKnownItems  Map with key (itemKnownId) and value (the item itself)
+     * @param unknownItems        Map with key (itemUnknownId) and value (the item itself)
+     * @return                    Map {key->ItemKnwonId}, {value -> Map (key -> itemUnknownId) (value -> Distance
+     *                            between itemKnown and itemUnknown}  This has size = limit
      */
     private Map<String,Map<String,Double>> getNeighbourhood(Map<String,Item> filteredKnownItems,Map<String,Item> unknownItems){
         Map<String,Double[]> attributesMinMax = findMinMaxOfItems(filteredKnownItems);
@@ -139,6 +149,12 @@ public class ContentBasedFiltering extends Algorithm{
         return neighbours;
     }
 
+    /**
+     *
+     * @param knownItemAttributes    Map - key(attributeName) value(attributeValue)
+     * @param unknownItemAttributes  Map - key(attributeName) value(attributeValue)
+     * @return                       The distance between the String Attributes of knownItem and unknownItem
+     */
     private Double distanceStringAttributes(Map<String,String> knownItemAttributes, Map<String,String> unknownItemAttributes){
         Double distance = 0.0;
         for(String attributeName : unknownItemAttributes.keySet()){
@@ -149,6 +165,15 @@ public class ContentBasedFiltering extends Algorithm{
         return Math.pow(distance,2);
     }
 
+
+    /**
+     *
+     * @param knownItemAttributes   Map - key(attributeName) value(attributeValue)
+     * @param unknownItemAttributes Map - key(attributeName) value(attributeValue)
+     * @param attributesMinMax      Map - key(attributeName) value(an Array with two values [0] min Value of this
+     *                              attribute and [1] max Value of this attribute)
+     * @return                      The normalized distance between the Int Attributes of knownItem and unknownItem
+     */
     private Double distanceIntAttributes(Map<String,Integer> knownItemAttributes, Map<String,Integer> unknownItemAttributes, Map<String,Double[]> attributesMinMax){
         Double distance = 0.0;
         for(String attributeName : unknownItemAttributes.keySet()){
@@ -163,6 +188,14 @@ public class ContentBasedFiltering extends Algorithm{
         return Math.pow(distance,2);
     }
 
+    /**
+     *
+     * @param knownItemAttributes    Map - key(attributeName) value(attributeValue)
+     * @param unknownItemAttributes  Map - key(attributeName) value(attributeValue)
+     * @param attributesMinMax       Map - key(attributeName) value(an Array with two values [0] min Value of this
+     *                               attribute and [1] max Value of this attribute)
+     * @return                       The normalized distance between the Int Attributes of knownItem and unknownItem
+     */
     private Double distanceDoubleAttributes(Map<String,Double> knownItemAttributes, Map<String,Double> unknownItemAttributes, Map<String,Double[]> attributesMinMax){
         Double distance = 0.0;
         for(String attributeName : unknownItemAttributes.keySet()){
@@ -177,6 +210,13 @@ public class ContentBasedFiltering extends Algorithm{
         return Math.pow(distance,2);
     }
 
+    /**
+     * 
+     * @param knownItemAttributes     Map - key(attributeName) value(attributeValue)
+     * @param unknownItemAttributes   Map - key(attributeName) value(attributeValue)
+     * @return                        Disctance between the Set Attributes of knownItem and unknown Item
+     *                                (using Intersection)
+     */
     private Double distanceSetAttributes(Map<String, Set<String>> knownItemAttributes, Map<String,Set<String>> unknownItemAttributes){
         Double distance = 0.0;
         for(String attributeName : unknownItemAttributes.keySet()){
@@ -191,10 +231,13 @@ public class ContentBasedFiltering extends Algorithm{
         return Math.pow(distance,2);
     }
 
-
     /**
-     *  Distances between a knwonItem and a Set(Map) of UnknownItems
-     * @return
+     *                          Distances between a knownItem and a Set(Map) of UnknownItems
+     *                          
+     * @param knownItem         an Item
+     * @param unknownItems      A map - key (unknowItemId) and value the item itself
+     * @param attributesMinMax  A Map - key(attributeName) value ([0] minAttributeValue, [1] maxAttributeValue)
+     * @return                  Map - key (itemUnknownId) value(Distance between itemUnknown and itemKnown)
      */
     private Map<String,Double> getDistances(Item knownItem, Map<String,Item> unknownItems, Map<String,Double[]> attributesMinMax){
         Map<String,Double> distances = new HashMap<>();
@@ -210,8 +253,15 @@ public class ContentBasedFiltering extends Algorithm{
         return distances;
     }
 
+    /**
+     *                          Gived neighbourhood and knownItemRating return the items with best calculated rating.
+     * @param neighbourhood     A map with key (itemKnownId), and Value ( Map with key (itemUnknownId) and value
+     *                          (Distance between itemKnown and itemUnknown))
+     * @param knownItemsRating  Rates of the items known | Map - key (itemKnownId) value(rate)
+     * @return                  the items with best calculated rating
+     */
     public Map<String,Double> filterNeighbourhood(Map<String,Map<String,Double>> neighbourhood, Map<String,Double> knownItemsRating){
-        Map<String,Double> mostSimilarItems = new HashMap<>();
+        Map<String,Double[]> mostSimilarItems = new HashMap<>();
         Map<String,Integer> occurrences = new HashMap<>();
         Double maxDistance = -1.0;
         Double minDistance = Double.MAX_VALUE;
@@ -230,53 +280,39 @@ public class ContentBasedFiltering extends Algorithm{
             for(String itemUnknownId : neighbourhood.get(itemKnownId).keySet()){
                 Double specifiedRate = itemRate * (1-normalizeValue(neighbourhood.get(itemKnownId).get(itemUnknownId),minDistance,maxDistance));
                 if(mostSimilarItems.containsKey(itemUnknownId)){
-                    Double sumDistances = mostSimilarItems.get(itemUnknownId);
-                    mostSimilarItems.put(itemUnknownId,sumDistances + specifiedRate);
+                    Double[] sumDistances = mostSimilarItems.get(itemUnknownId);
+                    sumDistances[0] = specifiedRate + sumDistances[0];
+                    sumDistances[1] = itemRate + (itemRate - specifiedRate) + sumDistances[1];
+                    mostSimilarItems.put(itemUnknownId,sumDistances);
                     occurrences.put(itemUnknownId,occurrences.get(itemUnknownId) + 1);
                 }
                 else{
-                    mostSimilarItems.put(itemUnknownId,specifiedRate);
+                    Double[] aux = {specifiedRate,itemRate + (itemRate - specifiedRate)};
+                    mostSimilarItems.put(itemUnknownId, aux);
                     occurrences.put(itemUnknownId,1);
                 }
             }
         }
+        Map<String,Double> result = new HashMap<>();
         for(String itemUnknownId : mostSimilarItems.keySet()){
             Integer occurrence = occurrences.get(itemUnknownId);
-            Double sumRates = mostSimilarItems.get(itemUnknownId);
-            mostSimilarItems.put(itemUnknownId,sumRates/occurrence);
+            Double[] sumRates = mostSimilarItems.get(itemUnknownId);
+            result.put(itemUnknownId,((sumRates[0]+sumRates[1])/2.0)/occurrence);
         }
 
-        return mostSimilarItems.entrySet().stream()
+        return result.entrySet().stream()
                 .sorted(Map.Entry.comparingByValue(Comparator.reverseOrder())).collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (oldValue, newValue) -> oldValue, LinkedHashMap::new));
     }
 
     /**
-     * Can be named recommend / executeAlgorithm ...
-     * @param user
-     * @param unknownItems
-     * @param limit
-     * @return
+     * Gived an User and their unknownItems returns the best unknownItems based on their knownItems
+     * @param user A user with known items
+     * @param unknownItems Map - key (unknownItemId) and value (item itself)
+     * @return Ordered Map with key (itemUnknowItemId) and value (expected rate)
      */
-    public Map<String,Double> query(User user, Map<String,Item> unknownItems, int limit){
-        this.limit = limit;
+    public Map<String,Double> query(User user, Map<String,Item> unknownItems){
         Map<String,Item> filteredKnownItems = filterKnownItems(user);
         Map<String,Map<String,Double>> neighbourhood = getNeighbourhood(filteredKnownItems,unknownItems);
-        System.out.println("--------------///-------------");
-        System.out.println(user.getId());
-        neighbourhood.forEach((k,v) -> {
-            System.out.println("KnownItem ID :" + k + " - " + user.getRatings().get(k));
-            System.out.println("---------------------------");
-            v.forEach((key,value) -> {
-                System.out.println("UnknownItem ID : " + key + " - " + value);
-            });
-        });
-
-        Map<String,Double> queryResult = filterNeighbourhood(neighbourhood,user.getRatings());
-
-        queryResult.forEach((k,v) -> {
-            System.out.println(k + ": " + v);
-        });
-
-        return new HashMap<>();
+        return filterNeighbourhood(neighbourhood,user.getRatings());
     }
 }
