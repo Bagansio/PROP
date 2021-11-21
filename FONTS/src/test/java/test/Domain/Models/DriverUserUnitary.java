@@ -6,9 +6,11 @@ import com.recommender.recommenderapp.Domain.Utils.ItemTypes;
 
 import org.junit.*;
 
+
 import java.util.Map;
 
 public class DriverUserUnitary {
+
     @Test
     public void testSetId(){
         User user = new User("test");
