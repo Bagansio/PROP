@@ -10,6 +10,8 @@
             </Attribute>
           </value>
         </entry>
+<<<<<<< HEAD
+=======
         <entry key="\src\main\resources\datasets\ratings.db.csv">
           <value>
             <Attribute>
@@ -17,6 +19,7 @@
             </Attribute>
           </value>
         </entry>
+>>>>>>> origin/master
         <entry key="\src\main\resources\datasets\ratings.test.known.csv">
           <value>
             <Attribute>
@@ -31,6 +34,8 @@
             </Attribute>
           </value>
         </entry>
+<<<<<<< HEAD
+=======
         <entry key="\src\main\resources\datasets\series\items.csv">
           <value>
             <Attribute>
@@ -45,6 +50,7 @@
             </Attribute>
           </value>
         </entry>
+>>>>>>> origin/master
       </map>
     </option>
   </component>
