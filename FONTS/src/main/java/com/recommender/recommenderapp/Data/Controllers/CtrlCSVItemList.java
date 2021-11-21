@@ -15,6 +15,11 @@ import java.util.*;
 public class CtrlCSVItemList implements ICtrlCSVItemList {
 
 
+    /**
+     *
+     * @param dataset
+     * @return Map -> (key, ItemId) value (item itslef)
+     */
     public Map<String, Item> getItemList(Datasets dataset) {
         Map<String, Item> items = new HashMap<>();
 

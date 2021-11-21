@@ -4,11 +4,18 @@ import java.util.HashMap;
 import java.util.Map;
 
 
+/**
+ * @author Alex
+ */
 public class ItemsCSVUtils {
 
     private Map<Integer,String[]> attributesPositions;
 
 
+    /**
+     *
+     * @param dataset a dataset
+     */
     public ItemsCSVUtils(Datasets dataset){
         if(dataset.equals(Datasets.movies)){
             chargeMovies();
@@ -17,6 +24,9 @@ public class ItemsCSVUtils {
     }
 
 
+    /**
+     *  charge movies attributes
+     */
     private void chargeMovies(){
         attributesPositions = new HashMap<>();
         attributesPositions.put(0, new String[]{"adult", "Boolean"});
@@ -39,6 +49,9 @@ public class ItemsCSVUtils {
         attributesPositions.put(24, new String[]{"keywords", "Set"});
     }
 
+    /**
+     * charge series attributes
+     */
     private void chargeSeries(){
         attributesPositions = new HashMap<>();
         attributesPositions.put(0,new String[]{"id","String"});
@@ -53,10 +66,21 @@ public class ItemsCSVUtils {
         attributesPositions.put(9,new String[]{"score","Double"});
     }
 
+
+    /**
+     *
+     * @param index
+     * @return if this attribute position is in attributesPosition
+     */
     public boolean relevantAttribute(Integer index){
         return attributesPositions.containsKey(index);
     }
 
+    /**
+     *
+     * @param index
+     * @return the information of attribute in position index
+     */
     public String[] getAttributeInfo(Integer index){
         return attributesPositions.get(index);
     }

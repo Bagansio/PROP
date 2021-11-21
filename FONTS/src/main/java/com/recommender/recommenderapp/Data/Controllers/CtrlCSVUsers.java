@@ -15,6 +15,13 @@ import java.util.Map;
 
 public class CtrlCSVUsers implements ICtrlCSVUser {
 
+    /**
+     *
+     * @param filename
+     * @param items
+     * @param dataset
+     * @return Map (key, UserId) (value, User iteself)
+     */
     private Map<String, User> loadUserFile(String filename, Map<String, Item> items, Datasets dataset){
         Map<String, User> users = new HashMap<>();
         try {
@@ -39,14 +46,35 @@ public class CtrlCSVUsers implements ICtrlCSVUser {
         return users;
     }
 
+
+    /**
+     *
+     * @param items
+     * @param dataset
+     * @return Map (key, UserId) (value, User iteself) - users of ratings.db file
+     */
     public Map<String, User> loadUserRatings(Map<String, Item> items, Datasets dataset){
         return loadUserFile("ratings.db",items, dataset);
     }
 
+
+    /**
+     *
+     * @param items
+     * @param dataset
+     * @return  Map (key, UserId) (value, User iteself) - users of ratings.test.known
+     */
     public Map<String, User> loadUserKnownRatings(Map<String, Item> items, Datasets dataset){
         return loadUserFile("ratings.test.known",items,dataset);
     }
 
+
+    /**
+     *
+     * @param items
+     * @param dataset
+     * @return Map (key, UserId) (value, User iteself) - users of ratings.test.unknown
+     */
     public Map<String, User> loadUserUnknownRatings(Map<String, Item> items, Datasets dataset){
         return loadUserFile("ratings.test.unknown",items,dataset);
     }
