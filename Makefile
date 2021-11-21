@@ -28,7 +28,8 @@ build:
 .SILENT: build
 
 compile_main: build
-	jar cvmf FONTS/src/main/java/com/recommender/recommenderapp/Main.mf  target/Recommender.jar -C target .
+	mkdir -p $(EXE)
+	jar cvmf FONTS/src/main/java/com/recommender/recommenderapp/Main.mf  $(EXE)/Recommender.jar -C target .
 .SILENT: compile
 
 
@@ -42,7 +43,7 @@ compile_test_UserUnitary: build
 	cp -R libs/*.jar $(EXE)/JUNIT/libs
 
 run_main:
-	java -jar target/Recommender.jar
+	java -jar $(EXE)/Recommender.jar
 .SILENT: run_main
 
 
