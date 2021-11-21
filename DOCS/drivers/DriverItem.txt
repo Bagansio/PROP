@@ -1,0 +1,14 @@
+Objeto de la prueba: 
+	Clase: Item.
+	Casos de Uso:
+		- Rate Item.
+		- Rate An Unrated Item.
+		- Rate An Already Rated Item.
+
+Drivers: DriverItem.
+
+Stubs: StubsItem (proporciona los datos necesarios para ejecutar el driver).
+
+Valores estudiados: verificacion experimental del codigo (caja blanca) que emplea un conjunto de datos predefinidos para testear los casos representativos.
+
+Operativa: Al ejecutar el programa, se elige entre una serie de funciones y, al seleccionar una, se realiza una determinada prueba.

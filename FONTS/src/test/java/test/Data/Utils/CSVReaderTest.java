@@ -10,6 +10,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+
+/**
+ * @author Alex
+ */
 public class CSVReaderTest {
 
     public static String filename = "ratings.db";
