@@ -3,11 +3,13 @@ SRC = FONTS/src/main/java/com/recommender/recommenderapp
 TARGET = target
 DRIVERS = EXE
 
+all: compile
+
 clean:
 	rm -r $(TARGET)
 
 build:
-	javac   -d target/classes $(SRC)/Domain/Models/*.java \
+	javac   -d target $(SRC)/Domain/Models/*.java \
 	                          $(SRC)/Domain/DataControllers/*.java \
 	                          $(SRC)/Domain/Controllers/*.java \
 	                          $(SRC)/Domain/Utils/*.java \
@@ -21,4 +23,6 @@ compile: build
 	jar cvmf FONTS/src/main/java/com/recommender/recommenderapp/Main.mf  target/Recommender.jar -C target .
 .SILENT: compile
 
-#java -jar target/Recommender.jar
+
+run_main:
+	java -jar target/Recommender.jar
