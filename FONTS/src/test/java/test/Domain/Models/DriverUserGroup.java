@@ -52,9 +52,9 @@ public class DriverUserGroup {
         StubsUserGroup stubsUserGroup = new StubsUserGroup();
         UserGroup userGroup = stubsUserGroup.getStubUserGroup();
         System.out.println("Expected id values after the execution: 1");
-        int finalId =userGroup.getId();
+        String finalId =userGroup.getId();
         System.out.println("id after the execution: " +finalId);
-        if (finalId == 1) System.out.println(ansiGreen + "Function worked properly" + ansiNormal);
+        if (finalId == "1") System.out.println(ansiGreen + "Function worked properly" + ansiNormal);
         else System.out.println(ansiRed + "Function did not work properly" + ansiNormal);
 
 
@@ -62,11 +62,11 @@ public class DriverUserGroup {
     private static void executeSetId() {
         System.out.println("Testing Set Id");
         System.out.println("We will now  create an UserGroup");
-        UserGroup userGroup = new UserGroup(1);
-        int id =5 ;
+        UserGroup userGroup = new UserGroup("1");
+        String id = "5" ;
         userGroup.setId(id);
         System.out.println("Expected id values after the execution:" + id);
-        int finalId =userGroup.getId();
+        String finalId =userGroup.getId();
         System.out.println("id after the execution: " +finalId);
         if (finalId == id) System.out.println(ansiGreen + "Function worked properly" + ansiNormal);
         else System.out.println(ansiRed + "Function did not work properly" + ansiNormal);
