@@ -3,6 +3,7 @@ package com.recommender.recommenderapp.Data.Controllers;
 
 //import com.opencsv.CSVReader;
 import com.recommender.recommenderapp.Data.Utils.CSVReader;
+import com.recommender.recommenderapp.Data.Utils.Datasets;
 import com.recommender.recommenderapp.Data.Utils.ItemsCSVUtils;
 import com.recommender.recommenderapp.Domain.DataControllers.ICtrlCSVItemList;
 import com.recommender.recommenderapp.Domain.Models.Item;
@@ -14,14 +15,14 @@ import java.util.*;
  */
 public class CtrlCSVItemList implements ICtrlCSVItemList {
 
-    public Map<String, Item> getItemList() {
+
+    public Map<String, Item> getItemList(Datasets dataset) {
         Map<String, Item> items = new HashMap<>();
 
         try  {
             CSVReader reader = new CSVReader();
-            List<List<String>> allData = reader.readFile("items");
-
-            ItemsCSVUtils csvUtils = new ItemsCSVUtils();
+            List<List<String>> allData = reader.readFile("items", dataset.toString());
+            ItemsCSVUtils csvUtils = new ItemsCSVUtils(dataset);
             ListIterator<List<String>> iterator = allData.listIterator(1);
             while(iterator.hasNext()){
                 List<String> itemData = iterator.next();
@@ -54,7 +55,7 @@ public class CtrlCSVItemList implements ICtrlCSVItemList {
 
                     }
                 }
-
+                System.out.println(currentItem.getId());
                 items.put(currentItem.getId(), currentItem);
                 /*
                 System.out.println("ID: " + currentItem.getId() + " Title: " + currentItem.getTitle());
@@ -71,9 +72,8 @@ public class CtrlCSVItemList implements ICtrlCSVItemList {
                 });
                 */
             }
-
         } catch (Exception ex) {
-            System.out.println(ex.toString());
+            ex.getStackTrace();
         }
         return items;
     }
