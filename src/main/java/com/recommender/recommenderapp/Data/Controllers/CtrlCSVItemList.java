@@ -55,8 +55,6 @@ public class CtrlCSVItemList implements ICtrlCSVItemList {
 
                     }
                 }
-                System.out.println(currentItem.getId());
-                items.put(currentItem.getId(), currentItem);
                 /*
                 System.out.println("ID: " + currentItem.getId() + " Title: " + currentItem.getTitle());
                 System.out.println("Integer Attributes: ");

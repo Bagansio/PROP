@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
@@ -47,15 +48,17 @@ public class CSVReader {
      */
     public List<List<String>> readFile(String filename, String dataset) {
         List<List<String>> fileData = new ArrayList<>();
-        String currentPath = PATH + "\\" + dataset + "\\" + filename + ".csv";
-        try (Scanner scanner = new Scanner(Paths.get(currentPath).toFile())) {
+
+        String currentPath = "/datasets/" + dataset + "/" + filename + ".csv";
+
+        File f = new File(getClass().getResource(currentPath).getPath());
+        try (Scanner scanner = new Scanner(f)) {
 
             while(scanner.hasNextLine()) {
                 String line = scanner.nextLine();
                 line = deleteValues(line);
                 fileData.add(readLine(line,DELIMITER));
             }
-
         }
         catch (Exception ex) {
             ex.printStackTrace();

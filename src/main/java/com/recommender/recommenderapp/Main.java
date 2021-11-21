@@ -2,11 +2,11 @@ package com.recommender.recommenderapp;
 
 import com.recommender.recommenderapp.Domain.Controllers.CtrlItemList;
 import com.recommender.recommenderapp.Domain.Controllers.CtrlUsers;
-import com.recommender.recommenderapp.Domain.Models.ContendBased;
 import com.recommender.recommenderapp.Domain.Models.ContentBasedFiltering;
 import com.recommender.recommenderapp.Domain.Models.Item;
 import com.recommender.recommenderapp.Domain.Models.User;
 
+import java.io.InputStream;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -96,8 +96,11 @@ public class Main {
 
         Map<String, Item> items = ctrlItemList.getItemList();
         CtrlUsers ctrlUsers = new CtrlUsers();
+        System.out.println("YOOOOOOOOO");
         Map<String, User> users = ctrlUsers.getUsers();
+
         Map<String, User> knownUsers = ctrlUsers.getKnownUsers();
+
         Map<String, User> unknownUsers = ctrlUsers.getUnknownUsers();
 
         ContentBasedFiltering algorithm = new ContentBasedFiltering();
@@ -107,6 +110,7 @@ public class Main {
         System.out.println(user.getId());
         algorithm.query(user,unknownUsers.get(user.getId()).getItems());
 
+        /*
         System.out.println("TTTTTTTTTTTTTTTTT");
         user.getRatings().forEach((k,v) ->{
             System.out.println(k + " - " + v);
@@ -118,10 +122,11 @@ public class Main {
             System.out.println(k + " - " + v);
         });
 
-
+        */
 
     }
     public static void main(String args[]){
+
         testContentBased();
         //testContentBasedItemsEqual();
     }
