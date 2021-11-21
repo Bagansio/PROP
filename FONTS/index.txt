@@ -1,0 +1,71 @@
+.
+├── index.txt
+└── src
+    ├── main
+    │   └── java
+    │       ├── Exceptions
+    │       ├── com
+    │       │   └── recommender
+    │       │       └── recommenderapp
+    │       │           ├── Data
+    │       │           │   ├── Controllers
+    │       │           │   │   ├── CtrlCSVItemList.java
+    │       │           │   │   └── CtrlCSVUsers.java
+    │       │           │   └── Utils
+    │       │           │       ├── CSVReader.java
+    │       │           │       ├── Datasets.java
+    │       │           │       ├── ItemsCSVUtils.java
+    │       │           │       └── UserCSVUtils.java
+    │       │           ├── Domain
+    │       │           │   ├── Controllers
+    │       │           │   │   ├── CtrlItemList.java
+    │       │           │   │   └── CtrlUsers.java
+    │       │           │   ├── DataControllers
+    │       │           │   │   ├── CtrlDataFactory.java
+    │       │           │   │   ├── ICtrlCSVItemList.java
+    │       │           │   │   └── ICtrlCSVUser.java
+    │       │           │   ├── Models
+    │       │           │   │   ├── Algorithm.java
+    │       │           │   │   ├── ContentBasedFiltering.java
+    │       │           │   │   ├── Item.java
+    │       │           │   │   ├── NewCollaborativeFiltering.java
+    │       │           │   │   ├── Recommendation.java
+    │       │           │   │   ├── User.java
+    │       │           │   │   └── UserGroup.java
+    │       │           │   └── Utils
+    │       │           │       └── ItemTypes.java
+    │       │           ├── Main.java
+    │       │           └── Main.mf
+    │       └── module-info.java
+    └── test
+        └── java
+            ├── stubs
+            │   ├── StubsCollaborativeFiltering.java
+            │   ├── StubsContentBasedFiltering.java
+            │   ├── StubsItem.java
+            │   ├── StubsRecommendation.java
+            │   ├── StubsUser.java
+            │   └── StubsUserGroup.java
+            └── test
+                ├── Data
+                │   └── Utils
+                │       └── CSVReaderTest.java
+                └── Domain
+                    ├── Controllers
+                    └── Models
+                        ├── DriverCollaborativeFiltering.java
+                        ├── DriverCollaborativeFiltering.mf
+                        ├── DriverContentBasedFiltering.java
+                        ├── DriverItem.java
+                        ├── DriverItem.mf
+                        ├── DriverRecommendation.java
+                        ├── DriverRecommendation.mf
+                        ├── DriverUser.java
+                        ├── DriverUser.mf
+                        ├── DriverUserGroup.java
+                        ├── DriverUserGroup.mf
+                        ├── DriverUserUnitary.java
+                        ├── JUnitUser.java
+                        └── JUnitUser.mf
+
+24 directories, 44 files
