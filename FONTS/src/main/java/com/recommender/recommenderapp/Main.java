@@ -85,7 +85,7 @@ public class Main {
         unknown.put("test2",testItem2);
         unknown.put("test3",testItem3);
         ContentBasedFiltering algorithm = new ContentBasedFiltering();
-        algorithm.query(user,unknown);
+        //algorithm.query(user,unknown);
 
     }
     public static void testContentBased(){
@@ -105,10 +105,10 @@ public class Main {
 
         System.out.println(user.getId());
         //System.out.println(user.getRatings());
-        Map<String, Double> result = algorithm.query(user,unknownUsers.get(user.getId()).getItems());
+        /*Map<String, Double> result = algorithm.query(user,unknownUsers.get(user.getId()).getItems());
                 result.forEach((k,v)->{
             System.out.println("ITEM ID: " +k + " - rate: " + v);
-        });
+        });*/
 
         /*
         System.out.println("TTTTTTTTTTTTTTTTT");

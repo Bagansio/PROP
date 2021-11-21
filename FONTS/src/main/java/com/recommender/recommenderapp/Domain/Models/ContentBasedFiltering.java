@@ -12,15 +12,11 @@ import java.util.stream.Collectors;
 public class ContentBasedFiltering extends Algorithm{
 
     private Integer limit = 3;
-    @Override
-    public void preprocessingData() {
+
+    public void preprocessingData(Map<String, Item> itemMap, Map<String, User> userMap) {
 
     }
 
-    @Override
-    public void executeAlgorithm() {
-
-    }
 
     /**
      *
@@ -310,9 +306,11 @@ public class ContentBasedFiltering extends Algorithm{
      * Gived an User and their unknownItems returns the best unknownItems based on their knownItems
      * @param user A user with known items
      * @param unknownItems Map - key (unknownItemId) and value (item itself)
+     * @param Q  number of items that must be recommended
      * @return Ordered Map with key (itemUnknowItemId) and value (expected rate)
      */
-    public Map<String,Double> query(User user, Map<String,Item> unknownItems){
+    public Map<String,Double> query(User user, Map<String, Item> unknownItems, int Q){
+        limit = Q;
         Map<String,Item> filteredKnownItems = filterKnownItems(user);
         Map<String,Map<String,Double>> neighbourhood = getNeighbourhood(filteredKnownItems,unknownItems);
         return filterNeighbourhood(neighbourhood,user.getRatings());
