@@ -47,11 +47,20 @@ run_main:
 .SILENT: run_main
 
 
-run_driverUser:
+run_UserDriver:
 	make run_driver DRIVER=DriverUser
 
-run_driverUserGroup:
+run_UserGroupDriver:
 	make run_driver DRIVER=DriverUserGroup
+
+run_CollaborativeFilteringDriver:
+	make run_driver DRIVER=DriverCollaborativeFiltering
+
+run_ItemDriver:
+	make run_driver DRIVER=DriverItem
+
+run_RecommendationDriver:
+	make run_driver DRIVER=DriverRecommendation
 
 run_junitUser:
 	make run_junit TEST=JUnitUser
@@ -67,59 +76,9 @@ compile_all:
 	make compile_main
 	make compile_driver DRIVER=DriverUser
 	make compile_driver DRIVER=DriverUserGroup
+	make compile_driver DRIVER=DriverCollaborativeFiltering
+	make compile_driver DRIVER=DriverItem
+	make compile_driver DRIVER=DriverRecommendation
 	make compile_test_UserUnitary
 
-help:
-	echo "List of tasks:"
 
-	echo ""
-
-	echo "- (default):\t\tbuild Othello applications, drivers and JUnit JARs to dist/ folder"
-
-	echo ""
-
-	echo "- othello:\t\texecute the Othello application"
-	echo "- driver:\t\texecute the driver specified by DRIVER=<Driver>"
-		echo "\t\t\t\t- make driver DRIVER=Pair"
-		echo "\t\t\t\t- make driver DRIVER=Bot"
-		echo "\t\t\t\t- make driver DRIVER=User"
-		echo "\t\t\t\t- make driver DRIVER=Configuration"
-		echo "\t\t\t\t- make driver DRIVER=Game"
-		echo "\t\t\t\t- make driver DRIVER=Board"
-		echo "\t\t\t\t- make driver DRIVER=EasyDifficulty"
-		echo "\t\t\t\t- make driver DRIVER=MediumDifficulty"
-		echo "\t\t\t\t- make driver DRIVER=HardDifficulty"
-
-	echo ""
-
-	echo "- test-ranking:\t\texecute JUnit ranking tests"
-	echo "- test-entry:\t\texecute JUnit entry tests"
-
-	echo ""
-
-	echo "- run-othello:\tbuild and execute the Othello application JAR"
-	echo "- run-driver:\t\tbuild and execute the driver specified by DRIVER=<Driver> JAR"
-	echo "- run-test-ranking:\tbuild and execute the JUnit ranking tests application JAR"
-	echo "- run-test-entry:\tbuild and execute the JUnit entry tests application JAR"
-
-	echo ""
-
-	echo "- compile-othello:\tbuild the Othello application JAR to dist/ folder"
-	echo "- compile-driver:\tbuild the driver specified by DRIVER=<Driver> JAR to dist/ folder"
-		echo "\t\t\t\t- make compile-driver DRIVER=Pair"
-		echo "\t\t\t\t- make compile-driver DRIVER=Bot"
-		echo "\t\t\t\t- make compile-driver DRIVER=User"
-		echo "\t\t\t\t- make compile-driver DRIVER=Configuration"
-		echo "\t\t\t\t- make compile-driver DRIVER=Game"
-		echo "\t\t\t\t- make compile-driver DRIVER=Board"
-		echo "\t\t\t\t- make compile-driver DRIVER=EasyDifficulty"
-		echo "\t\t\t\t- make compile-driver DRIVER=MediumDifficulty"
-		echo "\t\t\t\t- make compile-driver DRIVER=HardDifficulty"
-	echo "- compile-test-ranking:\tbuild the JUnit ranking tests application JAR to dist/ folder"
-	echo "- compile-test-entry:\tbuild the JUnit entry tests application JAR to dist/ folder"
-
-	echo ""
-
-	echo "- doc:\t\t\tbuild doxygen documentation"
-	echo "- clean:\t\tclean binaries and databases"
-.SILENT: help

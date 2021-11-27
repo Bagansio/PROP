@@ -1,0 +1,5 @@
+Objeto de la prueba: UserGroup.
+Drivers: DriverUserGroup.
+Stubs: StubsUserGroup, proporcionar los valores necesarios para el testeo. 
+Valores estudiados: verificacion experimental del codigo (caja blanca) que emplea un conjunto de datos predefinidos para testear los casos representativos.
+Operativa: Al ejecutar el programa se elige entre unas funciones y, al seleccionarlas, se testea la funcion en cuestion.

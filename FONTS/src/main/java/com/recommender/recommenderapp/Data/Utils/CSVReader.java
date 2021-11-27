@@ -50,15 +50,7 @@ public class CSVReader {
         List<List<String>> fileData = new ArrayList<>();
 
         String currentPath = "/DOCS/datasets/" + dataset + "/" + filename + ".csv";
-        /*
-        System.out.println("LOLASO");
-        System.out.println(System.getProperty("user.dir"));
-        System.out.println("-.-");
-        System.out.println(System.getProperty("user.dir")+currentPath);
-        //getClass().getResource(currentPath).getPath()
 
-        System.out.println("O: " + f.getAbsolutePath());
-        */
         File f = new File(System.getProperty("user.dir")+currentPath);
         try (Scanner scanner = new Scanner(f)) {
 

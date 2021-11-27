@@ -7,7 +7,7 @@ import java.util.stream.Collectors;
 /**
  * Represents the Content Based Filtering Algorithm.
  * @version 1.0, 20/11/21
- * @author
+ * @author Victor
  */
 public class ContentBasedFiltering extends Algorithm{
 
@@ -252,7 +252,7 @@ public class ContentBasedFiltering extends Algorithm{
     }
 
     /**
-     *                          Gived neighbourhood and knownItemRating return the items with best calculated rating.
+     *                          Given a neighbourhood and a knownItemRating return the items with best calculated rating.
      * @param neighbourhood     A map with key (itemKnownId), and Value ( Map with key (itemUnknownId) and value
      *                          (Distance between itemKnown and itemUnknown))
      * @param knownItemsRating  Rates of the items known | Map - key (itemKnownId) value(rate)
