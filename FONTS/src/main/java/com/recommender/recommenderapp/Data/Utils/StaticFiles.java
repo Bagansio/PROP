@@ -1,14 +1,12 @@
 package com.recommender.recommenderapp.Data.Utils;
 
 import com.recommender.recommenderapp.Domain.Models.Item;
+import com.recommender.recommenderapp.Domain.Models.User;
 import com.recommender.recommenderapp.Exceptions.DirectoryDoesNotExist;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
 import java.util.regex.Pattern;
 
 public class StaticFiles {
@@ -64,7 +62,7 @@ public class StaticFiles {
     public Map<String, Item> getItems(String dataset){
         Map<String,Item> items = new HashMap<>();
 
-        String[][] data = reader.readFile(System.getProperty("user.dir") + "\\" + Utils.getPATH() + "movies\\items.csv");
+        String[][] data = reader.readFile(pathHead + dataset + "\\items.csv");
 
         String[] attributes = data[0];
 
@@ -79,11 +77,13 @@ public class StaticFiles {
                     } else if (attributes[j].contains("title")) {
                         currentItem.setTitle(data[i][j]);
                     }//
-                    else if (Pattern.matches("^[\\\\+\\\\-]{0,1}[0-9]+[\\\\.\\\\,][0-9]+$", data[i][j]) == true) { //
+                    else if (Pattern.matches("^[\\\\+\\\\-]{0,1}[0-9]+[\\\\.\\\\,][0-9]  +$", data[i][j]) == true) { //
                         currentItem.addDoubleAttribute(attributes[j], Double.parseDouble(data[i][j]));
                     } else if (Pattern.matches("^[0-9]+$", data[i][j]) == true)
                         currentItem.addIntAttribute(attributes[j], Integer.parseInt(data[i][j]));
-                    else
+                    else if (data[i][j].contains(";")){
+                        currentItem.addSetAttribute(attributes[j],new HashSet<>(Arrays.asList(data[i][j].split(";"))));
+                    }else
                         currentItem.addStringAttribute(attributes[j], data[i][j]);
                 }
             }
@@ -93,6 +93,34 @@ public class StaticFiles {
     }
 
 
+    private Map<String,Integer> userAttributes(String[] attributes){
+        Map<String,Integer> map = new HashMap<>();
+
+        for(int i = 0; i < attributes.length ; ++i){
+            map.put(attributes[i],i);
+        }
+        return map;
+    }
+
+    public Map<String, User> getUsers(String dataset,String filename, Map<String,Item> items){
+        Map<String,User> users = new HashMap<>();
+
+        String[][] data = reader.readFile(pathHead + dataset + "\\" + filename + ".csv" );
+
+        Map<String,Integer> attributes = userAttributes(data[0]);
+
+
+        for(int i = 1; i < data.length ; ++i) {
+            String userId = data[i][attributes.get("userId")];
+            if (!users.containsKey(userId)) {
+                users.put(userId, new User(userId));
+            }
+            User currentUser = users.get(userId);
+            currentUser.addItem(items.get(data[i][attributes.get("itemId")]));
+            currentUser.rateItem(data[i][attributes.get("itemId")],Double.parseDouble(data[i][attributes.get("rating")]));
+        }
+        return users;
+    }
 
 
 }

@@ -37,6 +37,7 @@ public class CSVReader {
      */
     public String[] readLine(String line, String delimiter){
         List<String> lineList = new ArrayList<>();
+
         Scanner lineScanner = new Scanner(line);
         lineScanner.useDelimiter(delimiter);
         while(lineScanner.hasNext()){
@@ -45,7 +46,6 @@ public class CSVReader {
         lineScanner.close();
         return lineList.toArray(new String[lineList.size()]);
     }
-
 
     /**
      *
@@ -60,8 +60,7 @@ public class CSVReader {
 
             while(scanner.hasNextLine()) {
                 String line = scanner.nextLine();
-                line = deleteValues(line);
-                fileData.add(readLine(line,DELIMITER));
+                fileData.add(line.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)", -1));
             }
         }
         catch (Exception ex) {
@@ -71,18 +70,5 @@ public class CSVReader {
     }
 
 
-    /**
-     *
-     * @param line -> line to modify
-     * @return the same line without text in QUOTES
-     */
-    private String deleteValues(String line){
-        int index = line.indexOf(QUOTE);
-        while(index != -1 || index == line.length() - 1){
-            int endIndex = line.indexOf(QUOTE,index+2);
-            if(endIndex != -1) line = line.replace(line.substring(index,endIndex+1), "");
-            index = line.indexOf(QUOTE);
-        }
-        return line;
-    }
+
 }
