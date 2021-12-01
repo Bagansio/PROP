@@ -23,7 +23,7 @@ public class CSVReaderTest {
     public void readFileTest(){
         CSVReader reader = new CSVReader();
         List<String> expectedLine = new ArrayList<>(Arrays.asList("userId","itemId","rating"));
-        List<String> line = reader.readFile(filename, "movies").get(0);
+        //List<String> line = reader.readFile(filename, "movies").get(0);
         Assert.assertEquals("Data are different", line, expectedLine);
     }
 

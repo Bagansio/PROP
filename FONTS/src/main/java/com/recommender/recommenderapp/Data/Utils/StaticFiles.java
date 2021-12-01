@@ -1,22 +1,39 @@
 package com.recommender.recommenderapp.Data.Utils;
 
+import com.recommender.recommenderapp.Domain.Models.Item;
+import com.recommender.recommenderapp.Exceptions.DirectoryDoesNotExist;
+
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.Arrays;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Objects;
+import java.util.regex.Pattern;
 
 public class StaticFiles {
 
-    public static void main(String args[]){
-        for(String f : getDatasets("DOCS\\datasets\\"))
-            System.out.println(f);
+
+    private String pathHead;
+    private CSVReader reader;
+
+    public StaticFiles(){
+        pathHead =  System.getProperty("user.dir") + "\\" + Utils.getPATH();
+        reader = new CSVReader();
     }
 
 
 
+    public void writeDynamic(String dataset, String filename, String[][] data){
 
-     public static String[] getDatasets(String path){
-        File[] directories = new File(path).listFiles(File::isDirectory);
+    }
 
+     public String[] getDatasets() throws DirectoryDoesNotExist {
+
+        File[] directories = new File(pathHead).listFiles(File::isDirectory);
+
+        if(directories == null)
+            throw new DirectoryDoesNotExist("DIRECTORY '" + pathHead + "' DOESN'T EXIST", pathHead);
 
         String[] datasets = new String[directories.length];
 
@@ -29,4 +46,53 @@ public class StaticFiles {
 
         return datasets;
     }
+
+
+    /**
+     *
+     * @param dataset
+     * @param filename
+     * @return All the attributes of the csv files
+     * @throws FileNotFoundException
+     */
+    public String[] getAttributes(String dataset, String filename) throws FileNotFoundException {
+        String path = pathHead + "\\" + dataset + "\\" + filename + ".csv";
+        return reader.readFirstLine(path);
+    }
+
+
+    public Map<String, Item> getItems(String dataset){
+        Map<String,Item> items = new HashMap<>();
+
+        String[][] data = reader.readFile(System.getProperty("user.dir") + "\\" + Utils.getPATH() + "movies\\items.csv");
+
+        String[] attributes = data[0];
+
+        for(int i = 1; i < data.length; ++i){
+            Item currentItem = new Item();
+
+            for(int j = 0 ; j < data[i].length; ++j) {
+
+                if (! data[i][j].equals("")) {
+                    if ("id".equals(attributes[j])) {
+                        currentItem.setId(data[i][j]);
+                    } else if (attributes[j].contains("title")) {
+                        currentItem.setTitle(data[i][j]);
+                    }//
+                    else if (Pattern.matches("^[\\\\+\\\\-]{0,1}[0-9]+[\\\\.\\\\,][0-9]+$", data[i][j]) == true) { //
+                        currentItem.addDoubleAttribute(attributes[j], Double.parseDouble(data[i][j]));
+                    } else if (Pattern.matches("^[0-9]+$", data[i][j]) == true)
+                        currentItem.addIntAttribute(attributes[j], Integer.parseInt(data[i][j]));
+                    else
+                        currentItem.addStringAttribute(attributes[j], data[i][j]);
+                }
+            }
+            items.put(currentItem.getId(),currentItem);
+        }
+        return items;
+    }
+
+
+
+
 }

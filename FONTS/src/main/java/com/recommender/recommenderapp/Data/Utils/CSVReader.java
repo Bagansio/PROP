@@ -17,11 +17,17 @@ import java.util.Scanner;
  */
 public class CSVReader {
 
-    private static final String PATH = "src\\main\\resources\\datasets\\";
-    private static final String EXTENSION = ".csv";
     private static final String DELIMITER = ",";
     private static final String QUOTE = "\"";
 
+
+    public String[] readFirstLine(String path) throws FileNotFoundException{
+
+        File f = new File("\\" + path);
+        Scanner scanner = new Scanner(f);
+
+        return readLine(scanner.nextLine(),DELIMITER);
+    }
 
     /**
      *
@@ -29,7 +35,7 @@ public class CSVReader {
      * @param delimiter -> how will divide de line
      * @return A list of String that represent the line delimited
      */
-    public List<String> readLine(String line, String delimiter){
+    public String[] readLine(String line, String delimiter){
         List<String> lineList = new ArrayList<>();
         Scanner lineScanner = new Scanner(line);
         lineScanner.useDelimiter(delimiter);
@@ -37,7 +43,7 @@ public class CSVReader {
             lineList.add(lineScanner.next());
         }
         lineScanner.close();
-        return lineList;
+        return lineList.toArray(new String[lineList.size()]);
     }
 
 
@@ -46,12 +52,10 @@ public class CSVReader {
      * @param filename -> file to read
      * @return A list that contains each line of CSV separated by the DELIMITER
      */
-    public List<List<String>> readFile(String filename, String dataset) {
-        List<List<String>> fileData = new ArrayList<>();
+    public String[][] readFile(String path) {
+        List<String[]> fileData = new ArrayList<>();
 
-        String currentPath = "/DOCS/datasets/" + dataset + "/" + filename + ".csv";
-
-        File f = new File(System.getProperty("user.dir")+currentPath);
+        File f = new File(path);
         try (Scanner scanner = new Scanner(f)) {
 
             while(scanner.hasNextLine()) {
@@ -63,7 +67,7 @@ public class CSVReader {
         catch (Exception ex) {
             ex.printStackTrace();
         }
-        return fileData;
+        return fileData.toArray(new String[fileData.size()][]);
     }
 
 

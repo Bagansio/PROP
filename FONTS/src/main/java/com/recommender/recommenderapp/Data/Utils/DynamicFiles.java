@@ -1,5 +1,5 @@
 package com.recommender.recommenderapp.Data.Utils;
 
-public class DynamicUsers {
+public class DynamicFiles {
 
 }

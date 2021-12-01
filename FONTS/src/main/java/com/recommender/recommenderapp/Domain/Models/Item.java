@@ -169,7 +169,7 @@ public class Item {
      * @return the title of the item
      */
     public String getTitle() {
-        if (title.equals(null)) {
+        if (title == null) {
             return "NoTitle";
         }
         return title;

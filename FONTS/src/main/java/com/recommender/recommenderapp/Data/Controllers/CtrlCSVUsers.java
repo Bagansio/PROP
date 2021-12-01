@@ -24,6 +24,7 @@ public class CtrlCSVUsers implements ICtrlCSVUser {
      */
     private Map<String, User> loadUserFile(String filename, Map<String, Item> items, Datasets dataset){
         Map<String, User> users = new HashMap<>();
+        /*
         try {
             CSVReader reader = new CSVReader();
             List<List<String>> allData = reader.readFile(filename,dataset.toString());
@@ -43,6 +44,8 @@ public class CtrlCSVUsers implements ICtrlCSVUser {
         catch (Exception ex) {
             ex.getStackTrace();
         }
+
+         */
         return users;
     }
 
