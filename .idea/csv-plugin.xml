@@ -3,13 +3,6 @@
   <component name="CsvFileAttributes">
     <option name="attributeMap">
       <map>
-        <entry key="C:\Users\alexm\AppData\Roaming\JetBrains\IdeaIC2021.2\scratches\scratch.csv">
-          <value>
-            <Attribute>
-              <option name="separator" value="," />
-            </Attribute>
-          </value>
-        </entry>
         <entry key="\DOCS\Memory\datasets\movies\ratings.db.csv">
           <value>
             <Attribute>

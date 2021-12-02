@@ -8,12 +8,12 @@ import java.util.Map;
 
 public class tests {
 
-    public static void main(String args[]) throws FileNotFoundException {
+    public static void main(String args[]) throws Exception {
 
         StaticFiles staticFiles = new StaticFiles();
         String dataset = "series";
         CSVReader reader = new CSVReader();
-        String[] attributes = staticFiles.getAttributes(dataset,"items");
+        String[] attributes = staticFiles.getAttributes(dataset,Utils.ITEMS);
         Map<String, Item> m = staticFiles.getItems(dataset);
         staticFiles.getUsers(dataset,"ratings.db",m).forEach((u,us)->{
             System.out.println(u + ":");
@@ -57,7 +57,7 @@ public class tests {
         });
 
 
-
+        staticFiles.writeTempUsers(dataset,staticFiles.getUsers(dataset,"ratings.db",m),Utils.USERS);
 
     }
 }
