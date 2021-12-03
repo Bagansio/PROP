@@ -1,20 +1,19 @@
 package com.recommender.recommenderapp.Data.Utils;
 
 import com.recommender.recommenderapp.Domain.Models.Item;
-import com.recommender.recommenderapp.Exceptions.DirectoryDoesNotExist;
 
-import java.io.FileNotFoundException;
 import java.util.Map;
 
 public class tests {
 
     public static void main(String args[]) throws Exception {
 
-        StaticFiles staticFiles = new StaticFiles();
+        DataUtils dataUtils = new DataUtils();
         String dataset = "series";
         CSVReader reader = new CSVReader();
-        String[] attributes = staticFiles.getAttributes(dataset,Utils.ITEMS);
-        Map<String, Item> m = staticFiles.getItems(dataset);
+        //String[] attributes = dataUtils.getAttributes(dataset,Utils.ITEMS);
+        Map<String, Item> m = dataUtils.getItems(dataset);
+        /*
         staticFiles.getUsers(dataset,"ratings.db",m).forEach((u,us)->{
             System.out.println(u + ":");
             Map<String,Item> mo = us.getItems();
@@ -56,8 +55,8 @@ public class tests {
             System.out.println("+++++++++++");
         });
 
-
-        staticFiles.writeTempUsers(dataset,staticFiles.getUsers(dataset,"ratings.db",m),Utils.USERS);
+        */
+        //staticFiles.writeTempUsers(dataset,staticFiles.getUsers(dataset,"ratings.db",m),Utils.USERS);
 
     }
 }

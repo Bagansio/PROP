@@ -12,48 +12,53 @@ import java.util.regex.Pattern;
 /**
  *
  */
-public class StaticFiles {
+public class DataUtils {
 
 
-    private String pathHead;
     private CSVReader reader;
-    private static final String LINE_BREAK = System.getProperty("line.separator");
 
 
     /**
      *
      */
-    public StaticFiles() {
-        pathHead = Utils.PATH;
+    public DataUtils() {
         reader = new CSVReader();
     }
 
 
 
+    public boolean existTemp(String path){
+        File directory = new File(path);
+        return directory.exists();
+    }
 
+    public void createDir(String path){
+        File directory = new File(path);
+        if (! directory.exists()){
+            directory.mkdir();
+        }
+    }
 
 
     /**
-     * @param dataset
-     * @param filename
+     * @param path
      * @return All the attributes of the csv files
      * @throws FileNotFoundException
      */
-    public String[] getAttributes(String dataset, String filename) throws FileNotFoundException {
-        String path = pathHead + "\\" + dataset + "\\" + filename;
+    public String[] getAttributes(String path) throws FileNotFoundException {
         return reader.readFirstLine(path);
     }
 
 
     /**
      *
-     * @param dataset
+     * @param path
      * @return
      */
-    public Map<String, Item> getItems(String dataset) {
+    public Map<String, Item> getItems(String path) {
         Map<String, Item> items = new HashMap<>();
 
-        String[][] data = reader.readFile(pathHead + dataset + "\\" + Utils.ITEMS);
+        String[][] data = reader.readFile(path);
 
         String[] attributes = data[0];
 
@@ -100,15 +105,14 @@ public class StaticFiles {
 
 
     /**
-     * @param dataset
-     * @param filename
+     * @param path
      * @param items
      * @return
      */
-    public Map<String, User> getUsers(String dataset, String filename, Map<String, Item> items) {
+    public Map<String, User> getUsers(String path, Map<String, Item> items) {
         Map<String, User> users = new HashMap<>();
 
-        String[][] data = reader.readFile(pathHead + dataset + "\\" + filename + ".csv");
+        String[][] data = reader.readFile(path);
 
         Map<String, Integer> attributes = userAttributes(data[0]);
 
@@ -126,7 +130,7 @@ public class StaticFiles {
     }
 
     private void writeLine(FileWriter writer, String line) throws IOException{
-        writer.write(line + LINE_BREAK);
+        writer.write(line + Utils.LINE_BREAK);
     }
 
     public void writeFile(String path, String[] data) throws IOException{
@@ -146,7 +150,7 @@ public class StaticFiles {
      * @throws IOException
      */
     private void writeUserHeader(FileWriter fileWriter) throws IOException {
-        fileWriter.write("itemId,rating,userId" + LINE_BREAK);
+        fileWriter.write("itemId,rating,userId" + Utils.LINE_BREAK);
     }
 
 
@@ -156,7 +160,7 @@ public class StaticFiles {
             Map<String,Double> ratings = user.getRatings();
             for(String itemId : ratings.keySet()){
                 fileWriter.write(itemId + "," + ratings.get(itemId) + "," + user.getId());
-                fileWriter.write(LINE_BREAK);
+                fileWriter.write(Utils.LINE_BREAK);
             }
         }
     }
@@ -167,19 +171,17 @@ public class StaticFiles {
      * @param filename
      * @throws IOException
      */
-    public void writeTempUsers(String dataset, Map<String, User> users, String filename) throws IOException {
-        String path = pathHead + "\\" + dataset + "\\" + Utils.TEMP + "\\";
-        FilesUtils fUtils = new FilesUtils();
+    public void writeTempUsers(String path, Map<String, User> users, String filename) throws IOException {
+        path = path + Utils.TEMP + "\\";
+        createDir(path);
 
-
-        fUtils.createDir(path);
-
-        File file = new File(path + filename);
+        path = path + filename;
+        File file = new File(path);
 
 
         FileWriter fileWriter = new FileWriter(file);
 
-        String[] attributes = getAttributes(dataset, filename);
+        String[] attributes = getAttributes(path);
 
         writeUserHeader(fileWriter);
 

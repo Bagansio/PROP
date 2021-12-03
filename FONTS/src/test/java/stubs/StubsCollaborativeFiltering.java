@@ -1,10 +1,5 @@
 package stubs;
 
-import com.recommender.recommenderapp.Domain.Controllers.CtrlItemList;
-import com.recommender.recommenderapp.Domain.Controllers.CtrlUsers;
-import com.recommender.recommenderapp.Domain.DataControllers.CtrlDataFactory;
-import com.recommender.recommenderapp.Domain.DataControllers.ICtrlCSVItemList;
-import com.recommender.recommenderapp.Domain.DataControllers.ICtrlCSVUser;
 import com.recommender.recommenderapp.Domain.Models.Item;
 import com.recommender.recommenderapp.Domain.Models.User;
 

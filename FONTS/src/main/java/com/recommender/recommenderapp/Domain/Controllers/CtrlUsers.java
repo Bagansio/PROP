@@ -1,8 +1,7 @@
 package com.recommender.recommenderapp.Domain.Controllers;
 
-import com.recommender.recommenderapp.Data.Utils.Datasets;
+import com.recommender.recommenderapp.Data.Controllers.CtrlData;
 import com.recommender.recommenderapp.Domain.DataControllers.CtrlDataFactory;
-import com.recommender.recommenderapp.Domain.DataControllers.ICtrlCSVUser;
 import com.recommender.recommenderapp.Domain.Models.Item;
 import com.recommender.recommenderapp.Domain.Models.User;
 
@@ -13,23 +12,25 @@ import java.util.Map;
  * @author  Alex
  */
 public class CtrlUsers {
-    private Datasets dataset = Datasets.movies;
+    private String dataset;
+    private Boolean useTemp = false;
     private CtrlDataFactory ctrlDataFactory = new CtrlDataFactory();
     private Map<String, User> users;
     private Map<String, User> knownUsers;
     private Map<String, User> unknownUsers;
 
-    private static CtrlUsers _instance = null;
+    private static CtrlUsers _instance = new CtrlUsers();
 
+
+    private CtrlUsers(){
+
+    }
 
     /**
      *
      * @return the Instance of the class itself
      */
-    public static CtrlUsers Instance(){
-        if(_instance == null){
-            _instance = new CtrlUsers();
-        }
+    public static CtrlUsers getInstance(){
         return _instance;
     }
 
@@ -57,6 +58,15 @@ public class CtrlUsers {
         return knownUsers;
     }
 
+    public boolean setUseTemp(boolean useTemp){
+        CtrlData ctrlData = ctrlDataFactory.getCtrlData();
+        if(useTemp && ctrlData.existTemp(dataset)){
+            this.useTemp = true;
+        }
+        else this.useTemp = false;
+        return this.useTemp;
+
+    }
 
     /**
      *
@@ -74,7 +84,7 @@ public class CtrlUsers {
      *
      * @param dataset dataset to load the users
      */
-    public void setDataset(Datasets dataset) {
+    public void setDataset(String dataset) {
         this.dataset = dataset;
     }
 
@@ -83,12 +93,12 @@ public class CtrlUsers {
      * Load the users using the ctrlCSVUser
      */
     private void loadUsers(){
-        ICtrlCSVUser ctrlCSVUser = ctrlDataFactory.getICtrlCSVUser();
-        CtrlItemList ctrlItemList = new CtrlItemList();
-        Map<String, Item> items = ctrlItemList.getItemList();
-        users = ctrlCSVUser.loadUserRatings(items,dataset);
-        knownUsers = ctrlCSVUser.loadUserKnownRatings(items,dataset);
-        unknownUsers = ctrlCSVUser.loadUserUnknownRatings(items,dataset);
+        CtrlData ctrlData = ctrlDataFactory.getCtrlData();
+
+        Map<String, Item> items = CtrlItems.getInstance().getItems();
+        users = ctrlData.getUsers(dataset,useTemp,items);
+        knownUsers = ctrlData.getKnownUsers(dataset,useTemp,items);
+        unknownUsers = ctrlData.getUnknownUsers(dataset,useTemp,items);
     }
 
 }

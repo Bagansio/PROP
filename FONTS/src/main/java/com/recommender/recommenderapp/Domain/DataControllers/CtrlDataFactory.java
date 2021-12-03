@@ -1,7 +1,6 @@
 package com.recommender.recommenderapp.Domain.DataControllers;
 
-import com.recommender.recommenderapp.Data.Controllers.CtrlCSVItemList;
-import com.recommender.recommenderapp.Data.Controllers.CtrlCSVUsers;
+import com.recommender.recommenderapp.Data.Controllers.CtrlData;
 
 
 /**
@@ -12,31 +11,19 @@ public class CtrlDataFactory {
 
     private static CtrlDataFactory _instance = null;
 
+
+    public CtrlData getCtrlData() {
+        return new CtrlData();
+    }
+
     /**
-     *
      * @return the Instance of the class itself
      */
-    public static CtrlDataFactory Intance(){
-        if(_instance == null){
+    public static CtrlDataFactory Intance() {
+        if (_instance == null) {
             _instance = new CtrlDataFactory();
         }
         return _instance;
     }
 
-    /**
-     *
-     * @return Instance of CtrlCSVItemList
-     */
-    public ICtrlCSVItemList getICtrlCSVItemList(){
-        return new CtrlCSVItemList();
-    }
-
-
-    /**
-     *
-     * @return Instance of CtrlCSVser
-     */
-    public ICtrlCSVUser getICtrlCSVUser(){
-        return new CtrlCSVUsers();
-    }
 }

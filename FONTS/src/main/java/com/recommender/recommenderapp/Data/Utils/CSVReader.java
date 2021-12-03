@@ -21,6 +21,12 @@ public class CSVReader {
     private static final String QUOTE = "\"";
 
 
+    /**
+     *
+     * @param path -> to file to read
+     * @return The HEADER of CSV file as Array of Strings
+     * @throws FileNotFoundException
+     */
     public String[] readFirstLine(String path) throws FileNotFoundException{
 
         File f = new File("\\" + path);
@@ -49,8 +55,8 @@ public class CSVReader {
 
     /**
      *
-     * @param filename -> file to read
-     * @return A list that contains each line of CSV separated by the DELIMITER
+     * @param path -> path of file to read
+     * @return A Matrix of String that contains each line of CSV file separated by the attributes of it
      */
     public String[][] readFile(String path) {
         List<String[]> fileData = new ArrayList<>();
