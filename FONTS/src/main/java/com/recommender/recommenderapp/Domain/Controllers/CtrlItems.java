@@ -1,7 +1,7 @@
 package com.recommender.recommenderapp.Domain.Controllers;
 
-import com.recommender.recommenderapp.Data.Controllers.CtrlData;
 import com.recommender.recommenderapp.Domain.DataControllers.CtrlDataFactory;
+import com.recommender.recommenderapp.Domain.DataControllers.ICtrlData;
 import com.recommender.recommenderapp.Domain.Models.Item;
 
 import java.util.Map;
@@ -13,7 +13,7 @@ import java.util.Map;
  */
 public class CtrlItems {
     private String dataset;
-    private final CtrlDataFactory  ctrlDataFactory = new CtrlDataFactory();
+    private final CtrlDataFactory  ctrlDataFactory = CtrlDataFactory.getInstance();
     private Map<String,Item> items;
     private static CtrlItems _instance = new CtrlItems();
 
@@ -40,7 +40,7 @@ public class CtrlItems {
     }
 
     private void loadItems(){
-        CtrlData loader = ctrlDataFactory.getCtrlData();
-        items = loader.getItems(dataset);
+        ICtrlData loader = ctrlDataFactory.getICtrlData();
+        items = loader.loadItems(dataset);
     }
 }

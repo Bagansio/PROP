@@ -3,10 +3,7 @@ package com.recommender.recommenderapp;
 import com.recommender.recommenderapp.Data.Utils.Datasets;
 import com.recommender.recommenderapp.Domain.Controllers.CtrlItems;
 import com.recommender.recommenderapp.Domain.Controllers.CtrlUsers;
-import com.recommender.recommenderapp.Domain.Models.ContentBasedFiltering;
-import com.recommender.recommenderapp.Domain.Models.Item;
-import com.recommender.recommenderapp.Domain.Models.NewCollaborativeFiltering;
-import com.recommender.recommenderapp.Domain.Models.User;
+import com.recommender.recommenderapp.Domain.Models.*;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -57,7 +54,6 @@ public class Main {
         Map<String, User> users = ctrlUsers.getUsers();
         Map<String, User> knownUsers = ctrlUsers.getKnownUsers();
         Map<String, User> unknownUsers = ctrlUsers.getUnknownUsers();
-
         boolean isCollaborative = true;
         System.out.println("Select an Algorithm");
         System.out.println("\t0. Collaborative Filtering");
@@ -126,6 +122,9 @@ public class Main {
                 unknownItem.put(itemId.toString(), item);
             }
             Map<String,Double> result;
+            Algorithm alg;
+
+
             if(isCollaborative){
                 NewCollaborativeFiltering algorithm = new NewCollaborativeFiltering();
                 algorithm.preprocessingData(items,users);

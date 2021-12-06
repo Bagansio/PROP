@@ -2,6 +2,7 @@ package com.recommender.recommenderapp.Data.Controllers;
 
 import com.recommender.recommenderapp.Data.Utils.DataUtils;
 import com.recommender.recommenderapp.Data.Utils.Utils;
+import com.recommender.recommenderapp.Domain.DataControllers.ICtrlData;
 import com.recommender.recommenderapp.Domain.Models.Item;
 import com.recommender.recommenderapp.Domain.Models.User;
 import com.recommender.recommenderapp.Exceptions.DirectoryDoesNotExist;
@@ -11,7 +12,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-public class CtrlData {
+public class CtrlData implements ICtrlData {
 
 
 
@@ -43,14 +44,14 @@ public class CtrlData {
     }
 
 
-    public Map<String, Item> getItems(String dataset){
+    public Map<String, Item> loadItems(String dataset){
         String path = getPath(dataset) + Utils.ITEMS;
         DataUtils dataUtils = new DataUtils();
         return dataUtils.getItems(path);
     }
 
 
-    private Map<String, User> getUsers(String dataset, String filename, Map<String,Item> items){
+    private Map<String, User> loadUsers(String dataset, String filename, Map<String,Item> items){
         String path = getPath(dataset) + "\\" + filename;
 
         DataUtils dataUtils = new DataUtils();
@@ -58,31 +59,76 @@ public class CtrlData {
     }
 
 
-    public Map<String,User> getKnownUsers(String dataset, boolean useTemp, Map<String,Item> items){
+    public Map<String,User> loadKnownUsers(String dataset, boolean useTemp, Map<String,Item> items){
         String filename = pathTemp(Utils.KNOWN_USERS, useTemp);
 
-        return getUsers(dataset,filename,items);
+        return loadUsers(dataset,filename,items);
     }
 
-    public Map<String,User> getUnknownUsers(String dataset, boolean useTemp, Map<String,Item> items){
+    public Map<String,User> loadUnknownUsers(String dataset, boolean useTemp, Map<String,Item> items){
         String filename = pathTemp(Utils.UNKNOWN_USERS, useTemp);
 
-        return getUsers(dataset,filename,items);
+        return loadUsers(dataset,filename,items);
     }
 
-    public Map<String,User> getUsers(String dataset, boolean useTemp, Map<String,Item> items){
+    public Map<String,User> loadUsers(String dataset, boolean useTemp, Map<String,Item> items){
         String filename = pathTemp(Utils.USERS, useTemp);
 
-        return getUsers(dataset,filename,items);
+        return loadUsers(dataset,filename,items);
     }
 
 
+    /**
+     *
+     * @param dataset
+     * @param filename
+     * @param users an Array of users to save
+     * @return true -> correctly save , false -> not save
+     */
+    private boolean saveUsers(String dataset, String filename, User[] users){
+        String path = getPath(dataset) + "\\" + Utils.TEMP;
 
-    public void writeKnownRates(String dataset, String[] data) throws IOException{
-        String path = getPath(dataset) + Utils.TEMP + "\\" + Utils.KNOWN_USERS;
         DataUtils dataUtils = new DataUtils();
+        try {
+            dataUtils.writeTempUsers(path, filename,users);
+        }
+        catch(IOException e){
+            return false;
+        }
+        return true;
+    }
 
-        dataUtils.writeFile(path, data);
+
+    /**
+     * Save users in temp
+     * @param dataset
+     * @param users an Array of users to save
+     * @return true -> correctly save , false -> not save
+     */
+    public boolean saveUsers(String dataset, User[] users){
+        return saveUsers(dataset,Utils.USERS,users);
+    }
+
+
+    /**
+     * Save known users in temp
+     * @param dataset
+     * @param users an Array of users to save
+     * @return true -> correctly save , false -> not save
+     */
+    public boolean saveKnownUsers(String dataset, User[] users){
+        return saveUsers(dataset,Utils.KNOWN_USERS,users);
+    }
+
+
+    /**
+     * Save unknown users in temp
+     * @param dataset
+     * @param users an Array of users to save
+     * @return true -> correctly save , false -> not save
+     */
+    public boolean saveUnknownUsers(String dataset, User[] users){
+        return saveUsers(dataset,Utils.UNKNOWN_USERS,users);
     }
 
 

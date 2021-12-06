@@ -5,6 +5,7 @@ import com.recommender.recommenderapp.Domain.Models.User;
 import com.recommender.recommenderapp.Exceptions.DirectoryDoesNotExist;
 
 import java.io.*;
+import java.nio.file.Files;
 import java.util.*;
 import java.util.regex.Pattern;
 
@@ -28,16 +29,13 @@ public class DataUtils {
 
 
     public boolean existTemp(String path){
-        File directory = new File(path);
-        return directory.exists();
+        boolean exists =  new File(path).exists();
+        exists &= new File(path + "\\" + Utils.KNOWN_USERS).exists();
+        exists &= new File(path + "\\" + Utils.USERS).exists();
+        exists &= new File(path + "\\" + Utils.UNKNOWN_USERS).exists();
+        return exists;
     }
 
-    public void createDir(String path){
-        File directory = new File(path);
-        if (! directory.exists()){
-            directory.mkdir();
-        }
-    }
 
 
     /**
@@ -150,43 +148,43 @@ public class DataUtils {
      * @throws IOException
      */
     private void writeUserHeader(FileWriter fileWriter) throws IOException {
-        fileWriter.write("itemId,rating,userId" + Utils.LINE_BREAK);
+        fileWriter.write("userId,rating,itemId" + Utils.LINE_BREAK);
     }
 
 
-    private void writeUserRates(FileWriter fileWriter, Map<String,User> users, Optional<String> delimiter) throws IOException {
+    private void writeUserRates(FileWriter fileWriter, User[] users) throws IOException {
 
-        for(User user : users.values()){
+        for(User user : users){
             Map<String,Double> ratings = user.getRatings();
             for(String itemId : ratings.keySet()){
-                fileWriter.write(itemId + "," + ratings.get(itemId) + "," + user.getId());
+                fileWriter.write(user.getId() + "," + ratings.get(itemId) + "," + itemId);
                 fileWriter.write(Utils.LINE_BREAK);
             }
         }
     }
+
+    private boolean createDir(String path){
+        return new File(path).mkdir();
+    }
+
     /**
      *
-     * @param dataset
      * @param users
-     * @param filename
      * @throws IOException
      */
-    public void writeTempUsers(String path, Map<String, User> users, String filename) throws IOException {
-        path = path + Utils.TEMP + "\\";
+    public void writeTempUsers(String path, String filename, User[] users) throws IOException {
+
         createDir(path);
 
-        path = path + filename;
-        File file = new File(path);
-
+        File file = new File(path + "\\" + filename);
 
         FileWriter fileWriter = new FileWriter(file);
 
-        String[] attributes = getAttributes(path);
-
         writeUserHeader(fileWriter);
 
-        writeUserRates(fileWriter, users, Optional.empty());
+        writeUserRates(fileWriter, users);
 
         fileWriter.flush();
     }
+
 }
