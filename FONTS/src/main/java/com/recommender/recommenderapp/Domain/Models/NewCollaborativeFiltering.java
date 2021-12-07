@@ -329,7 +329,7 @@ public class NewCollaborativeFiltering extends Algorithm {
     }
 
     /**
-     * @param recommendedItems -> Map - key(itemId) value (rating)
+     * @param recommendedItems -> Map - key (itemId) value (rating)
      * @param Q                -> amount of items that have to be recommended
      * @return an ordered map of the recommended items
      */

@@ -49,10 +49,10 @@ public class DriverCollaborativeFiltering {
             System.out.println();
             first = false;
         }
-        System.out.println("You are executing Item's class driver. Choose one of the following options in order to" +
+        System.out.println("You are executing CollaborativeFiltering's class driver. Choose one of the following options in order to" +
                 " test this class");
         System.out.println("\t1. preprocessingData: initializes all the data structures and applies the Kmeans algorithm");
-        System.out.println(" \t2. QUery: executes the Slope One Algorithm");;
+        System.out.println(" \t2. Query: executes the Slope One Algorithm");;
         System.out.println(ansiRed + "\t3. Exit" + ansiNormal);
     }
 
