@@ -23,7 +23,7 @@ public class StubsContentBasedFiltering {
         m1.put("revenue", 100);
         knownItem.setIntAttributes(m1);
 
-        /*Map<String, Double> m2 = new HashMap<>();
+        Map<String, Double> m2 = new HashMap<>();
         m2.put("popularity", 1.0);
         knownItem.setDoubleAttributes(m2);
 
@@ -35,13 +35,12 @@ public class StubsContentBasedFiltering {
         Set<String> s1 = new HashSet<>();
         s1.add("terror"); s1.add("thriller");
         m4.put("genres", s1);
-        knownItem.setSetAttributes(m4); */
+        knownItem.setSetAttributes(m4);
 
         unknown.rateItem("known", 5.0);
 
         return unknown;
     }
-
     public Map<String, Item> getUnknownItems() {
         //Unknown Items
         Item unknownItem = new Item();
@@ -53,7 +52,7 @@ public class StubsContentBasedFiltering {
         m1.put("revenue", 100);
         unknownItem.setIntAttributes(m1);
 
-        /*Map<String, Double> m2 = new HashMap<>();
+        Map<String, Double> m2 = new HashMap<>();
         m2.put("popularity", 1.0);
         unknownItem.setDoubleAttributes(m2);
 
@@ -65,7 +64,7 @@ public class StubsContentBasedFiltering {
         Set<String> s1 = new HashSet<>();
         s1.add("terror"); s1.add("thriller");
         m4.put("genres", s1);
-        unknownItem.setSetAttributes(m4);*/
+        unknownItem.setSetAttributes(m4);
 
         Map<String, Item> m = new HashMap<>();
         m.put("unknown", unknownItem);

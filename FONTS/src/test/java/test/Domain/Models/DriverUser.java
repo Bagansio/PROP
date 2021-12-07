@@ -12,6 +12,10 @@ import stubs.StubsUserGroup;
 import java.util.Map;
 import java.util.Scanner;
 
+
+/**
+ * @author Victor Muñoz
+ */
 public class DriverUser {
 
 

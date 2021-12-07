@@ -52,7 +52,7 @@ public class DriverContentBasedFiltering {
 
 
         ContentBasedFiltering cbf = new ContentBasedFiltering();
-        Map<String, Double> m = cbf.query(stubsCBF.getUnknownUser(), stubsCBF.getUnknownItems(), 3);
+        Map<String, Double> m = cbf.query(stubsCBF.getUnknownUser(), stubsCBF.getUnknownItems(), 1);
 
         for (String s: m.keySet()) {
             System.out.println(m.get(s));

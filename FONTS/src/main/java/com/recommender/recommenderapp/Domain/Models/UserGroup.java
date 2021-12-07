@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * @author Melanie Scatena
+ * @author Artur Farriols
  */
 public class UserGroup {
     private String id;

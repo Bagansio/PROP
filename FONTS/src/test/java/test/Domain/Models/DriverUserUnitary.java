@@ -9,6 +9,9 @@ import org.junit.*;
 
 import java.util.Map;
 
+/**
+ * @author Victor Muñoz
+ */
 public class DriverUserUnitary {
 
     @Test

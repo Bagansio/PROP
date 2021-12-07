@@ -1,0 +1,24 @@
+.
+├── Casos de uso.pdf
+├── Diagrama de clases.pdf
+├── datasets
+│   ├── movies
+│   │   ├── items.csv
+│   │   ├── ratings.db.csv
+│   │   ├── ratings.test.known.csv
+│   │   └── ratings.test.unknown.csv
+│   └── series
+│       ├── items.csv
+│       ├── ratings.db.csv
+│       ├── ratings.test.known.csv
+│       └── ratings.test.unknown.csv
+├── drivers
+│   ├── DriverCollaborativeFiltering.txt
+│   ├── DriverContentBasedFiltering.txt
+│   ├── DriverItem.txt
+│   ├── DriverRecommendation.txt
+│   ├── DriverUser.txt
+│   └── DriverUserGroup.txt
+└── index.txt
+
+4 directories, 17 files

@@ -10,6 +10,9 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 
+/**
+ * @author Artur Farriols
+ */
 public class DriverCollaborativeFiltering {
 
     public static final String ansiGreen = "\u001B[32m";

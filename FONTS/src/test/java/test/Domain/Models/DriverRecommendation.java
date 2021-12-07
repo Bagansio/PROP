@@ -7,6 +7,10 @@ import stubs.StubsRecommendation;
 
 import java.util.Scanner;
 
+
+/**
+ * @author  Melanie Scatena
+ */
 public class DriverRecommendation {
     public static final String ansiGreen = "\u001B[32m";
     public static final String ansiRed = "\u001B[31m";
