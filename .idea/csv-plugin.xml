@@ -31,13 +31,6 @@
             </Attribute>
           </value>
         </entry>
-        <entry key="\DOCS\Memory\datasets\movies\temp\ratings.db.csv">
-          <value>
-            <Attribute>
-              <option name="separator" value="," />
-            </Attribute>
-          </value>
-        </entry>
         <entry key="\DOCS\Memory\datasets\series\items.csv">
           <value>
             <Attribute>
@@ -60,13 +53,6 @@
           </value>
         </entry>
         <entry key="\DOCS\Memory\datasets\series\ratings.test.unknown.csv">
-          <value>
-            <Attribute>
-              <option name="separator" value="," />
-            </Attribute>
-          </value>
-        </entry>
-        <entry key="\DOCS\Memory\datasets\series\temp\ratings.db.csv">
           <value>
             <Attribute>
               <option name="separator" value="," />
