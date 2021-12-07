@@ -17,11 +17,23 @@ import java.util.Scanner;
  */
 public class CSVReader {
 
-    private static final String PATH = "src\\main\\resources\\datasets\\";
-    private static final String EXTENSION = ".csv";
     private static final String DELIMITER = ",";
     private static final String QUOTE = "\"";
 
+
+    /**
+     *
+     * @param path -> to file to read
+     * @return The HEADER of CSV file as Array of Strings
+     * @throws FileNotFoundException
+     */
+    public String[] readFirstLine(String path) throws FileNotFoundException{
+
+        File f = new File("\\" + path);
+        Scanner scanner = new Scanner(f);
+
+        return readLine(scanner.nextLine(),DELIMITER);
+    }
 
     /**
      *
@@ -29,56 +41,40 @@ public class CSVReader {
      * @param delimiter -> how will divide de line
      * @return A list of String that represent the line delimited
      */
-    public List<String> readLine(String line, String delimiter){
+    public String[] readLine(String line, String delimiter){
         List<String> lineList = new ArrayList<>();
+
         Scanner lineScanner = new Scanner(line);
         lineScanner.useDelimiter(delimiter);
         while(lineScanner.hasNext()){
             lineList.add(lineScanner.next());
         }
         lineScanner.close();
-        return lineList;
+        return lineList.toArray(new String[lineList.size()]);
     }
-
 
     /**
      *
-     * @param filename -> file to read
-     * @return A list that contains each line of CSV separated by the DELIMITER
+     * @param path -> path of file to read
+     * @return A Matrix of String that contains each line of CSV file separated by the attributes of it
      */
-    public List<List<String>> readFile(String filename, String dataset) {
-        List<List<String>> fileData = new ArrayList<>();
+    public String[][] readFile(String path) {
+        List<String[]> fileData = new ArrayList<>();
 
-        String currentPath = "/DOCS/datasets/" + dataset + "/" + filename + ".csv";
-
-        File f = new File(System.getProperty("user.dir")+currentPath);
+        File f = new File(path);
         try (Scanner scanner = new Scanner(f)) {
 
             while(scanner.hasNextLine()) {
                 String line = scanner.nextLine();
-                line = deleteValues(line);
-                fileData.add(readLine(line,DELIMITER));
+                fileData.add(line.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)", -1));
             }
         }
         catch (Exception ex) {
             ex.printStackTrace();
         }
-        return fileData;
+        return fileData.toArray(new String[fileData.size()][]);
     }
 
 
-    /**
-     *
-     * @param line -> line to modify
-     * @return the same line without text in QUOTES
-     */
-    private String deleteValues(String line){
-        int index = line.indexOf(QUOTE);
-        while(index != -1 || index == line.length() - 1){
-            int endIndex = line.indexOf(QUOTE,index+2);
-            if(endIndex != -1) line = line.replace(line.substring(index,endIndex+1), "");
-            index = line.indexOf(QUOTE);
-        }
-        return line;
-    }
+
 }

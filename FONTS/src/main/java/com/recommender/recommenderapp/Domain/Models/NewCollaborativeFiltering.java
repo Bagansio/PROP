@@ -1,10 +1,6 @@
 package com.recommender.recommenderapp.Domain.Models;
 
-import com.recommender.recommenderapp.Domain.Controllers.CtrlItemList;
-import com.recommender.recommenderapp.Domain.Controllers.CtrlUsers;
 
-
-import java.lang.reflect.Array;
 import java.util.*;
 import java.util.stream.Collectors;
 
