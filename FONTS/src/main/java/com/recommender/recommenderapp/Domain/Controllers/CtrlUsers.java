@@ -90,7 +90,11 @@ public class CtrlUsers {
      * @param dataset dataset to load the users
      */
     public void setDataset(String dataset) {
+
         this.dataset = dataset;
+        users = null;
+        unknownUsers = null;
+        knownUsers = null;
     }
 
 

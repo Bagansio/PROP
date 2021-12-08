@@ -1,15 +1,21 @@
 package com.recommender.recommenderapp.View.Controllers;
 
+import com.recommender.recommenderapp.Domain.Controllers.CtrlDomain;
+import com.recommender.recommenderapp.View.Views.DatasetsView;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
+
 import java.nio.file.Paths;
 
 
 public class CtrlView extends Application {
 
+
+    public static CtrlDomain ctrlDomain = new CtrlDomain();
     /**
      * @brief Main stage.
      */
@@ -30,17 +36,24 @@ public class CtrlView extends Application {
     public void start(Stage primaryStage) throws Exception {
         CtrlView.stage = primaryStage;
         primaryStage.setResizable(false);
-        Parent root = FXMLLoader.load(Paths.get(System.getProperty("user.dir") + "resources\\templates\\MainView.fxml").toUri().toURL());
-        primaryStage.setTitle("OTHELLO");
-        primaryStage.setScene(new Scene(root, 1464, 824));
+        FXMLLoader loader = new FXMLLoader(Paths.get(System.getProperty("user.dir") + "\\resources\\templates\\DatasetsView.fxml").toUri().toURL());
+        loader.setController(new DatasetsView());
+
+        Parent root = loader.load();
+
+        primaryStage.setTitle("RECOMMENDER");
+        primaryStage.setScene(new Scene(root, 1280, 800));
+        primaryStage.getIcons().add(new Image("file:"+System.getProperty("user.dir") + "\\resources\\templates\\icons\\iconSmall.png"));
         primaryStage.show();
     }
+
 
     /**
      * @brief Main method.
      */
     public static void main(String[] args) {
-        //ViewCtrl.domainCtrl = new DomainCtrl();
+        //CtrlView.domainCtrl = new DomainCtrl();
+
         CtrlView.launch(args);
     }
 }
