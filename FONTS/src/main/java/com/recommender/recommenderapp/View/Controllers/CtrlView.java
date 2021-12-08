@@ -11,11 +11,17 @@ import javafx.stage.Stage;
 
 import java.nio.file.Paths;
 
-
+/**
+ * @author Alex
+ */
 public class CtrlView extends Application {
 
 
+    /**
+     * @brief Controller of Domain Layer
+     */
     public static CtrlDomain ctrlDomain = new CtrlDomain();
+
     /**
      * @brief Main stage.
      */
@@ -30,7 +36,7 @@ public class CtrlView extends Application {
     /**
      * @brief Event method which is executed when the program is executed
      * @pre <em>True</em>
-     * @post All stage parameters are set and the LogInView scene is shown.
+     * @post All stage parameters are set and the DatasetsView scene is shown.
      */
     @Override
     public void start(Stage primaryStage) throws Exception {
@@ -48,12 +54,4 @@ public class CtrlView extends Application {
     }
 
 
-    /**
-     * @brief Main method.
-     */
-    public static void main(String[] args) {
-        //CtrlView.domainCtrl = new DomainCtrl();
-
-        CtrlView.launch(args);
-    }
 }
