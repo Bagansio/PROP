@@ -141,14 +141,13 @@ public class CtrlData implements ICtrlData {
     /**
      *
      * @return
-     * @throws DirectoryDoesNotExist
      */
-    public String[] getDatasets() throws DirectoryDoesNotExist {
+    public String[] getDatasets(){
 
         File[] directories = new File(Utils.PATH).listFiles(File::isDirectory);
 
         if (directories == null)
-            throw new DirectoryDoesNotExist("DIRECTORY '" + Utils.PATH + "' DOESN'T EXIST", Utils.PATH);
+            return new String[0];
 
         String[] datasets = new String[directories.length];
 

@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="823.5" prefWidth="1464.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.UserView">
+    <children>
+        <Rectangle arcHeight="5.0" arcWidth="5.0" height="824.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="1464.0">
+            <fill>
+                <LinearGradient endX="0.519047619047619" endY="1.0" startX="0.5047619047619047">
+                    <stops>
+                        <Stop>
+                            <color>
+                                <Color red="0.20392157137393951" green="0.8274509906768799" blue="0.6000000238418579" />
+                            </color>
+                        </Stop>
+                        <Stop offset="1.0">
+                            <color>
+                                <Color red="0.01568627543747425" green="0.47058823704719543" blue="0.34117648005485535" />
+                            </color>
+                        </Stop>
+                    </stops>
+                </LinearGradient>
+            </fill>
+        </Rectangle>
+        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f9f9f9" height="660.0" layoutX="14.0" layoutY="121.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="744.0" AnchorPane.bottomAnchor="43.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="706.0" AnchorPane.topAnchor="121.0" />
+        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f9f9f9" height="63.0" layoutX="14.0" layoutY="58.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="106.5" />
+        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#22222275" height="63.0" layoutX="121.0" layoutY="58.0" stroke="#a6a6a6" strokeType="INSIDE" width="99.0" />
+        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#22222275" height="63.0" layoutX="220.0" layoutY="58.0" stroke="#a6a6a6" strokeType="INSIDE" width="118.5" />
+        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#22222275" height="63.0" layoutX="339.0" layoutY="58.0" stroke="#a6a6a6" strokeType="INSIDE" width="124.5" />
+        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#22222275" height="63.0" layoutX="464.0" layoutY="58.0" stroke="#a6a6a6" strokeType="INSIDE" width="142.5" />
+        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#22222275" height="63.0" layoutX="607.0" layoutY="58.0" stroke="#a6a6a6" strokeType="INSIDE" width="87.0" />
+        <Rectangle fx:id="deleteUserButton" arcHeight="5.0" arcWidth="5.0" height="45.0" layoutX="103.0" layoutY="332.0" onMouseClicked="#deleteUser" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="236.0">
+            <fill>
+                <LinearGradient endX="1.0" startY="1.0">
+                    <stops>
+                        <Stop>
+                            <color>
+                                <Color red="0.01568627543747425" green="0.47058823704719543" blue="0.34117648005485535" />
+                            </color>
+                        </Stop>
+                        <Stop offset="1.0">
+                            <color>
+                                <Color red="0.20392157137393951" green="0.8274509906768799" blue="0.6000000238418579" />
+                            </color>
+                        </Stop>
+                    </stops>
+                </LinearGradient>
+            </fill>
+            <cursor>
+                <Cursor fx:constant="HAND" />
+            </cursor>
+        </Rectangle>
+        <Text fx:id="deleteUser" fill="WHITE" layoutX="103.0" layoutY="364.0" onMouseClicked="#deleteUser" strokeType="OUTSIDE" strokeWidth="0.0" text="Delete Account" textAlignment="CENTER" wrappingWidth="236.0">
+            <font>
+                <Font size="26.0" />
+            </font>
+            <cursor>
+                <Cursor fx:constant="HAND" />
+            </cursor>
+        </Text>
+        <Text fill="#828282" layoutX="131.0" layoutY="272.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Change your current username and/or password.">
+            <font>
+                <Font size="20.0" />
+            </font>
+        </Text>
+        <Text fill="#828282" layoutX="131.0" layoutY="420.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Delete your account. Be careful, this action cannot">
+            <font>
+                <Font size="20.0" />
+            </font>
+        </Text>
+        <Text fx:id="user" fill="#14966d" layoutX="14.0" layoutY="99.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Me" textAlignment="CENTER" wrappingWidth="106.5">
+            <font>
+                <Font name="System Bold" size="26.0" />
+            </font>
+            <cursor>
+                <Cursor fx:constant="HAND" />
+            </cursor>
+        </Text>
+        <Text fx:id="bots" fill="WHITE" layoutX="121.0" layoutY="99.0" onMouseClicked="#bots" strokeType="OUTSIDE" strokeWidth="0.0" text="Bots" textAlignment="CENTER" wrappingWidth="99.0">
+            <font>
+                <Font name="System Bold" size="26.0" />
+            </font>
+            <cursor>
+                <Cursor fx:constant="HAND" />
+            </cursor>
+        </Text>
+        <Text fx:id="config" fill="WHITE" layoutX="220.0" layoutY="99.0" onMouseClicked="#config" strokeType="OUTSIDE" strokeWidth="0.0" text="Config." textAlignment="CENTER" wrappingWidth="118.5">
+            <font>
+                <Font name="System Bold" size="26.0" />
+            </font>
+            <cursor>
+                <Cursor fx:constant="HAND" />
+            </cursor>
+        </Text>
+        <Text fx:id="games" fill="WHITE" layoutX="339.0" layoutY="99.0" onMouseClicked="#games" strokeType="OUTSIDE" strokeWidth="0.0" text="Games" textAlignment="CENTER" wrappingWidth="124.5">
+            <font>
+                <Font name="System Bold" size="26.0" />
+            </font>
+            <cursor>
+                <Cursor fx:constant="HAND" />
+            </cursor>
+        </Text>
+        <Text fx:id="ranking" fill="WHITE" layoutX="464.0" layoutY="99.0" onMouseClicked="#ranking" strokeType="OUTSIDE" strokeWidth="0.0" text="Ranking" textAlignment="CENTER" wrappingWidth="142.5">
+            <font>
+                <Font name="System Bold" size="26.0" />
+            </font>
+            <cursor>
+                <Cursor fx:constant="HAND" />
+            </cursor>
+        </Text>
+        <Text fx:id="play" fill="WHITE" layoutX="607.0" layoutY="99.0" onMouseClicked="#play" strokeType="OUTSIDE" strokeWidth="0.0" text="Play" textAlignment="CENTER" wrappingWidth="87.0">
+            <font>
+                <Font name="System Bold" size="26.0" />
+            </font>
+            <cursor>
+                <Cursor fx:constant="HAND" />
+            </cursor>
+        </Text>
+        <Rectangle fx:id="modifyUserButton" arcHeight="5.0" arcWidth="5.0" height="45.0" layoutX="103.0" layoutY="191.0" onMouseClicked="#modifyUser" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="236.0">
+            <fill>
+                <LinearGradient endX="1.0" startY="1.0">
+                    <stops>
+                        <Stop>
+                            <color>
+                                <Color red="0.01568627543747425" green="0.47058823704719543" blue="0.34117648005485535" />
+                            </color>
+                        </Stop>
+                        <Stop offset="1.0">
+                            <color>
+                                <Color red="0.20392157137393951" green="0.8274509906768799" blue="0.6000000238418579" />
+                            </color>
+                        </Stop>
+                    </stops>
+                </LinearGradient>
+            </fill>
+            <cursor>
+                <Cursor fx:constant="HAND" />
+            </cursor>
+        </Rectangle>
+        <Text fx:id="modifyUser" fill="WHITE" layoutX="103.0" layoutY="223.0" onMouseClicked="#modifyUser" strokeType="OUTSIDE" strokeWidth="0.0" text="Modify Account" textAlignment="CENTER" wrappingWidth="235.5">
+            <font>
+                <Font size="26.0" />
+            </font>
+            <cursor>
+                <Cursor fx:constant="HAND" />
+            </cursor>
+        </Text>
+        <Circle fill="#30c9913d" layoutX="1110.0" layoutY="392.0" radius="315.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
+        <Circle fill="#34cf963d" layoutX="1110.0" layoutY="392.0" radius="258.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
+        <ImageView fitHeight="385.1" fitWidth="385.1" layoutX="917.0" layoutY="205.0">
+            <image>
+                <Image url="@../../../res/assets/images/undraw_male_avatar_323b.png" />
+            </image>
+        </ImageView>
+        <Text fx:id="logOut" fill="WHITE" layoutX="1343.0" layoutY="49.0" onMouseClicked="#logOut" strokeType="OUTSIDE" strokeWidth="0.0" text="Log Out">
+            <font>
+                <Font name="System Bold" size="24.0" />
+            </font>
+            <cursor>
+                <Cursor fx:constant="HAND" />
+            </cursor>
+        </Text>
+        <Label fx:id="currentUserName" layoutX="80.0" layoutY="16.0" textFill="WHITE">
+            <font>
+                <Font name="System Bold" size="20.0" />
+            </font>
+        </Label>
+        <Text fx:id="currentUser" fill="WHITE" layoutX="14.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Hello, ">
+            <font>
+                <Font size="20.0" />
+            </font>
+        </Text>
+        <Text fill="#828282" layoutX="131.0" layoutY="458.0" strokeType="OUTSIDE" strokeWidth="0.0" text="be undone.">
+            <font>
+                <Font size="20.0" />
+            </font>
+        </Text>
+    </children>
+</AnchorPane>

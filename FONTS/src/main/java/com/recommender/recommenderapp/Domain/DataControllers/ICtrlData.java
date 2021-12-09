@@ -24,5 +24,5 @@ public interface ICtrlData {
 
     public boolean saveUnknownUsers(String dataset, User[] users);
 
-    public String[] getDatasets() throws DirectoryDoesNotExist;
+    public String[] getDatasets();
 }

@@ -30,6 +30,7 @@ public class CtrlItems {
 
     public void setDataset(String dataset) {
         this.dataset = dataset;
+        items = null;
     }
 
     public Map<String,Item> getItems(){
