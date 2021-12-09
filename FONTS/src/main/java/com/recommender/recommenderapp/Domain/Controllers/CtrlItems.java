@@ -40,7 +40,7 @@ public class CtrlItems {
         return items;
     }
 
-    private void loadItems(){
+    public void loadItems(){
         ICtrlData loader = ctrlDataFactory.getICtrlData();
         items = loader.loadItems(dataset);
     }

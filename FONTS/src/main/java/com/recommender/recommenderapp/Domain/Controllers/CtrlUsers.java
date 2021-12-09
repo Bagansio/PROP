@@ -101,7 +101,7 @@ public class CtrlUsers {
     /**
      * Load the users using the Data controller
      */
-    private void loadUsers(){
+    public void loadUsers(){
         ICtrlData ctrlData = ctrlDataFactory.getICtrlData();
 
         Map<String, Item> items = CtrlItems.getInstance().getItems();

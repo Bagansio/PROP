@@ -1,6 +1,7 @@
 package com.recommender.recommenderapp.View.Views;
 
 import com.recommender.recommenderapp.Data.Utils.Utils;
+import com.recommender.recommenderapp.Domain.Controllers.CtrlItems;
 import com.recommender.recommenderapp.View.Controllers.CtrlView;
 import com.recommender.recommenderapp.View.Utils.Styles;
 import javafx.application.Platform;
@@ -33,9 +34,11 @@ public class DatasetsView {
      */
     @FXML
     public void loadDataset(ActionEvent event){
+        //loadButton.setStyle(Styles.getStyleBackgroundColor("black"));
         String dataset = datasetsChoiceBox.getValue();
-        CtrlView.ctrlDomain.setDataset(dataset);
-
+        CtrlView.ctrlDomain.loadData(dataset);
+        System.out.println(CtrlView.ctrlDomain.getItems().size());
+        CtrlView.changeScene("view");
     }
 
 
@@ -67,9 +70,9 @@ public class DatasetsView {
      * @brief Initialize the view, set some values (ex styles)
      */
     public void initialize() {
-        loadButton.setStyle(Styles.getStyleBackgroundColor("black"));
-        loadButton.setOnMousePressed(e -> loadButton.setStyle(Styles.getStyleBackgroundColor("#3c3c3c")));//loadButton.setStyle("-fx-background-color: #3c3c3c"));
-        loadButton.setOnMouseClicked(e -> loadButton.setStyle(Styles.getStyleBackgroundColor("black")));
+        //loadButton.setStyle(Styles.getStyleBackgroundColor("black"));
+        //loadButton.setOnMousePressed(e -> loadButton.setStyle(Styles.getStyleBackgroundColor("#3c3c3c")));//loadButton.setStyle("-fx-background-color: #3c3c3c"));
+        //loadButton.setOnMouseClicked(e -> loadButton.setStyle(Styles.getStyleBackgroundColor("black")));
         loadDatasetsChoiceBox();
     }
 
