@@ -27,6 +27,7 @@ public class CSVReaderTest {
         Assert.assertEquals("Data are different", line, expectedLine);
     }
 
+    /*
     @Test
     public void readLineTest(){
         CSVReader reader = new CSVReader();
@@ -34,5 +35,5 @@ public class CSVReaderTest {
 
         Assert.assertEquals("Lines are different", reader.readLine(line,","),expectedLine);
     }
-
+*/
 }

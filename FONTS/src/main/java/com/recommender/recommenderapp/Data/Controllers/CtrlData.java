@@ -6,21 +6,25 @@ import com.recommender.recommenderapp.Domain.DataControllers.ICtrlData;
 import com.recommender.recommenderapp.Domain.Models.Item;
 import com.recommender.recommenderapp.Domain.Models.User;
 import com.recommender.recommenderapp.Exceptions.DirectoryDoesNotExist;
+import javafx.scene.chart.PieChart;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class CtrlData implements ICtrlData {
 
-
+    private DataUtils utils = new DataUtils();
 
 
     public boolean existTemp(String dataset){
         String path = getPath(dataset) + "\\" + Utils.TEMP;
-        return new DataUtils().existTemp(path);
+        return utils.existTemp(path);
     }
+
 
 
     private String pathTemp(String filename, boolean useTemp){
@@ -46,16 +50,26 @@ public class CtrlData implements ICtrlData {
 
     public Map<String, Item> loadItems(String dataset){
         String path = getPath(dataset) + Utils.ITEMS;
-        DataUtils dataUtils = new DataUtils();
-        return dataUtils.getItems(path);
+        Map<String, Item> items = null;
+        try {
+            items = utils.getItems(path);
+        }
+        catch(Exception e) {
+
+        }
+        return items;
     }
 
 
     private Map<String, User> loadUsers(String dataset, String filename, Map<String,Item> items){
         String path = getPath(dataset) + "\\" + filename;
-
-        DataUtils dataUtils = new DataUtils();
-        return dataUtils.getUsers(path,items);
+        Map<String,User> users = null;
+        try {
+            users = utils.getUsers(path, items);
+        }
+        catch (Exception e){
+        }
+        return users;
     }
 
 
@@ -88,9 +102,8 @@ public class CtrlData implements ICtrlData {
     private boolean saveUsers(String dataset, String filename, User[] users){
         String path = getPath(dataset) + "\\" + Utils.TEMP;
 
-        DataUtils dataUtils = new DataUtils();
         try {
-            dataUtils.writeTempUsers(path, filename,users);
+            utils.writeTempUsers(path, filename,users);
         }
         catch(IOException e){
             return false;
@@ -149,16 +162,20 @@ public class CtrlData implements ICtrlData {
         if (directories == null)
             return new String[0];
 
-        String[] datasets = new String[directories.length];
+        //String[] datasets = new String[directories.length];
 
+        List<String> datasets = new ArrayList<>();
         int i = 0;
 
+
         for (File f : directories) {
-            datasets[i] = f.getName();
+            if(utils.existDataset(f.getPath())){
+                datasets.add(f.getName());
+            }
             ++i;
         }
 
-        return datasets;
+        return datasets.toArray(new String[0]);
     }
 
 }

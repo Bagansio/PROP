@@ -101,13 +101,14 @@ public class CtrlUsers {
     /**
      * Load the users using the Data controller
      */
-    public void loadUsers(){
+    public boolean loadUsers(){
         ICtrlData ctrlData = ctrlDataFactory.getICtrlData();
 
         Map<String, Item> items = CtrlItems.getInstance().getItems();
         users = ctrlData.loadUsers(dataset,useTemp,items);
         knownUsers = ctrlData.loadKnownUsers(dataset,useTemp,items);
         unknownUsers = ctrlData.loadUnknownUsers(dataset,useTemp,items);
+        return users != null && knownUsers != null && unknownUsers != null;
     }
 
 

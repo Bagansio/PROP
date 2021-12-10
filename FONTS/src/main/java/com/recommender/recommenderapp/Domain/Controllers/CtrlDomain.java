@@ -32,18 +32,17 @@ public class CtrlDomain {
         ctrlUsers.setDataset(dataset);
     }
 
-    public void loadItems(){
-        ctrlItems.loadItems();
+    public boolean loadItems(){
+        return ctrlItems.loadItems();
     }
 
-    public void loadUsers(){
-        ctrlUsers.loadUsers();
+    public boolean loadUsers(){
+        return ctrlUsers.loadUsers();
     }
 
-    public void loadData(String dataset){
+    public boolean loadData(String dataset){
         setDataset(dataset);
-        loadUsers();
-        loadItems();
+        return loadUsers() && loadItems();
     }
 
     public Map<String, Item> getItems(){
