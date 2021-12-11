@@ -38,7 +38,7 @@ public class DatasetsView {
         //loadButton.setStyle(Styles.getStyleBackgroundColor("black"));
         String dataset = datasetsChoiceBox.getValue();
         if(CtrlView.ctrlDomain.loadData(dataset)){
-            CtrlView.changeScene("view");
+            CtrlView.changeScene("MainView");
             System.out.println(CtrlView.ctrlDomain.getItems().size());
         }
         else

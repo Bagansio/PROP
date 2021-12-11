@@ -3,8 +3,11 @@ package com.recommender.recommenderapp.Domain.Controllers;
 import com.recommender.recommenderapp.Domain.DataControllers.CtrlDataFactory;
 import com.recommender.recommenderapp.Domain.DataControllers.ICtrlData;
 import com.recommender.recommenderapp.Domain.Models.Item;
+import com.recommender.recommenderapp.Domain.Utils.AlgorithmTypes;
 
+import java.util.Arrays;
 import java.util.Map;
+import java.util.stream.Stream;
 
 public class CtrlDomain {
 
@@ -47,5 +50,9 @@ public class CtrlDomain {
 
     public Map<String, Item> getItems(){
         return ctrlItems.getItems();
+    }
+
+    public String[] getAlgorithms(){
+        return Stream.of(AlgorithmTypes.values()).map(AlgorithmTypes::name).toArray(String[]::new);
     }
 }

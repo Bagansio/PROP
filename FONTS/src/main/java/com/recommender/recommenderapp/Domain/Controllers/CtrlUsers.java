@@ -19,6 +19,7 @@ public class CtrlUsers {
     private Map<String, User> users;
     private Map<String, User> knownUsers;
     private Map<String, User> unknownUsers;
+    private User currentUser;
 
     private static CtrlUsers _instance = new CtrlUsers();
 
@@ -148,4 +149,18 @@ public class CtrlUsers {
         return saveUsers() && saveKnownUsers() && saveUnknownUsers();
     }
 
+
+    public boolean existsUser(String userId){
+        return knownUsers.containsKey(userId);
+    }
+
+    public boolean setCurrentUser(String userId) {
+        boolean canSet = true;
+        if(existsUser(userId)){
+            this.currentUser = knownUsers.get(userId);
+        }
+        else
+            canSet = false;
+        return canSet;
+    }
 }

@@ -1,0 +1,36 @@
+#addRatesButton, #editRatesButton , #exitButton , #profileButton{
+    -fx-background-color: transparent;
+}
+
+#addRatesButton:hover, #editRatesButton:hover, #exitButton:hover , #profileButton:hover{
+   -fx-background-color: #dedede;
+}
+
+
+
+#addRatesButton:pressed, #editRatesButton:pressed, #exitButton:pressed, #profileButton:pressed{
+    -fx-background-color:  #b8b8b8;
+}
+
+.choice-box {
+  -fx-background-color: white;
+  -fx-mark-color: black; // arrow color
+}
+
+.choice-box > .label{
+    -fx-text-fill: black;
+}
+
+.button {
+    -fx-background-color: black;
+}
+
+
+.button:hover {
+    -fx-background-color: #333333;
+}
+
+.button:pressed {
+    -fx-background-color: #454545;
+}
+
