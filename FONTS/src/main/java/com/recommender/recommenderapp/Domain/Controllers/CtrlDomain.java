@@ -2,6 +2,12 @@ package com.recommender.recommenderapp.Domain.Controllers;
 
 import com.recommender.recommenderapp.Domain.DataControllers.CtrlDataFactory;
 import com.recommender.recommenderapp.Domain.DataControllers.ICtrlData;
+import com.recommender.recommenderapp.Domain.Models.Item;
+import com.recommender.recommenderapp.Domain.Utils.AlgorithmTypes;
+
+import java.util.Arrays;
+import java.util.Map;
+import java.util.stream.Stream;
 
 public class CtrlDomain {
 
@@ -10,6 +16,8 @@ public class CtrlDomain {
     private final CtrlDataFactory ctrlDataFactory = CtrlDataFactory.getInstance();
     private CtrlItems ctrlItems = CtrlItems.getInstance();
     private CtrlUsers ctrlUsers = CtrlUsers.getInstance();
+
+
 
     public CtrlDomain() {
         ICtrlData ctrlData = ctrlDataFactory.getICtrlData();
@@ -25,5 +33,26 @@ public class CtrlDomain {
     public void setDataset(String dataset){
         ctrlItems.setDataset(dataset);
         ctrlUsers.setDataset(dataset);
+    }
+
+    public boolean loadItems(){
+        return ctrlItems.loadItems();
+    }
+
+    public boolean loadUsers(){
+        return ctrlUsers.loadUsers();
+    }
+
+    public boolean loadData(String dataset){
+        setDataset(dataset);
+        return loadUsers() && loadItems();
+    }
+
+    public Map<String, Item> getItems(){
+        return ctrlItems.getItems();
+    }
+
+    public String[] getAlgorithms(){
+        return Stream.of(AlgorithmTypes.values()).map(AlgorithmTypes::name).toArray(String[]::new);
     }
 }

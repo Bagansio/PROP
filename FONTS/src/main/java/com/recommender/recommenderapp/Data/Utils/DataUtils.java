@@ -36,6 +36,9 @@ public class DataUtils {
         return exists;
     }
 
+    public boolean existDataset(String path){
+        return existTemp(path) && new File(path + "\\" + Utils.ITEMS).exists();
+    }
 
 
     /**
@@ -53,7 +56,7 @@ public class DataUtils {
      * @param path
      * @return
      */
-    public Map<String, Item> getItems(String path) {
+    public Map<String, Item> getItems(String path) throws Exception{
         Map<String, Item> items = new HashMap<>();
 
         String[][] data = reader.readFile(path);
@@ -107,7 +110,7 @@ public class DataUtils {
      * @param items
      * @return
      */
-    public Map<String, User> getUsers(String path, Map<String, Item> items) {
+    public Map<String, User> getUsers(String path, Map<String, Item> items) throws Exception{
         Map<String, User> users = new HashMap<>();
 
         String[][] data = reader.readFile(path);

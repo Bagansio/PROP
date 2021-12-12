@@ -1,8 +1,10 @@
 package com.recommender.recommenderapp.View.Views;
 
 import com.recommender.recommenderapp.Data.Utils.Utils;
+import com.recommender.recommenderapp.Domain.Controllers.CtrlItems;
 import com.recommender.recommenderapp.View.Controllers.CtrlView;
 import com.recommender.recommenderapp.View.Utils.Styles;
+import com.recommender.recommenderapp.View.Utils.Views;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -33,8 +35,14 @@ public class DatasetsView {
      */
     @FXML
     public void loadDataset(ActionEvent event){
+        //loadButton.setStyle(Styles.getStyleBackgroundColor("black"));
         String dataset = datasetsChoiceBox.getValue();
-        CtrlView.ctrlDomain.setDataset(dataset);
+        if(CtrlView.ctrlDomain.loadData(dataset)){
+            CtrlView.changeScene("MainView");
+            System.out.println(CtrlView.ctrlDomain.getItems().size());
+        }
+        else
+            Views.buildErrorAlert("Error loading users and items of Dataset, check the files and load again").showAndWait();
 
     }
 
@@ -43,11 +51,7 @@ public class DatasetsView {
      * @brief handles the empty datasets Exception
      */
     private void emptyDatasetsException(){
-        Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setHeaderText("NO DATASETS TO LOAD");
-        alert.setTitle("DATASET ERROR");
-        alert.setContentText("Should add a dataset in: "+ Utils.PATH);
-        alert.showAndWait();
+        Views.buildErrorAlert("Should add a dataset in: "+ Utils.PATH + "\n With the 4 files needed").showAndWait();
         Platform.exit();
         System.exit(0);
     }
@@ -67,9 +71,6 @@ public class DatasetsView {
      * @brief Initialize the view, set some values (ex styles)
      */
     public void initialize() {
-        loadButton.setStyle(Styles.getStyleBackgroundColor("black"));
-        loadButton.setOnMousePressed(e -> loadButton.setStyle(Styles.getStyleBackgroundColor("#3c3c3c")));//loadButton.setStyle("-fx-background-color: #3c3c3c"));
-        loadButton.setOnMouseClicked(e -> loadButton.setStyle(Styles.getStyleBackgroundColor("black")));
         loadDatasetsChoiceBox();
     }
 

@@ -58,7 +58,7 @@ public class CSVReader {
      * @param path -> path of file to read
      * @return A Matrix of String that contains each line of CSV file separated by the attributes of it
      */
-    public String[][] readFile(String path) {
+    public String[][] readFile(String path) throws Exception{
         List<String[]> fileData = new ArrayList<>();
 
         File f = new File(path);

@@ -40,8 +40,9 @@ public class CtrlItems {
         return items;
     }
 
-    private void loadItems(){
+    public boolean loadItems(){
         ICtrlData loader = ctrlDataFactory.getICtrlData();
         items = loader.loadItems(dataset);
+        return items != null;
     }
 }
