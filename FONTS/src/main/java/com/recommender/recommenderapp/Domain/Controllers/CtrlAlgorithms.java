@@ -1,13 +1,12 @@
 package com.recommender.recommenderapp.Domain.Controllers;
 
-import com.recommender.recommenderapp.Domain.Models.ContentBasedFiltering;
-import com.recommender.recommenderapp.Domain.Models.Item;
-import com.recommender.recommenderapp.Domain.Models.NewCollaborativeFiltering;
-import com.recommender.recommenderapp.Domain.Models.User;
+import com.recommender.recommenderapp.Domain.Models.*;
 import com.recommender.recommenderapp.Domain.Utils.AlgorithmTypes;
+import com.recommender.recommenderapp.Domain.Utils.PrecisionTypes;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.stream.Stream;
 
 public class CtrlAlgorithms {
     private ContentBasedFiltering contentBasedFiltering = new ContentBasedFiltering();
@@ -22,6 +21,18 @@ public class CtrlAlgorithms {
     }
 
     /**
+     * @brief Get all the usable algorithms
+     * @return An array with Algorithm Types
+     */
+    public String[] getAlgorithms(){
+        return Stream.of(AlgorithmTypes.values()).map(AlgorithmTypes::name).toArray(String[]::new);
+    }
+
+
+    public String[] getPrecisions(){
+        return Stream.of(PrecisionTypes.values()).map(PrecisionTypes::name).toArray(String[]::new);
+    }
+    /**
      * @brief Preprocess the needed data for correctly work of algorithms
      * @param itemMap The set of items
      * @param userMap The set of users
@@ -31,19 +42,24 @@ public class CtrlAlgorithms {
         contentBasedFiltering.preprocessingData(itemMap, userMap);
     }
 
-    public String[] recommend(String algorithm,User currentUser, Map<String,Item> unknownItems){
-        String[] recommendation = new String[0];
-        Map<String,Double> rec = new HashMap<>();
+    public Recommendation recommend(String algorithm,String precision, User currentUser, Map<String,Item> unknownItems){
+        Recommendation recommendation = new Recommendation("1",algorithm);
+        recommendation.setUser(currentUser);
+        recommendation.setPrecisionType(precision);
         switch (AlgorithmTypes.valueOf(algorithm)){
             case ContentBasedFiltering:
-                rec = contentBasedFiltering.query(currentUser,unknownItems,3);
+                recommendation.executeQuery(unknownItems,contentBasedFiltering,3);
+                //rec = contentBasedFiltering.query(currentUser,unknownItems,3);
                 break;
             case CollaborativeFiltering:
-                rec = collaborativeFiltering.query(currentUser,unknownItems,3);
+                recommendation.executeQuery(unknownItems,collaborativeFiltering,3);
+                //rec = collaborativeFiltering.query(currentUser,unknownItems,3);
                 break;
             default:
                 break;
         }
+
+        Map<String,Double> rec = recommendation.getRecommendedItems();
         System.out.println("USING " + algorithm);
         for(String item : rec.keySet()){
             System.out.println(item + ": " + rec.get(item));

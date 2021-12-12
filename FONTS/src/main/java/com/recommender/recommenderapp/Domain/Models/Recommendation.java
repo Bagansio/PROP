@@ -20,7 +20,7 @@ public class Recommendation {
 
     static private Map<String, Item> itemMap;
     private Map<String, Double> recommendedItems;
-    private Algorithm algorithm;
+    private AlgorithmTypes algorithmType;
 
     /**
      * Basic constructor operation
@@ -32,9 +32,17 @@ public class Recommendation {
      * @param id -> identifies the recommendation
      * @param algorithm -> assigns an algorithm to the recommendation
      */
-    public Recommendation(String id, Algorithm algorithm) {
+    public Recommendation(String id, String algorithmType) {
         this.id = id;
-        this.algorithm = algorithm;
+        this.algorithmType = AlgorithmTypes.valueOf(algorithmType);
+    }
+
+    public String getAlgorithmType(){
+        return algorithmType.toString();
+    }
+
+    public void setAlgorithmType(String algorithmType){
+        this.algorithmType = AlgorithmTypes.valueOf(algorithmType);
     }
 
     /**
@@ -51,6 +59,10 @@ public class Recommendation {
      */
     public void setScore(int score) {
         this.score = score;
+    }
+
+    public Map<String,Double> getRecommendedItems(){
+        return recommendedItems;
     }
 
     /**
@@ -113,8 +125,9 @@ public class Recommendation {
      *
      * @param precisionType -> specifies the amount of precision desired by the user
      */
-    public void setPrecisionType(PrecisionTypes precisionType) {
-        this.precisionType = precisionType;
+    public void setPrecisionType(String precisionType) {
+
+        this.precisionType = PrecisionTypes.valueOf(precisionType);
     }
 
     /**
@@ -123,16 +136,16 @@ public class Recommendation {
      * @param unknownItems -> set of unknown items
      * @param Q -> amount of items that shall be recommended
      */
-    public void executeQuery(User user, Map<String, Item> unknownItems, int Q) {
+    public void executeQuery(Map<String, Item> unknownItems, Algorithm algorithm,  int Q) {
         switch (this.precisionType) {
             case imprecise:
-                queryPrecision(user, unknownItems, Q, 1);
+                queryPrecision(user, algorithm,unknownItems, Q, 1);
                 break;
             case precise:
-                queryPrecision(user, unknownItems, Q, 5);
+                queryPrecision(user,algorithm, unknownItems, Q, 5);
                 break;
             default:
-                queryPrecision(user, unknownItems, Q, 10);
+                queryPrecision(user,algorithm, unknownItems, Q, 10);
                 break;
         }
     }
@@ -144,7 +157,7 @@ public class Recommendation {
      * @param Q -> number of items that must be recommended
      * @param precision -> precision chosen by the user
      */
-    private void queryPrecision(User user, Map<String, Item> unknownItems, int Q, int precision) {
+    private void queryPrecision(User user,Algorithm algorithm, Map<String, Item> unknownItems, int Q, int precision) {
         Map<String, Double> itemRatings = new LinkedHashMap<>();
         Map<String, Integer> itemAppearances = new LinkedHashMap<>();
 
@@ -197,14 +210,16 @@ public class Recommendation {
         return result;
     }
 
+
     /**
      *
      * @param unknown -> user that contains the rating of the unknown items
      * @return the normalized discounted cumulative gain of the used algorithm
      */
     public Double normalizedDiscountedCumulativeGain(User unknown) {
-        return algorithm.discountedCumulativeGain(recommendedItems, unknown);
+        return Algorithm.discountedCumulativeGain(recommendedItems, unknown);
     }
+
 
     /*public void preprocessData(Map<String, User> userMap) {
         switch(this.algorithmType) {

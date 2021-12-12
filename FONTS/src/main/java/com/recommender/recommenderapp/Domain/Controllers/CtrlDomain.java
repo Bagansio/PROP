@@ -3,7 +3,9 @@ package com.recommender.recommenderapp.Domain.Controllers;
 import com.recommender.recommenderapp.Domain.DataControllers.CtrlDataFactory;
 import com.recommender.recommenderapp.Domain.DataControllers.ICtrlData;
 import com.recommender.recommenderapp.Domain.Models.Item;
+import com.recommender.recommenderapp.Domain.Models.Recommendation;
 import com.recommender.recommenderapp.Domain.Utils.AlgorithmTypes;
+import com.recommender.recommenderapp.Domain.Utils.PrecisionTypes;
 
 import java.util.Arrays;
 import java.util.Map;
@@ -12,7 +14,7 @@ import java.util.stream.Stream;
 public class CtrlDomain {
 
     private String[] datasets;
-
+    private Boolean useTemp;
     private final CtrlDataFactory ctrlDataFactory = CtrlDataFactory.getInstance();
     private CtrlItems ctrlItems = CtrlItems.getInstance();
     private CtrlUsers ctrlUsers = CtrlUsers.getInstance();
@@ -53,7 +55,11 @@ public class CtrlDomain {
     }
 
     public String[] getAlgorithms(){
-        return Stream.of(AlgorithmTypes.values()).map(AlgorithmTypes::name).toArray(String[]::new);
+        return ctrlAlgorithms.getAlgorithms();
+    }
+
+    public String[] getPrecisions(){
+        return ctrlAlgorithms.getPrecisions();
     }
 
     public boolean setCurrentUser(String userId){
@@ -64,7 +70,10 @@ public class CtrlDomain {
         ctrlAlgorithms.preprocessingData(ctrlItems.getItems(),ctrlUsers.getUsers());
     }
 
-    public void recommend(String algorithm){
-        ctrlAlgorithms.recommend(algorithm, ctrlUsers.getKnownCurrentUser(),ctrlUsers.getUnknownItemsFromCurrentUser());
+    public String recommend(String algorithm, String precision){
+        Recommendation recommendation = ctrlAlgorithms.recommend(algorithm, precision, ctrlUsers.getKnownCurrentUser(),ctrlUsers.getUnknownItemsFromCurrentUser());
+        // save recommendation
+        String itemId = recommendation.getRecommendedItems().entrySet().iterator().next().getKey();
+        return ctrlItems.getItems().get(itemId).getTitle();
     }
 }

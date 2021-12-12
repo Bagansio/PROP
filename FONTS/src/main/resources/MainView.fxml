@@ -70,6 +70,12 @@
             <Button fx:id="editRatesButton" layoutX="660.0" layoutY="619.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="97.0" />
             <Button fx:id="exitButton" layoutX="24.0" layoutY="28.0" mnemonicParsing="false" />
             <Button fx:id="profileButton" layoutX="1192.0" layoutY="28.0" mnemonicParsing="false" />
+            <ChoiceBox fx:id="precisionCheckBox" layoutX="675.0" layoutY="556.0" prefHeight="26.0" prefWidth="82.0" />
+            <Text layoutX="608.0" layoutY="574.0" strokeType="OUTSIDE" strokeWidth="0.0" text="PRECISION:">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Text>
       </children>
     </AnchorPane>
   </children>

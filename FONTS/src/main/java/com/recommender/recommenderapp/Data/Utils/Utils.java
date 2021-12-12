@@ -7,6 +7,7 @@ public class Utils {
     public static final String KNOWN_USERS = "ratings.test.known.csv";
     public static final String UNKNOWN_USERS = "ratings.test.unknown.csv";
     public static final String TEMP = "temp";
+    public static final String RECOMMENDATIONS = "recommendations.csv";
 
     public static final String LINE_BREAK = System.getProperty("line.separator");
 

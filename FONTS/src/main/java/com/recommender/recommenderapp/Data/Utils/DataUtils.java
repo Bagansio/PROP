@@ -1,6 +1,7 @@
 package com.recommender.recommenderapp.Data.Utils;
 
 import com.recommender.recommenderapp.Domain.Models.Item;
+import com.recommender.recommenderapp.Domain.Models.Recommendation;
 import com.recommender.recommenderapp.Domain.Models.User;
 import com.recommender.recommenderapp.Exceptions.DirectoryDoesNotExist;
 
@@ -186,6 +187,50 @@ public class DataUtils {
         writeUserHeader(fileWriter);
 
         writeUserRates(fileWriter, users);
+
+        fileWriter.flush();
+    }
+
+    public Map<String, Recommendation> readRecommendations(String path, Map<String,User> users) throws Exception{
+        Map<String, Recommendation> recommendations = new HashMap<>();
+
+        String[][] data = reader.readFile(path);
+
+        String[] attributes = data[0];
+
+        for (int i = 1; i < data.length; ++i) {
+            Recommendation currentRecommendation = new Recommendation(data[i][0],data[i][2]);
+            currentRecommendation.setUser(users.get(data[i][1]));
+            currentRecommendation.setScore(Integer.parseInt(data[i][3]));
+            currentRecommendation.setPrecisionType(data[i][4]);
+
+            Map<String,Double> rates = new LinkedHashMap<>();
+
+            recommendations.put(currentRecommendation.getId(),currentRecommendation);
+        }
+
+        return recommendations;
+    }
+
+    public void writeRecommendations(String path, String filename, Recommendation[] recommendations) throws IOException{
+
+        createDir(path);
+
+        File file = new File(path + "\\" + filename);
+
+        FileWriter fileWriter = new FileWriter(file);
+
+
+        fileWriter.write("recommendationId,userId,algorithm,recommendationRate,precisionType,itemsId-rate" + Utils.LINE_BREAK);
+
+        for(Recommendation currentRecommendation : recommendations){
+            fileWriter.write(currentRecommendation.getId() + "," + currentRecommendation.getUser().getId() + "," + currentRecommendation.getAlgorithmType() + "," + currentRecommendation.getPrecisionType().toString() + "," + currentRecommendation.getScore() + ",");
+            Map<String, Double> rates = currentRecommendation.getRecommendedItems();
+            for (String itemId : rates.keySet()){
+                fileWriter.write(itemId+"-"+rates.get(itemId)+";");
+            }
+            fileWriter.write(Utils.LINE_BREAK);
+        }
 
         fileWriter.flush();
     }
