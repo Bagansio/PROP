@@ -1,6 +1,7 @@
 package com.recommender.recommenderapp.Domain.DataControllers;
 
 import com.recommender.recommenderapp.Domain.Models.Item;
+import com.recommender.recommenderapp.Domain.Models.Recommendation;
 import com.recommender.recommenderapp.Domain.Models.User;
 import com.recommender.recommenderapp.Exceptions.DirectoryDoesNotExist;
 
@@ -23,6 +24,8 @@ public interface ICtrlData {
     public boolean saveKnownUsers(String dataset, User[] users);
 
     public boolean saveUnknownUsers(String dataset, User[] users);
+
+    public boolean writeRecommendations(String dataset, boolean useTemp, Recommendation[] recommendations);
 
     public String[] getDatasets();
 }

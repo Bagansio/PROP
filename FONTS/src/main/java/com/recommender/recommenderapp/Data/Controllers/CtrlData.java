@@ -4,6 +4,7 @@ import com.recommender.recommenderapp.Data.Utils.DataUtils;
 import com.recommender.recommenderapp.Data.Utils.Utils;
 import com.recommender.recommenderapp.Domain.DataControllers.ICtrlData;
 import com.recommender.recommenderapp.Domain.Models.Item;
+import com.recommender.recommenderapp.Domain.Models.Recommendation;
 import com.recommender.recommenderapp.Domain.Models.User;
 import com.recommender.recommenderapp.Exceptions.DirectoryDoesNotExist;
 import javafx.scene.chart.PieChart;
@@ -176,6 +177,19 @@ public class CtrlData implements ICtrlData {
         }
 
         return datasets.toArray(new String[0]);
+    }
+
+    public boolean writeRecommendations(String dataset, boolean useTemp, Recommendation[] recommendations){
+        String path = getPath(dataset) + "\\" + Utils.TEMP;
+
+        boolean written = true;
+        try {
+            utils.writeRecommendations(path, Utils.RECOMMENDATIONS, recommendations);
+        }
+        catch(Exception e){
+            written = false;
+        }
+        return written;
     }
 
 }

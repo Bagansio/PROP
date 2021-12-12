@@ -19,6 +19,7 @@ public class CtrlDomain {
     private CtrlItems ctrlItems = CtrlItems.getInstance();
     private CtrlUsers ctrlUsers = CtrlUsers.getInstance();
     private CtrlAlgorithms ctrlAlgorithms = CtrlAlgorithms.getInstance();
+    private CtrlRecommendations ctrlRecommendations = CtrlRecommendations.getInstance();
 
 
     public CtrlDomain() {
@@ -72,6 +73,8 @@ public class CtrlDomain {
 
     public String recommend(String algorithm, String precision){
         Recommendation recommendation = ctrlAlgorithms.recommend(algorithm, precision, ctrlUsers.getKnownCurrentUser(),ctrlUsers.getUnknownItemsFromCurrentUser());
+        ctrlRecommendations.addRecommendation(recommendation);
+        ctrlRecommendations.saveRecommendations();
         // save recommendation
         String itemId = recommendation.getRecommendedItems().entrySet().iterator().next().getKey();
         return ctrlItems.getItems().get(itemId).getTitle();
