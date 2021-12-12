@@ -4,6 +4,7 @@ import com.recommender.recommenderapp.Data.Utils.Utils;
 import com.recommender.recommenderapp.View.Controllers.CtrlView;
 import com.recommender.recommenderapp.View.Utils.Views;
 import javafx.application.Platform;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
@@ -38,6 +39,11 @@ public class MainView {
         System.out.println("Using Main VIEW");
     }
 
+    @FXML
+    public void recommend(ActionEvent event){
+        CtrlView.ctrlDomain.recommend(algorithmCheckBox.getValue());
+    }
+
     /**
      * @brief handles the empty datasets Exception
      */
@@ -48,6 +54,7 @@ public class MainView {
     }
 
     private void loadAlgorithms(){
+        CtrlView.ctrlDomain.loadAlgorithms();
         String[] algorithms = CtrlView.ctrlDomain.getAlgorithms();
         if(algorithms.length == 0) emptyAlgorithmsException();
         algorithmCheckBox.getItems().addAll(algorithms);
@@ -55,6 +62,8 @@ public class MainView {
     }
 
     public void initialize() {
+        System.out.println("Set current user:"+ CtrlView.ctrlDomain.setCurrentUser("53968"));
+
         loadAlgorithms();
 
         try {

@@ -46,7 +46,7 @@
   <children>
     <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="795.0" prefWidth="1272.0" VBox.vgrow="ALWAYS">
       <children>
-            <Button fx:id="recommendButton" layoutX="498.0" layoutY="400.0" mnemonicParsing="false" prefHeight="97.0" prefWidth="285.0" text="RECOMMEND" textFill="#f8f8f8" wrapText="true">
+            <Button fx:id="recommendButton" layoutX="498.0" layoutY="400.0" mnemonicParsing="false" onAction="#recommend" prefHeight="97.0" prefWidth="285.0" text="RECOMMEND" textFill="#f8f8f8" wrapText="true">
                <font>
                   <Font name="System Bold" size="24.0" />
                </font></Button>

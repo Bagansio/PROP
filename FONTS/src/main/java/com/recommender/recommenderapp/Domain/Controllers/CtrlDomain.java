@@ -16,7 +16,7 @@ public class CtrlDomain {
     private final CtrlDataFactory ctrlDataFactory = CtrlDataFactory.getInstance();
     private CtrlItems ctrlItems = CtrlItems.getInstance();
     private CtrlUsers ctrlUsers = CtrlUsers.getInstance();
-
+    private CtrlAlgorithms ctrlAlgorithms = CtrlAlgorithms.getInstance();
 
 
     public CtrlDomain() {
@@ -54,5 +54,17 @@ public class CtrlDomain {
 
     public String[] getAlgorithms(){
         return Stream.of(AlgorithmTypes.values()).map(AlgorithmTypes::name).toArray(String[]::new);
+    }
+
+    public boolean setCurrentUser(String userId){
+        return ctrlUsers.setCurrentUser(userId);
+    }
+
+    public void loadAlgorithms(){
+        ctrlAlgorithms.preprocessingData(ctrlItems.getItems(),ctrlUsers.getUsers());
+    }
+
+    public void recommend(String algorithm){
+        ctrlAlgorithms.recommend(algorithm, ctrlUsers.getKnownCurrentUser(),ctrlUsers.getUnknownItemsFromCurrentUser());
     }
 }

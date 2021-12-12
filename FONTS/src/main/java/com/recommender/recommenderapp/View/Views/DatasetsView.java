@@ -1,6 +1,7 @@
 package com.recommender.recommenderapp.View.Views;
 
 import com.recommender.recommenderapp.Data.Utils.Utils;
+import com.recommender.recommenderapp.Domain.Controllers.CtrlAlgorithms;
 import com.recommender.recommenderapp.Domain.Controllers.CtrlItems;
 import com.recommender.recommenderapp.View.Controllers.CtrlView;
 import com.recommender.recommenderapp.View.Utils.Styles;
@@ -40,6 +41,7 @@ public class DatasetsView {
         if(CtrlView.ctrlDomain.loadData(dataset)){
             CtrlView.changeScene("MainView");
             System.out.println(CtrlView.ctrlDomain.getItems().size());
+
         }
         else
             Views.buildErrorAlert("Error loading users and items of Dataset, check the files and load again").showAndWait();

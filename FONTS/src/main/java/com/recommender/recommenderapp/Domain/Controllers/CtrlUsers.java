@@ -14,18 +14,20 @@ import java.util.Map;
  */
 public class CtrlUsers {
     private String dataset;
-    private Boolean useTemp = false;
-    private CtrlDataFactory ctrlDataFactory = CtrlDataFactory.getInstance();
+    private Boolean useTemp;
+    private CtrlDataFactory ctrlDataFactory;
     private Map<String, User> users;
     private Map<String, User> knownUsers;
     private Map<String, User> unknownUsers;
-    private User currentUser;
+    private User[] currentUser;
 
     private static CtrlUsers _instance = new CtrlUsers();
 
 
     private CtrlUsers(){
-
+        useTemp = false;
+        ctrlDataFactory = CtrlDataFactory.getInstance();
+        currentUser = new User[2];
     }
 
     /**
@@ -157,10 +159,19 @@ public class CtrlUsers {
     public boolean setCurrentUser(String userId) {
         boolean canSet = true;
         if(existsUser(userId)){
-            this.currentUser = knownUsers.get(userId);
+            this.currentUser[0] = knownUsers.get(userId);
+            this.currentUser[1] = unknownUsers.get(userId);
         }
         else
             canSet = false;
         return canSet;
+    }
+
+    public User getKnownCurrentUser(){
+        return currentUser[0];
+    }
+
+    public Map<String,Item> getUnknownItemsFromCurrentUser(){
+        return currentUser[1].getItems();
     }
 }
