@@ -40,8 +40,6 @@ public class DatasetsView {
         String dataset = datasetsChoiceBox.getValue();
         if(CtrlView.ctrlDomain.loadData(dataset)){
             CtrlView.changeScene("MainView");
-            System.out.println(CtrlView.ctrlDomain.getItems().size());
-
         }
         else
             Views.buildErrorAlert("Error loading users and items of Dataset, check the files and load again").showAndWait();

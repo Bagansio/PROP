@@ -73,6 +73,11 @@ public class MainView {
     }
 
 
+    @FXML
+    public void changeEditRatesView(ActionEvent event){
+        CtrlView.changeScene("ItemRatesView");
+    }
+
     /**
      * @brief Recommend the user the better items based in their known items
      * @param event
