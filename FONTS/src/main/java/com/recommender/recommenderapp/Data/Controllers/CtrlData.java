@@ -177,6 +177,9 @@ public class CtrlData implements ICtrlData {
             if(utils.existDataset(f.getPath())){
                 datasets.add(f.getName());
             }
+            if(utils.existDataset(f.getPath() + "\\" + Utils.TEMP)){
+                datasets.add(f.getName() + "\\" + Utils.TEMP);
+            }
             ++i;
         }
 
