@@ -167,7 +167,7 @@ public class DataUtils {
         }
     }
 
-    private boolean createDir(String path){
+    public boolean createDir(String path){
         return new File(path).mkdir();
     }
 
@@ -176,11 +176,9 @@ public class DataUtils {
      * @param users
      * @throws IOException
      */
-    public void writeTempUsers(String path, String filename, User[] users) throws IOException {
+    public void writeTempUsers(String path, User[] users) throws IOException {
 
-        createDir(path);
-
-        File file = new File(path + "\\" + filename);
+        File file = new File(path);
 
         FileWriter fileWriter = new FileWriter(file);
 
@@ -191,12 +189,19 @@ public class DataUtils {
         fileWriter.flush();
     }
 
+
+    /**
+     * @brief Read Recommendation file.
+     * @param path The recommendation file path
+     * @param users Known Users
+     * @return A Map with recommendations;
+     * @throws Exception
+     */
     public Map<String, Recommendation> readRecommendations(String path, Map<String,User> users) throws Exception{
-        Map<String, Recommendation> recommendations = new HashMap<>();
+        Map<String, Recommendation> recommendations = new LinkedHashMap<>();
 
         String[][] data = reader.readFile(path);
 
-        String[] attributes = data[0];
 
         for (int i = 1; i < data.length; ++i) {
             Recommendation currentRecommendation = new Recommendation(data[i][0],data[i][2]);
@@ -206,17 +211,20 @@ public class DataUtils {
 
             Map<String,Double> rates = new LinkedHashMap<>();
 
+            for(String rate : data[i][5].split(";")){
+                String[] rateInfo = rate.split("-");
+                rates.put(rateInfo[0],Double.parseDouble(rateInfo[1]));
+            }
             recommendations.put(currentRecommendation.getId(),currentRecommendation);
         }
-
         return recommendations;
     }
 
-    public void writeRecommendations(String path, String filename, Recommendation[] recommendations) throws IOException{
+    public void writeRecommendations(String path, Recommendation[] recommendations) throws IOException{
 
-        createDir(path);
+        System.out.println(recommendations.length);
 
-        File file = new File(path + "\\" + filename);
+        File file = new File(path);
 
         FileWriter fileWriter = new FileWriter(file);
 
@@ -224,15 +232,35 @@ public class DataUtils {
         fileWriter.write("recommendationId,userId,algorithm,recommendationRate,precisionType,itemsId-rate" + Utils.LINE_BREAK);
 
         for(Recommendation currentRecommendation : recommendations){
-            fileWriter.write(currentRecommendation.getId() + "," + currentRecommendation.getUser().getId() + "," + currentRecommendation.getAlgorithmType() + "," + currentRecommendation.getPrecisionType().toString() + "," + currentRecommendation.getScore() + ",");
-            Map<String, Double> rates = currentRecommendation.getRecommendedItems();
-            for (String itemId : rates.keySet()){
-                fileWriter.write(itemId+"-"+rates.get(itemId)+";");
-            }
-            fileWriter.write(Utils.LINE_BREAK);
+            writeRecommendation(fileWriter,currentRecommendation);
         }
 
         fileWriter.flush();
+    }
+
+    private void writeRecommendation(FileWriter fileWriter, Recommendation recommendation) throws IOException{
+        fileWriter.write(recommendation.getId() + "," + recommendation.getUser().getId() + "," + recommendation.getAlgorithmType() + "," + recommendation.getScore()  +  ","  +  recommendation.getPrecisionType().toString() + ",");
+        Map<String, Double> rates = recommendation.getRecommendedItems();
+        for (String itemId : rates.keySet()){
+            fileWriter.write(itemId+"-"+rates.get(itemId)+";");
+        }
+        fileWriter.write(Utils.LINE_BREAK);
+    }
+
+    public void writeNewRecommendation(String path, Recommendation recommendation) throws IOException{
+
+        File file = new File(path);
+        if(! file.exists() || file.length() == 0){
+
+            writeRecommendations(path,new Recommendation[]{recommendation});
+        }
+        else {
+            FileWriter fileWriter = new FileWriter(file, true);
+
+            writeRecommendation(fileWriter, recommendation);
+
+            fileWriter.flush();
+        }
     }
 
 }

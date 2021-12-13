@@ -43,7 +43,7 @@ public class CtrlAlgorithms {
     }
 
     public Recommendation recommend(String algorithm,String precision, User currentUser, Map<String,Item> unknownItems){
-        Recommendation recommendation = new Recommendation("1",algorithm);
+        Recommendation recommendation = new Recommendation(CtrlRecommendations.getInstance().getNewId(),algorithm);
         recommendation.setUser(currentUser);
         recommendation.setPrecisionType(precision);
         switch (AlgorithmTypes.valueOf(algorithm)){

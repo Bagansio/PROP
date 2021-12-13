@@ -62,15 +62,11 @@ public class CSVReader {
         List<String[]> fileData = new ArrayList<>();
 
         File f = new File(path);
-        try (Scanner scanner = new Scanner(f)) {
+        Scanner scanner = new Scanner(f);
 
-            while(scanner.hasNextLine()) {
-                String line = scanner.nextLine();
-                fileData.add(line.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)", -1));
-            }
-        }
-        catch (Exception ex) {
-            ex.printStackTrace();
+        while(scanner.hasNextLine()) {
+            String line = scanner.nextLine();
+            fileData.add(line.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)", -1));
         }
         return fileData.toArray(new String[fileData.size()][]);
     }

@@ -11,10 +11,7 @@ import javafx.scene.chart.PieChart;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class CtrlData implements ICtrlData {
 
@@ -104,7 +101,9 @@ public class CtrlData implements ICtrlData {
         String path = getPath(dataset) + "\\" + Utils.TEMP;
 
         try {
-            utils.writeTempUsers(path, filename,users);
+            utils.createDir(path);
+            path += "\\" + filename;
+            utils.writeTempUsers(path,users);
         }
         catch(IOException e){
             return false;
@@ -146,6 +145,11 @@ public class CtrlData implements ICtrlData {
     }
 
 
+    /**
+     *
+     * @param dataset
+     * @return The path to a dataset
+     */
     private String getPath(String dataset){
         return  Utils.PATH + "\\" + dataset + "\\" ;
     }
@@ -153,8 +157,8 @@ public class CtrlData implements ICtrlData {
 
 
     /**
-     *
-     * @return
+     * return the datasets of the system
+     * @return An array with the datasets
      */
     public String[] getDatasets(){
 
@@ -179,14 +183,72 @@ public class CtrlData implements ICtrlData {
         return datasets.toArray(new String[0]);
     }
 
+
+    /**
+     * Load the recommendations of a dataset
+     * @param dataset Dataset to load
+     * @param useTemp if use temp files
+     * @param users
+     * @return the values if can load or null if not
+     */
+    public Map<String,Recommendation> loadRecommendations(String dataset, boolean useTemp, Map<String,User> users){
+        String path = getPath(dataset);
+        if(useTemp) path += "\\" + Utils.TEMP;
+        path += "\\" + Utils.RECOMMENDATIONS;
+
+        Map<String,Recommendation> recommendations = null;
+
+        try {
+            recommendations = utils.readRecommendations(path, users);
+        }
+        catch(Exception e){
+        }
+        return recommendations;
+    }
+
+    /**
+     * Write the recommendations
+     * @param dataset Dataset to write
+     * @param useTemp if use temp files
+     * @param recommendations data to write
+     * @return true if its write correctly, false if not
+     */
     public boolean writeRecommendations(String dataset, boolean useTemp, Recommendation[] recommendations){
-        String path = getPath(dataset) + "\\" + Utils.TEMP;
+        String path = getPath(dataset);
+
+        if(useTemp) path += "\\" + Utils.TEMP;
+
+        path += "\\" + Utils.RECOMMENDATIONS;
 
         boolean written = true;
         try {
-            utils.writeRecommendations(path, Utils.RECOMMENDATIONS, recommendations);
+            utils.writeRecommendations(path, recommendations);
         }
         catch(Exception e){
+            written = false;
+        }
+        return written;
+    }
+
+
+    /**
+     * Append a new recommendation to the file
+     * @param dataset Dataset to write
+     * @param useTemp if use temp files
+     * @param recommendation data to write
+     * @return true if its write correctly, false if not
+     */
+    public boolean writeNewRecommendations(String dataset, boolean useTemp, Recommendation recommendation){
+        String path = getPath(dataset);
+        if(useTemp) path += "\\" + Utils.TEMP;
+        utils.createDir(path);
+        path += "\\" + Utils.RECOMMENDATIONS;
+
+        boolean written = true;
+        try {
+            utils.writeNewRecommendation(path, recommendation);
+        }
+        catch (Exception e){
             written = false;
         }
         return written;

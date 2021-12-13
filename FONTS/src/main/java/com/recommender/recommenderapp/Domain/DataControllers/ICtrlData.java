@@ -19,6 +19,10 @@ public interface ICtrlData {
 
     public Map<String,User> loadUsers(String dataset, boolean useTemp, Map<String,Item> items);
 
+    public Map<String,Recommendation> loadRecommendations(String dataset, boolean useTemp, Map<String,User> users);
+
+    public boolean writeNewRecommendations(String dataset, boolean useTemp, Recommendation recommendation);
+
     public boolean saveUsers(String dataset, User[] users);
 
     public boolean saveKnownUsers(String dataset, User[] users);

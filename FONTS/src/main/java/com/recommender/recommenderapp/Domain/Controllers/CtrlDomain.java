@@ -36,6 +36,7 @@ public class CtrlDomain {
     public void setDataset(String dataset){
         ctrlItems.setDataset(dataset);
         ctrlUsers.setDataset(dataset);
+        ctrlRecommendations.setDataset(dataset);
     }
 
     public boolean loadItems(){
@@ -46,8 +47,12 @@ public class CtrlDomain {
         return ctrlUsers.loadUsers();
     }
 
+    public boolean loadRecommendations(){ return ctrlRecommendations.loadRecommendations();}
+
     public boolean loadData(String dataset){
         setDataset(dataset);
+        ctrlRecommendations.loadRecommendations();
+        System.out.println(ctrlRecommendations.getRecommendations().size());
         return loadUsers() && loadItems();
     }
 
@@ -74,7 +79,7 @@ public class CtrlDomain {
     public String recommend(String algorithm, String precision){
         Recommendation recommendation = ctrlAlgorithms.recommend(algorithm, precision, ctrlUsers.getKnownCurrentUser(),ctrlUsers.getUnknownItemsFromCurrentUser());
         ctrlRecommendations.addRecommendation(recommendation);
-        ctrlRecommendations.saveRecommendations();
+        ctrlRecommendations.saveNewRecommendation(recommendation);
         // save recommendation
         String itemId = recommendation.getRecommendedItems().entrySet().iterator().next().getKey();
         return ctrlItems.getItems().get(itemId).getTitle();
