@@ -15,14 +15,12 @@ import java.util.stream.Stream;
 public class CtrlRecommendations {
     private String dataset;
     private Map<String, Recommendation> recommendations;
-    private Boolean useTemp;
     private CtrlDataFactory ctrlDataFactory;
     private static CtrlRecommendations _instance = new CtrlRecommendations();
 
     private CtrlRecommendations(){
         recommendations = new LinkedHashMap<>();
         ctrlDataFactory = CtrlDataFactory.getInstance();
-        useTemp = false;
     }
 
     public void addRecommendation(Recommendation recommendation){
@@ -54,7 +52,7 @@ public class CtrlRecommendations {
     public boolean loadRecommendations(){
         boolean loadedCorrectly = true;
         ICtrlData ctrlData = ctrlDataFactory.getICtrlData();
-        recommendations = ctrlData.loadRecommendations(dataset,useTemp, CtrlUsers.getInstance().getKnownUsers());
+        recommendations = ctrlData.loadRecommendations(dataset, CtrlUsers.getInstance().getKnownUsers());
         if(recommendations == null){
             initializeRecommendations();
             loadedCorrectly = false;
@@ -71,12 +69,12 @@ public class CtrlRecommendations {
 
     public boolean saveRecommendations(){
         ICtrlData ctrlData = ctrlDataFactory.getICtrlData();
-        return ctrlData.writeRecommendations("movies", useTemp,recommendations.values().toArray(new Recommendation[0]));
+        return ctrlData.writeRecommendations(dataset,recommendations.values().toArray(new Recommendation[0]));
     }
 
     public boolean saveNewRecommendation(Recommendation recommendation){
         ICtrlData ctrlData = ctrlDataFactory.getICtrlData();
-        return ctrlData.writeNewRecommendations(dataset,useTemp,recommendation);
+        return ctrlData.writeNewRecommendations(dataset,recommendation);
     }
 
 }

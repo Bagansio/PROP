@@ -14,7 +14,6 @@ import java.util.Map;
  */
 public class CtrlUsers {
     private String dataset;
-    private Boolean useTemp;
     private CtrlDataFactory ctrlDataFactory;
     private Map<String, User> users;
     private Map<String, User> knownUsers;
@@ -25,7 +24,6 @@ public class CtrlUsers {
 
 
     private CtrlUsers(){
-        useTemp = false;
         ctrlDataFactory = CtrlDataFactory.getInstance();
         currentUser = new User[2];
     }
@@ -62,19 +60,6 @@ public class CtrlUsers {
         return knownUsers;
     }
 
-    /**
-     *
-     * @param useTemp new condition to use temp files
-     * @return the condition value after try to change it
-     */
-    public boolean setUseTemp(boolean useTemp){
-        ICtrlData ctrlData = ctrlDataFactory.getICtrlData();
-        if(useTemp && ctrlData.existTemp(dataset)){
-            this.useTemp = true;
-        }
-        else this.useTemp = false;
-        return this.useTemp;
-    }
 
     /**
      *
@@ -108,9 +93,9 @@ public class CtrlUsers {
         ICtrlData ctrlData = ctrlDataFactory.getICtrlData();
 
         Map<String, Item> items = CtrlItems.getInstance().getItems();
-        users = ctrlData.loadUsers(dataset,useTemp,items);
-        knownUsers = ctrlData.loadKnownUsers(dataset,useTemp,items);
-        unknownUsers = ctrlData.loadUnknownUsers(dataset,useTemp,items);
+        users = ctrlData.loadUsers(dataset,items);
+        knownUsers = ctrlData.loadKnownUsers(dataset,items);
+        unknownUsers = ctrlData.loadUnknownUsers(dataset,items);
         return users != null && knownUsers != null && unknownUsers != null;
     }
 

@@ -50,9 +50,7 @@ public class CtrlDomain {
 
     public boolean loadData(String dataset){
         setDataset(dataset);
-        ctrlRecommendations.loadRecommendations();
-        System.out.println(ctrlRecommendations.getRecommendations().size());
-        return loadUsers() && loadItems();
+        return loadUsers() && loadItems() && loadRecommendations();
     }
 
 

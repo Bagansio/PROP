@@ -25,8 +25,8 @@ public class CtrlData implements ICtrlData {
 
 
 
-    private String pathTemp(String filename, boolean useTemp){
-        if(useTemp)
+    private String pathTemp(String filename){
+        if(! filename.contains(Utils.TEMP))
             filename = Utils.TEMP + "\\" + filename;
 
         return filename;
@@ -48,12 +48,13 @@ public class CtrlData implements ICtrlData {
 
     public Map<String, Item> loadItems(String dataset){
         String path = getPath(dataset) + Utils.ITEMS;
+        System.out.println(path);
         Map<String, Item> items = null;
         try {
             items = utils.getItems(path);
         }
         catch(Exception e) {
-
+            System.out.println(e.toString());
         }
         return items;
     }
@@ -66,27 +67,24 @@ public class CtrlData implements ICtrlData {
             users = utils.getUsers(path, items);
         }
         catch (Exception e){
+            System.out.println(e.toString());
         }
         return users;
     }
 
 
-    public Map<String,User> loadKnownUsers(String dataset, boolean useTemp, Map<String,Item> items){
-        String filename = pathTemp(Utils.KNOWN_USERS, useTemp);
+    public Map<String,User> loadKnownUsers(String dataset, Map<String,Item> items){
 
-        return loadUsers(dataset,filename,items);
+        return loadUsers(dataset, Utils.KNOWN_USERS,items);
     }
 
-    public Map<String,User> loadUnknownUsers(String dataset, boolean useTemp, Map<String,Item> items){
-        String filename = pathTemp(Utils.UNKNOWN_USERS, useTemp);
-
-        return loadUsers(dataset,filename,items);
+    public Map<String,User> loadUnknownUsers(String dataset, Map<String,Item> items){
+        return loadUsers(dataset,Utils.UNKNOWN_USERS,items);
     }
 
-    public Map<String,User> loadUsers(String dataset, boolean useTemp, Map<String,Item> items){
-        String filename = pathTemp(Utils.USERS, useTemp);
+    public Map<String,User> loadUsers(String dataset, Map<String,Item> items){
 
-        return loadUsers(dataset,filename,items);
+        return loadUsers(dataset,Utils.USERS,items);
     }
 
 
@@ -98,8 +96,9 @@ public class CtrlData implements ICtrlData {
      * @return true -> correctly save , false -> not save
      */
     private boolean saveUsers(String dataset, String filename, User[] users){
-        String path = getPath(dataset) + "\\" + Utils.TEMP;
-
+        String path = getPath(dataset);
+        if(! path.contains(Utils.TEMP))
+            path += "\\" + Utils.TEMP;
         try {
             utils.createDir(path);
             path += "\\" + filename;
@@ -194,10 +193,8 @@ public class CtrlData implements ICtrlData {
      * @param users
      * @return the values if can load or null if not
      */
-    public Map<String,Recommendation> loadRecommendations(String dataset, boolean useTemp, Map<String,User> users){
-        String path = getPath(dataset);
-        if(useTemp) path += "\\" + Utils.TEMP;
-        path += "\\" + Utils.RECOMMENDATIONS;
+    public Map<String,Recommendation> loadRecommendations(String dataset, Map<String,User> users){
+        String path = getPath(dataset) + Utils.RECOMMENDATIONS;
 
         Map<String,Recommendation> recommendations = null;
 
@@ -205,6 +202,7 @@ public class CtrlData implements ICtrlData {
             recommendations = utils.readRecommendations(path, users);
         }
         catch(Exception e){
+            System.out.println(e.toString());
         }
         return recommendations;
     }
@@ -216,7 +214,7 @@ public class CtrlData implements ICtrlData {
      * @param recommendations data to write
      * @return true if its write correctly, false if not
      */
-    public boolean writeRecommendations(String dataset, boolean useTemp, Recommendation[] recommendations){
+    public boolean writeRecommendations(String dataset, Recommendation[] recommendations){
         String path = getPath(dataset);
         if(! path.contains(Utils.TEMP))
             path += "\\" + Utils.TEMP;
@@ -226,6 +224,7 @@ public class CtrlData implements ICtrlData {
         boolean written = true;
         try {
             utils.writeRecommendations(path, recommendations);
+            //falta añadir lo de arriba en todas y borrar use temp
         }
         catch(Exception e){
             written = false;
@@ -241,9 +240,10 @@ public class CtrlData implements ICtrlData {
      * @param recommendation data to write
      * @return true if its write correctly, false if not
      */
-    public boolean writeNewRecommendations(String dataset, boolean useTemp, Recommendation recommendation){
+    public boolean writeNewRecommendations(String dataset, Recommendation recommendation){
         String path = getPath(dataset);
-        if(useTemp) path += "\\" + Utils.TEMP;
+        if(! path.contains(Utils.TEMP))
+            path += "\\" + Utils.TEMP;
         utils.createDir(path);
         path += "\\" + Utils.RECOMMENDATIONS;
 

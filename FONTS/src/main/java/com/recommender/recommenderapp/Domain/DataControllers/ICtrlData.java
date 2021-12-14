@@ -13,15 +13,15 @@ public interface ICtrlData {
 
     public Map<String, Item> loadItems(String dataset);
 
-    public Map<String, User> loadKnownUsers(String dataset, boolean useTemp, Map<String,Item> items);
+    public Map<String, User> loadKnownUsers(String dataset, Map<String,Item> items);
 
-    public Map<String,User> loadUnknownUsers(String dataset, boolean useTemp, Map<String,Item> items);
+    public Map<String,User> loadUnknownUsers(String dataset, Map<String,Item> items);
 
-    public Map<String,User> loadUsers(String dataset, boolean useTemp, Map<String,Item> items);
+    public Map<String,User> loadUsers(String dataset, Map<String,Item> items);
 
-    public Map<String,Recommendation> loadRecommendations(String dataset, boolean useTemp, Map<String,User> users);
+    public Map<String,Recommendation> loadRecommendations(String dataset, Map<String,User> users);
 
-    public boolean writeNewRecommendations(String dataset, boolean useTemp, Recommendation recommendation);
+    public boolean writeNewRecommendations(String dataset, Recommendation recommendation);
 
     public boolean saveUsers(String dataset, User[] users);
 
@@ -29,7 +29,7 @@ public interface ICtrlData {
 
     public boolean saveUnknownUsers(String dataset, User[] users);
 
-    public boolean writeRecommendations(String dataset, boolean useTemp, Recommendation[] recommendations);
+    public boolean writeRecommendations(String dataset, Recommendation[] recommendations);
 
     public String[] getDatasets();
 }
