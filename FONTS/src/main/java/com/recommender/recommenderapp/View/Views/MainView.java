@@ -92,7 +92,7 @@ public class MainView {
      * @brief handles the empty datasets Exception
      */
     private void emptyCheckBoxException(String errorName){
-        Views.buildErrorAlert("Error loading the "+ errorName).showAndWait();
+        Views.buildAlert(Alert.AlertType.ERROR,"Error loading the "+ errorName, "ERROR").showAndWait();
         Platform.exit();
         System.exit(0);
     }

@@ -136,4 +136,11 @@ public class User {
         return result;
     }
 
+    public void deleteRate(String itemId){
+        ratings.remove(itemId);
+        items.remove(itemId);
+    }
+
+
+
 }

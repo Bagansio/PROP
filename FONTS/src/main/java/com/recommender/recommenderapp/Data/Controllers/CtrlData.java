@@ -218,8 +218,8 @@ public class CtrlData implements ICtrlData {
      */
     public boolean writeRecommendations(String dataset, boolean useTemp, Recommendation[] recommendations){
         String path = getPath(dataset);
-
-        if(useTemp) path += "\\" + Utils.TEMP;
+        if(! path.contains(Utils.TEMP))
+            path += "\\" + Utils.TEMP;
 
         path += "\\" + Utils.RECOMMENDATIONS;
 

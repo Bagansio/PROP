@@ -42,7 +42,7 @@ public class DatasetsView {
             CtrlView.changeScene("MainView");
         }
         else
-            Views.buildErrorAlert("Error loading users and items of Dataset, check the files and load again").showAndWait();
+            Views.buildAlert(Alert.AlertType.ERROR,"Error loading users and items of Dataset, check the files and load again","ERROR").showAndWait();
 
     }
 
@@ -51,7 +51,7 @@ public class DatasetsView {
      * @brief handles the empty datasets Exception
      */
     private void emptyDatasetsException(){
-        Views.buildErrorAlert("Should add a dataset in: "+ Utils.PATH + "\n With the 4 files needed").showAndWait();
+        Views.buildAlert(Alert.AlertType.ERROR,"Should add a dataset in: "+ Utils.PATH + "\n With the 4 files needed","ERROR").showAndWait();
         Platform.exit();
         System.exit(0);
     }

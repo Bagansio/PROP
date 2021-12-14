@@ -38,7 +38,9 @@ public class ItemRatesView {
     }
 
 
-    private void loadItems(String itemTitle){
+
+
+    public void loadItems(String itemTitle){
 
         ratesBox.getChildren().clear();
 
@@ -62,10 +64,10 @@ public class ItemRatesView {
         }
     }
 
+
     public void initialize() {
 
         loadItems("");
-
         try {
             backButton.setGraphic(new ImageView(new Image(Views.getPath("icons\\back.png").toExternalForm())));
             addRatesButton.setGraphic(new ImageView(new Image(Views.getPath("icons\\add.png").toExternalForm())));

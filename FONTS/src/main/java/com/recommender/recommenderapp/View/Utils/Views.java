@@ -19,11 +19,19 @@ public class Views {
      * @brief builds an Alert with message = msg
      * @param msg -> to show the error
      * @return  An alert with message = msg
-     */
+
     public static Alert buildErrorAlert(String msg){
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setHeaderText("");
         alert.setTitle("ERROR");
+        alert.setContentText(msg);
+        return alert;
+    }
+    */
+    public static Alert buildAlert(Alert.AlertType type,String msg, String title){
+        Alert alert = new Alert(type);
+        alert.setHeaderText("");
+        alert.setTitle(title);
         alert.setContentText(msg);
         return alert;
     }

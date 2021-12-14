@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/17" fx:controller="com.recommender.recommenderapp.View.Views.ItemRateView">
+<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="600.0"  xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.recommender.recommenderapp.View.Views.ItemRateView">
    <children>
       <Label fx:id="titleLabel" alignment="CENTER" prefHeight="71.0" prefWidth="150.0" text="ItemTitle">
          <font>
@@ -27,7 +27,7 @@
       </Label>
       <HBox alignment="CENTER" prefHeight="50.0" prefWidth="150.0">
          <children>
-            <Button fx:id="editButton" contentDisplay="CENTER" maxHeight="30.0" maxWidth="30.0" mnemonicParsing="false" textAlignment="CENTER">
+            <Button fx:id="editButton" contentDisplay="CENTER" maxHeight="30.0" maxWidth="30.0" mnemonicParsing="false" onAction="#editRate" textAlignment="CENTER">
                <graphic>
                   <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -38,7 +38,7 @@
                <HBox.margin>
                   <Insets right="15.0" />
                </HBox.margin></Button>
-            <Button fx:id="deleteButton" alignment="CENTER" mnemonicParsing="false">
+            <Button fx:id="deleteButton" alignment="CENTER" mnemonicParsing="false" onAction="#deleteRate">
                <graphic>
                   <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                      <image>

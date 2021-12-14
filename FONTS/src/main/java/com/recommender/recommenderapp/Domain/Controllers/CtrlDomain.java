@@ -1,5 +1,6 @@
 package com.recommender.recommenderapp.Domain.Controllers;
 
+import com.recommender.recommenderapp.Data.Utils.Utils;
 import com.recommender.recommenderapp.Domain.DataControllers.CtrlDataFactory;
 import com.recommender.recommenderapp.Domain.DataControllers.ICtrlData;
 import com.recommender.recommenderapp.Domain.Models.Item;
@@ -12,9 +13,7 @@ import java.util.Map;
 import java.util.stream.Stream;
 
 public class CtrlDomain {
-
     private String[] datasets;
-    private Boolean useTemp;
     private final CtrlDataFactory ctrlDataFactory = CtrlDataFactory.getInstance();
     private CtrlItems ctrlItems = CtrlItems.getInstance();
     private CtrlUsers ctrlUsers = CtrlUsers.getInstance();
@@ -56,6 +55,7 @@ public class CtrlDomain {
         return loadUsers() && loadItems();
     }
 
+
     public Map<String, Item> getItems(){
         return ctrlItems.getItems();
     }
@@ -87,5 +87,20 @@ public class CtrlDomain {
 
     public String[][] searchRatingsOfCurrentUser(String itemId){
         return ctrlUsers.searchRatingsOfCurrentUser(itemId);
+    }
+
+    public void saveAllDynamic(){
+        ctrlUsers.saveKnownUsers();
+        ctrlUsers.saveUnknownUsers();
+    }
+
+    public void deleteRateOfCurrentUser(String itemId){
+        ctrlUsers.deleteRateOfCurrentUser(itemId);
+        saveAllDynamic();
+    }
+
+    public void editRateOfCurrentUser(String itemId, Double newRate){
+        ctrlUsers.editRateOfCurrentUser(itemId,newRate);
+        System.out.println(ctrlUsers.saveKnownUsers());
     }
 }

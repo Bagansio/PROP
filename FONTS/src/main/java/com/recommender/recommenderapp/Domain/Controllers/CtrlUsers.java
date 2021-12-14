@@ -187,4 +187,13 @@ public class CtrlUsers {
         }
         return search;
     }
+
+
+    public void deleteRateOfCurrentUser(String itemId){
+        currentUser[0].deleteRate(itemId);
+    }
+
+    public void editRateOfCurrentUser(String itemId, Double newRate){
+        currentUser[0].rateItem(itemId,newRate);
+    }
 }
