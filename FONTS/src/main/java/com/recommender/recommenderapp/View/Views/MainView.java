@@ -75,7 +75,7 @@ public class MainView {
 
     @FXML
     public void changeEditRatesView(ActionEvent event){
-        CtrlView.changeScene("ItemRatesView");
+        CtrlView.changeScene(event,"ItemRatesView");
     }
 
     /**

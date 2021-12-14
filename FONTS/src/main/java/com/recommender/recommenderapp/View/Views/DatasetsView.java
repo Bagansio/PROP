@@ -36,11 +36,10 @@ public class DatasetsView {
      */
     @FXML
     public void loadDataset(ActionEvent event){
-        //loadButton.setStyle(Styles.getStyleBackgroundColor("black"));
         String dataset = datasetsChoiceBox.getValue();
         System.out.println(dataset);
         if(CtrlView.ctrlDomain.loadData(dataset)){
-            CtrlView.changeScene("MainView");
+            CtrlView.changeScene(event,"MainView");
         }
         else
             Views.buildAlert(Alert.AlertType.ERROR,"Error loading users and items of Dataset, check the files and load again","ERROR").showAndWait();
