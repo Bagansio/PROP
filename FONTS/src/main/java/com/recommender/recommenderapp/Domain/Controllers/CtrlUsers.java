@@ -174,4 +174,17 @@ public class CtrlUsers {
     public Map<String,Item> getUnknownItemsFromCurrentUser(){
         return currentUser[1].getItems();
     }
+
+
+    public String[][] searchRatingsOfCurrentUser(String itemId){
+        Map<String,Double> searchResult = currentUser[0].searchRatings(itemId);
+        String[][] search = new String[searchResult.size()][3];
+
+        int i = 0;
+        for(String item : searchResult.keySet()){
+            search[i] = new String[]{currentUser[0].getItem(item).getTitle(),item,String.valueOf(searchResult.get(item))};
+            ++i;
+        }
+        return search;
+    }
 }

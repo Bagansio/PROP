@@ -113,7 +113,7 @@ public class MainView {
     }
 
     public void initialize() {
-        System.out.println("Set current user:"+ CtrlView.ctrlDomain.setCurrentUser("53968"));
+        System.out.println("Set current user:"+ CtrlView.ctrlDomain.setCurrentUser("208238"));
 
         loadAlgorithms();
         loadPrecisions();

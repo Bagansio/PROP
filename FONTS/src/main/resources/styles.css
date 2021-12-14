@@ -1,14 +1,14 @@
-#addRatesButton, #editRatesButton , #exitButton , #profileButton, #searchButton, #backButton{
+#addRatesButton, #editRatesButton , #exitButton , #profileButton, #searchButton, #backButton, #editButton, #deleteButton{
     -fx-background-color: transparent;
 }
 
-#addRatesButton:hover, #editRatesButton:hover, #exitButton:hover , #profileButton:hover, #searchButton:hover, #backButton:hover{
+#addRatesButton:hover, #editRatesButton:hover, #exitButton:hover , #profileButton:hover, #searchButton:hover, #backButton:hover, #editButton:hover, #deleteButton:hover{
    -fx-background-color: #dedede;
 }
 
 
 
-#addRatesButton:pressed, #editRatesButton:pressed, #exitButton:pressed, #profileButton:pressed, #searchButton:pressed, #backButton:pressed{
+#addRatesButton:pressed, #editRatesButton:pressed, #exitButton:pressed, #profileButton:pressed, #searchButton:pressed, #backButton:pressed, #editButton:pressed, #deleteButton:pressed{
     -fx-background-color:  #b8b8b8;
 }
 

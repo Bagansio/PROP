@@ -84,4 +84,8 @@ public class CtrlDomain {
         String itemId = recommendation.getRecommendedItems().entrySet().iterator().next().getKey();
         return ctrlItems.getItems().get(itemId).getTitle();
     }
+
+    public String[][] searchRatingsOfCurrentUser(String itemId){
+        return ctrlUsers.searchRatingsOfCurrentUser(itemId);
+    }
 }

@@ -124,4 +124,16 @@ public class User {
         return ratings;
     }
 
+
+    public Map<String,Double> searchRatings(String id){
+
+        Map<String,Double> result = new HashMap<>();
+        for(Item item : items.values()){
+            if(item.getTitle().contains(id)) {
+                result.put(item.getId(), ratings.get(item.getId()));
+            }
+        }
+        return result;
+    }
+
 }
