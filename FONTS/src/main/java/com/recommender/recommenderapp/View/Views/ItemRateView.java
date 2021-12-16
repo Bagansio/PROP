@@ -40,7 +40,6 @@ public class ItemRateView {
     @FXML
     public void deleteRate(ActionEvent event){
         Optional<ButtonType> result = Views.buildAlert(Alert.AlertType.CONFIRMATION,"Are you sure to delete the rate of " + titleLabel.getText() + " ?","DELETE RATE").showAndWait();
-        System.out.println("Is known: " + isKnown);
         if(result.get() == ButtonType.OK) {
             CtrlView.ctrlDomain.deleteRateOfCurrentUser(idLabel.getText(),isKnown);
             ((VBox) idLabel.getParent().getParent()).getChildren().remove(idLabel.getParent()); // removes

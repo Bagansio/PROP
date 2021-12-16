@@ -79,9 +79,6 @@ public class CtrlUsers {
     public void setDataset(String dataset) {
 
         this.dataset = dataset;
-        users = null;
-        unknownUsers = null;
-        knownUsers = null;
     }
 
 
@@ -186,9 +183,19 @@ public class CtrlUsers {
     }
 
     public boolean saveUsersByBoolean(boolean isKnown){
-        if(isKnown)
-            return saveKnownUsers();
-        else
-            return saveUnknownUsers();
+        if(ctrlDataFactory.getICtrlData().existTemp(dataset)) {
+            if (isKnown)
+                return saveKnownUsers();
+            else
+                return saveUnknownUsers();
+        }
+        else{
+            saveAll();
+        }
+        return true;
+    }
+
+    public String getTempDataset(){
+        return ctrlDataFactory.getICtrlData().getTempDataset(dataset);
     }
 }

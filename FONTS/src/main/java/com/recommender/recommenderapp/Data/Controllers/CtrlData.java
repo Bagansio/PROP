@@ -48,13 +48,12 @@ public class CtrlData implements ICtrlData {
 
     public Map<String, Item> loadItems(String dataset){
         String path = getPath(dataset) + Utils.ITEMS;
-        System.out.println(path);
         Map<String, Item> items = null;
         try {
             items = utils.getItems(path);
         }
         catch(Exception e) {
-            System.out.println(e.toString());
+            //System.out.println(e.toString());
         }
         return items;
     }
@@ -67,7 +66,7 @@ public class CtrlData implements ICtrlData {
             users = utils.getUsers(path, items);
         }
         catch (Exception e){
-            System.out.println(e.toString());
+            //System.out.println(e.toString());
         }
         return users;
     }
@@ -202,7 +201,7 @@ public class CtrlData implements ICtrlData {
             recommendations = utils.readRecommendations(path, users);
         }
         catch(Exception e){
-            System.out.println(e.toString());
+            //System.out.println(e.toString());
         }
         return recommendations;
     }
@@ -259,6 +258,12 @@ public class CtrlData implements ICtrlData {
 
     public String tempDatasetToNormal(String dataset){
         return dataset.replace("\\" + Utils.TEMP,"");
+    }
+
+    public String getTempDataset(String dataset){
+        if(! dataset.contains("\\" + Utils.TEMP))
+            dataset += "\\" + Utils.TEMP;
+        return dataset;
     }
 
 

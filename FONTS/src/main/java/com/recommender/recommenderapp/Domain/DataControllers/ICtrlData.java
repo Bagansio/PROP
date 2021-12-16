@@ -35,4 +35,6 @@ public interface ICtrlData {
     public String[] getDatasets();
 
     public String tempDatasetToNormal(String dataset);
+
+    public String getTempDataset(String dataset);
 }

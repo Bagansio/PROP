@@ -76,7 +76,7 @@ public class ItemRatesView {
 
 
             try {
-                System.out.println(Views.getPath("ItemRateView.fxml"));
+
                 FXMLLoader fxmlLoader = new FXMLLoader(Views.getPath("ItemRateView.fxml"));
                 HBox hBox = fxmlLoader.load();
 

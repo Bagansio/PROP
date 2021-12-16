@@ -12,6 +12,7 @@ import java.util.Map;
 import java.util.stream.Stream;
 
 public class CtrlDomain {
+    private boolean useTemp;
     private CtrlItems ctrlItems = CtrlItems.getInstance();
     private CtrlUsers ctrlUsers = CtrlUsers.getInstance();
     private CtrlAlgorithms ctrlAlgorithms = CtrlAlgorithms.getInstance();
@@ -85,6 +86,7 @@ public class CtrlDomain {
 
     public void deleteRateOfCurrentUser(String itemId,boolean isKnown){
         ctrlUsers.deleteRateOfCurrentUser(itemId,getPosCurrentUser(isKnown));
+        changeToTempDataset();
         ctrlUsers.saveUsersByBoolean(isKnown);
     }
 
@@ -97,6 +99,7 @@ public class CtrlDomain {
 
     public void editRateOfCurrentUser(String itemId, Double newRate, boolean isKnown){
         ctrlUsers.editRateOfCurrentUser(itemId,newRate,getPosCurrentUser(isKnown));
+        changeToTempDataset();
         ctrlUsers.saveUsersByBoolean(isKnown);
     }
 
@@ -104,5 +107,10 @@ public class CtrlDomain {
        return ctrlUsers.existsUser(userId);
     }
 
-
+    public void changeToTempDataset(){
+        useTemp = true;
+        String tempDataset = ctrlUsers.getTempDataset();
+        ctrlRecommendations.setDataset(tempDataset);
+        ctrlUsers.setDataset(tempDataset);
+    }
 }
