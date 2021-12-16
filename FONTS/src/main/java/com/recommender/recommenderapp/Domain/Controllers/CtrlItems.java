@@ -30,7 +30,8 @@ public class CtrlItems {
     }
 
     public void setDataset(String dataset) {
-        this.dataset = dataset;
+        System.out.println(ctrlDataFactory.getICtrlData().tempDatasetToNormal(dataset));
+        this.dataset = ctrlDataFactory.getICtrlData().tempDatasetToNormal(dataset);
         items = null;
     }
 

@@ -1,5 +1,6 @@
 package com.recommender.recommenderapp.Domain.DataControllers;
 
+import com.recommender.recommenderapp.Data.Utils.Utils;
 import com.recommender.recommenderapp.Domain.Models.Item;
 import com.recommender.recommenderapp.Domain.Models.Recommendation;
 import com.recommender.recommenderapp.Domain.Models.User;
@@ -32,4 +33,6 @@ public interface ICtrlData {
     public boolean writeRecommendations(String dataset, Recommendation[] recommendations);
 
     public String[] getDatasets();
+
+    public String tempDatasetToNormal(String dataset);
 }

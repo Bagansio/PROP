@@ -137,7 +137,7 @@ public class CtrlUsers {
 
 
     public boolean existsUser(String userId){
-        return knownUsers.containsKey(userId);
+        return knownUsers.containsKey(userId) || unknownUsers.containsKey(userId);
     }
 
     public boolean setCurrentUser(String userId) {
@@ -145,6 +145,10 @@ public class CtrlUsers {
         if(existsUser(userId)){
             this.currentUser[0] = knownUsers.get(userId);
             this.currentUser[1] = unknownUsers.get(userId);
+            if(this.currentUser[0] == null)
+                this.currentUser[0] = new User(userId);
+            if(this.currentUser[1] == null)
+                this.currentUser[1] = new User(userId);
         }
         else
             canSet = false;

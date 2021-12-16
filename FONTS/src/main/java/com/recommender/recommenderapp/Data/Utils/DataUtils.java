@@ -38,9 +38,11 @@ public class DataUtils {
     }
 
     public boolean existDataset(String path){
-        return existTemp(path) && new File(path + "\\" + Utils.ITEMS).exists();
+        boolean exists = existTemp(path);
+        if(path.contains(Utils.TEMP))
+            path = path.replace("\\"+Utils.TEMP,"");
+        return exists && new File(path + "\\" + Utils.ITEMS).exists();
     }
-
 
     /**
      * @param path

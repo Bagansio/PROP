@@ -257,4 +257,10 @@ public class CtrlData implements ICtrlData {
         return written;
     }
 
+    public String tempDatasetToNormal(String dataset){
+        return dataset.replace("\\" + Utils.TEMP,"");
+    }
+
+
+
 }

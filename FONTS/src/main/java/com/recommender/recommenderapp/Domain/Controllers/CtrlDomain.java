@@ -99,4 +99,10 @@ public class CtrlDomain {
         ctrlUsers.editRateOfCurrentUser(itemId,newRate,getPosCurrentUser(isKnown));
         ctrlUsers.saveUsersByBoolean(isKnown);
     }
+
+    public boolean existsUser(String userId){
+       return ctrlUsers.existsUser(userId);
+    }
+
+
 }

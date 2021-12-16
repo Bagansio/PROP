@@ -36,7 +36,7 @@ public class DatasetsView {
         String dataset = datasetsChoiceBox.getValue();
         System.out.println(dataset);
         if(CtrlView.ctrlDomain.loadData(dataset)){
-            CtrlView.changeScene(event,"MainView");
+            CtrlView.changeScene(event,"LoginUserView");
         }
         else
             Views.buildAlert(Alert.AlertType.ERROR,"Error loading users and items of Dataset, check the files and load again","ERROR").showAndWait();

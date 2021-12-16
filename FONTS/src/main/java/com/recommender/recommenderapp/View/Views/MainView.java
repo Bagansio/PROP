@@ -11,6 +11,7 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.VBox;
 
 import java.util.Optional;
 
@@ -37,6 +38,14 @@ public class MainView {
 
     @FXML
     public Button profileButton;
+
+    @FXML
+    public void exit(ActionEvent event){
+        Optional<ButtonType> result = Views.buildAlert(Alert.AlertType.CONFIRMATION,"Are you sure to exit?","EXIT").showAndWait();
+        if(result.get() == ButtonType.OK) {
+            CtrlView.changeScene(event,"LoginUserView");
+        }
+    }
 
     /**
             * Creates an instance of MainView
@@ -112,7 +121,6 @@ public class MainView {
     }
 
     public void initialize() {
-        System.out.println("Set current user:"+ CtrlView.ctrlDomain.setCurrentUser("208238"));
 
         loadAlgorithms();
         loadPrecisions();
