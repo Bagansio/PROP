@@ -1,7 +1,6 @@
 package com.recommender.recommenderapp.Domain.DataControllers;
 
 import com.recommender.recommenderapp.Data.Controllers.CtrlData;
-import com.recommender.recommenderapp.Domain.Controllers.CtrlItems;
 
 
 /**

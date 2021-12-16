@@ -1,10 +1,7 @@
 package com.recommender.recommenderapp.View.Controllers;
 
 import com.recommender.recommenderapp.Domain.Controllers.CtrlDomain;
-import com.recommender.recommenderapp.Domain.Controllers.CtrlItems;
-import com.recommender.recommenderapp.Domain.Controllers.CtrlUsers;
 import com.recommender.recommenderapp.View.Utils.Views;
-import com.recommender.recommenderapp.View.Views.DatasetsView;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
@@ -15,7 +12,6 @@ import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.nio.file.Paths;
 
 /**
  * @author Alex

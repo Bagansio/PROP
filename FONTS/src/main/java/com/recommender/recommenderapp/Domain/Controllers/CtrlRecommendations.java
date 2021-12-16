@@ -50,14 +50,9 @@ public class CtrlRecommendations {
     }
 
     public boolean loadRecommendations(){
-        boolean loadedCorrectly = true;
         ICtrlData ctrlData = ctrlDataFactory.getICtrlData();
         recommendations = ctrlData.loadRecommendations(dataset, CtrlUsers.getInstance().getKnownUsers());
-        if(recommendations == null){
-            initializeRecommendations();
-            loadedCorrectly = false;
-        }
-        return loadedCorrectly;
+        return true;
     }
 
     public Map<String,Recommendation> getRecommendations(){

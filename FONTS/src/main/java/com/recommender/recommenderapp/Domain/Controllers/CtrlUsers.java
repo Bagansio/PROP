@@ -1,6 +1,5 @@
 package com.recommender.recommenderapp.Domain.Controllers;
 
-import com.recommender.recommenderapp.Data.Controllers.CtrlData;
 import com.recommender.recommenderapp.Domain.DataControllers.CtrlDataFactory;
 import com.recommender.recommenderapp.Domain.DataControllers.ICtrlData;
 import com.recommender.recommenderapp.Domain.Models.Item;
@@ -161,24 +160,31 @@ public class CtrlUsers {
     }
 
 
-    public String[][] searchRatingsOfCurrentUser(String itemId){
-        Map<String,Double> searchResult = currentUser[0].searchRatings(itemId);
+    public String[][] searchRatingsOfCurrentUser(String itemId,int pos){
+        Map<String,Double> searchResult = currentUser[pos].searchRatings(itemId);
         String[][] search = new String[searchResult.size()][3];
 
         int i = 0;
         for(String item : searchResult.keySet()){
-            search[i] = new String[]{currentUser[0].getItem(item).getTitle(),item,String.valueOf(searchResult.get(item))};
+            search[i] = new String[]{currentUser[pos].getItem(item).getTitle(),item,String.valueOf(searchResult.get(item))};
             ++i;
         }
         return search;
     }
 
 
-    public void deleteRateOfCurrentUser(String itemId){
-        currentUser[0].deleteRate(itemId);
+    public void deleteRateOfCurrentUser(String itemId, int pos){
+        currentUser[pos].deleteRate(itemId);
     }
 
-    public void editRateOfCurrentUser(String itemId, Double newRate){
-        currentUser[0].rateItem(itemId,newRate);
+    public void editRateOfCurrentUser(String itemId, Double newRate, int pos){
+        currentUser[pos].rateItem(itemId,newRate);
+    }
+
+    public boolean saveUsersByBoolean(boolean isKnown){
+        if(isKnown)
+            return saveKnownUsers();
+        else
+            return saveUnknownUsers();
     }
 }

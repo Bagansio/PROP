@@ -196,7 +196,7 @@ public class CtrlData implements ICtrlData {
     public Map<String,Recommendation> loadRecommendations(String dataset, Map<String,User> users){
         String path = getPath(dataset) + Utils.RECOMMENDATIONS;
 
-        Map<String,Recommendation> recommendations = null;
+        Map<String,Recommendation> recommendations = new LinkedHashMap<>();
 
         try {
             recommendations = utils.readRecommendations(path, users);

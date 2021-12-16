@@ -1,7 +1,6 @@
 package com.recommender.recommenderapp.Domain.Controllers;
 
 import com.recommender.recommenderapp.Data.Utils.Utils;
-import com.recommender.recommenderapp.Domain.DataControllers.CtrlDataFactory;
 import com.recommender.recommenderapp.Domain.DataControllers.ICtrlData;
 import com.recommender.recommenderapp.Domain.Models.Item;
 import com.recommender.recommenderapp.Domain.Models.Recommendation;
@@ -13,8 +12,6 @@ import java.util.Map;
 import java.util.stream.Stream;
 
 public class CtrlDomain {
-    private String[] datasets;
-    private final CtrlDataFactory ctrlDataFactory = CtrlDataFactory.getInstance();
     private CtrlItems ctrlItems = CtrlItems.getInstance();
     private CtrlUsers ctrlUsers = CtrlUsers.getInstance();
     private CtrlAlgorithms ctrlAlgorithms = CtrlAlgorithms.getInstance();
@@ -22,13 +19,11 @@ public class CtrlDomain {
 
 
     public CtrlDomain() {
-        ICtrlData ctrlData = ctrlDataFactory.getICtrlData();
-        this.datasets = ctrlData.getDatasets();
     }
 
 
     public String[] getDatasets(){
-        return datasets;
+        return ctrlItems.getDatasets();
     }
 
 
@@ -83,22 +78,25 @@ public class CtrlDomain {
         return ctrlItems.getItems().get(itemId).getTitle();
     }
 
-    public String[][] searchRatingsOfCurrentUser(String itemId){
-        return ctrlUsers.searchRatingsOfCurrentUser(itemId);
+    public String[][] searchRatingsOfCurrentUser(String itemId,boolean isKnown){
+        return ctrlUsers.searchRatingsOfCurrentUser(itemId,getPosCurrentUser(isKnown));
     }
 
-    public void saveAllDynamic(){
-        ctrlUsers.saveKnownUsers();
-        ctrlUsers.saveUnknownUsers();
+
+    public void deleteRateOfCurrentUser(String itemId,boolean isKnown){
+        ctrlUsers.deleteRateOfCurrentUser(itemId,getPosCurrentUser(isKnown));
+        ctrlUsers.saveUsersByBoolean(isKnown);
     }
 
-    public void deleteRateOfCurrentUser(String itemId){
-        ctrlUsers.deleteRateOfCurrentUser(itemId);
-        saveAllDynamic();
+    private int getPosCurrentUser(boolean isKnown) {
+        int pos = 1;
+        if(isKnown)
+            pos = 0;
+        return pos;
     }
 
-    public void editRateOfCurrentUser(String itemId, Double newRate){
-        ctrlUsers.editRateOfCurrentUser(itemId,newRate);
-        System.out.println(ctrlUsers.saveKnownUsers());
+    public void editRateOfCurrentUser(String itemId, Double newRate, boolean isKnown){
+        ctrlUsers.editRateOfCurrentUser(itemId,newRate,getPosCurrentUser(isKnown));
+        ctrlUsers.saveUsersByBoolean(isKnown);
     }
 }

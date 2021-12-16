@@ -32,6 +32,7 @@
   OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 -->
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Accordion?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
@@ -50,25 +51,8 @@
     <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="795.0" prefWidth="1272.0" VBox.vgrow="ALWAYS">
       <children>
             <Accordion layoutX="553.0" layoutY="388.0" />
-            <Button fx:id="backButton" layoutX="24.0" layoutY="28.0" mnemonicParsing="false" />
+            <Button fx:id="backButton" layoutX="24.0" layoutY="28.0" mnemonicParsing="false" onAction="#back" />
             <Button fx:id="profileButton" layoutX="1192.0" layoutY="28.0" mnemonicParsing="false" />
-            <Button fx:id="searchButton" layoutX="788.0" layoutY="329.0" mnemonicParsing="false" onAction="#searchItems">
-               <graphic>
-                  <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@icons/search.png" />
-                     </image>
-                  </ImageView>
-               </graphic></Button>
-            <TextField fx:id="searchText" layoutX="494.0" layoutY="335.0" prefHeight="25.0" prefWidth="287.0" />
-            <Text fx:id="itemTitleText" layoutX="487.0" layoutY="697.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="310.0" />
-            <Text fx:id="itemTitleText1" layoutX="487.0" layoutY="742.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="310.0" />
-            <Button fx:id="addRatesButton" layoutX="597.0" layoutY="200.0" mnemonicParsing="false" />
-            <Text layoutX="417.0" layoutY="352.0" strokeType="OUTSIDE" strokeWidth="0.0" text="SEARCH:" wrappingWidth="55.17578125">
-               <font>
-                  <Font name="System Bold" size="12.0" />
-               </font>
-            </Text>
             <HBox layoutX="325.0" layoutY="371.0" prefHeight="430.0" prefWidth="631.0">
                <children>
                   <ScrollPane prefHeight="426.0" prefWidth="626.0" style="-fx-border-color: black; -fx-border-width: 2;" stylesheets="@styles.css">
@@ -104,6 +88,53 @@
                         </VBox>
                      </content>
                   </ScrollPane>
+               </children>
+            </HBox>
+            <HBox alignment="BOTTOM_LEFT" layoutX="325.0" layoutY="333.0" prefHeight="38.0" prefWidth="211.0">
+               <children>
+                  <Button fx:id="knownButton" mnemonicParsing="false" onAction="#setKnown" style="-fx-background-radius: 0;" text="KNOWN" textFill="WHITE">
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                  </Button>
+                  <Button fx:id="unknownButton" mnemonicParsing="false" onAction="#setUnknown" style="-fx-background-radius: 0;" text="UNKNOWN" textFill="WHITE">
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                  </Button>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" layoutY="71.0" prefHeight="100.0" prefWidth="1280.0">
+               <children>
+                  <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+                     <children>
+                        <Text fx:id="title" strokeType="OUTSIDE" strokeWidth="0.0" text="KNOWN RATES" textAlignment="CENTER">
+                           <font>
+                              <Font size="25.0" />
+                           </font>
+                        </Text>
+                        <Button fx:id="addRatesButton" mnemonicParsing="false" />
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" layoutY="303.0" prefHeight="38.0" prefWidth="1280.0">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="SEARCH:" wrappingWidth="55.17578125">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Text>
+                  <TextField fx:id="searchText" prefHeight="25.0" prefWidth="287.0" />
+                  <Button fx:id="searchButton" mnemonicParsing="false" onAction="#searchItems">
+                     <graphic>
+                        <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@icons/search.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
                </children>
             </HBox>
       </children>

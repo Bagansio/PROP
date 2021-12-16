@@ -131,20 +131,6 @@ public class DataUtils {
         return users;
     }
 
-    private void writeLine(FileWriter writer, String line) throws IOException{
-        writer.write(line + Utils.LINE_BREAK);
-    }
-
-    public void writeFile(String path, String[] data) throws IOException{
-        File file = new File(path);
-        FileWriter writer = new FileWriter(file);
-
-        for(String line : data){
-            writeLine(writer,line);
-        }
-    }
-
-
 
     /**
      *
@@ -155,17 +141,14 @@ public class DataUtils {
         fileWriter.write("userId,rating,itemId" + Utils.LINE_BREAK);
     }
 
-
-    private void writeUserRates(FileWriter fileWriter, User[] users) throws IOException {
-
-        for(User user : users){
-            Map<String,Double> ratings = user.getRatings();
-            for(String itemId : ratings.keySet()){
-                fileWriter.write(user.getId() + "," + ratings.get(itemId) + "," + itemId);
-                fileWriter.write(Utils.LINE_BREAK);
-            }
+    private void writeUserRates(FileWriter fileWriter, User user) throws  IOException{
+        Map<String,Double> ratings = user.getRatings();
+        for(String itemId : ratings.keySet()){
+            fileWriter.write(user.getId() + "," + ratings.get(itemId) + "," + itemId);
+            fileWriter.write(Utils.LINE_BREAK);
         }
     }
+
 
     public boolean createDir(String path){
         return new File(path).mkdir();
@@ -184,7 +167,8 @@ public class DataUtils {
 
         writeUserHeader(fileWriter);
 
-        writeUserRates(fileWriter, users);
+        for(User user: users)
+            writeUserRates(fileWriter,user);
 
         fileWriter.flush();
     }

@@ -12,7 +12,6 @@ import java.util.Map;
  * Its a Singleton
  */
 public class CtrlItems {
-    private boolean useTemp;
     private String dataset;
     private final CtrlDataFactory  ctrlDataFactory;
     private Map<String,Item> items;
@@ -20,7 +19,6 @@ public class CtrlItems {
 
     private CtrlItems(){
         ctrlDataFactory = CtrlDataFactory.getInstance();
-        useTemp = false;
     }
 
     public static CtrlItems getInstance(){
@@ -35,16 +33,11 @@ public class CtrlItems {
         this.dataset = dataset;
         items = null;
     }
-/*
-    public void setUseTemp(boolean useTemp){
-        ICtrlData ctrlData = ctrlDataFactory.getICtrlData();
-        if(useTemp && ctrlData.existTemp(dataset)){
-            this.useTemp = true;
-        }
-        else this.useTemp = false;
-        return this.useTemp;
+
+    public String[] getDatasets(){
+        return ctrlDataFactory.getICtrlData().getDatasets();
     }
-*/
+
     public Map<String,Item> getItems(){
         if(items == null){
             loadItems();

@@ -7,4 +7,5 @@ module com.recommender.recommenderapp {
     exports com.recommender.recommenderapp;
     exports com.recommender.recommenderapp.View.Controllers;
     exports com.recommender.recommenderapp.View.Views;
+    exports com.recommender.recommenderapp.View.Utils;
 }

@@ -6,12 +6,13 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
-import javafx.scene.text.Text;
 
 import java.util.Optional;
 
-public class    ItemRateView {
+public class ItemRateView {
 
+
+    private static boolean isKnown;
 
     @FXML
     public Label titleLabel;
@@ -28,6 +29,9 @@ public class    ItemRateView {
     @FXML
     public Button deleteButton;
 
+    public static void setIsKnown(boolean isKnown){
+        ItemRateView.isKnown = isKnown;
+    }
 
     /**
      *
@@ -36,9 +40,9 @@ public class    ItemRateView {
     @FXML
     public void deleteRate(ActionEvent event){
         Optional<ButtonType> result = Views.buildAlert(Alert.AlertType.CONFIRMATION,"Are you sure to delete the rate of " + titleLabel.getText() + " ?","DELETE RATE").showAndWait();
-
+        System.out.println("Is known: " + isKnown);
         if(result.get() == ButtonType.OK) {
-            CtrlView.ctrlDomain.deleteRateOfCurrentUser(idLabel.getText());
+            CtrlView.ctrlDomain.deleteRateOfCurrentUser(idLabel.getText(),isKnown);
             ((VBox) idLabel.getParent().getParent()).getChildren().remove(idLabel.getParent()); // removes
         }
     }
@@ -55,7 +59,7 @@ public class    ItemRateView {
                 if(newRate < 0) Views.buildAlert(Alert.AlertType.ERROR, "Rate should be positive \nExample: 5", "ERROR").showAndWait();
                 else{
                     rateLabel.setText(newRate.toString());
-                    CtrlView.ctrlDomain.editRateOfCurrentUser(idLabel.getText(),newRate);
+                    CtrlView.ctrlDomain.editRateOfCurrentUser(idLabel.getText(),newRate,isKnown);
                 }
             } catch (Exception e) {
                 Views.buildAlert(Alert.AlertType.ERROR, "Error format of : " + result.get() + "\nExample: 5.0", "ERROR").showAndWait();

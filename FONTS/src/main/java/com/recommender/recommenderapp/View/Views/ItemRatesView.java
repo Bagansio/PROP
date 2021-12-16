@@ -11,8 +11,14 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
 
 public class ItemRatesView {
+
+    private Boolean isKnown;
+
+    @FXML
+    public Text title;
 
     @FXML
     public Button backButton;
@@ -33,20 +39,40 @@ public class ItemRatesView {
     public TextField searchText;
 
     @FXML
+    public Button knownButton;
+
+    @FXML
+    public Button unknownButton;
+
+    @FXML
+    public void setKnown(ActionEvent event){
+        setIsKnown(true);
+    }
+
+    @FXML
+    public void setUnknown(ActionEvent event){
+        setIsKnown(false);
+    }
+
+    @FXML
     public void searchItems(ActionEvent event){
         loadItems(searchText.getText());
     }
 
 
+    @FXML
+    public void back(ActionEvent event){
+        CtrlView.changeScene(event,"MainView");
+    }
 
 
     public void loadItems(String itemTitle){
 
         ratesBox.getChildren().clear();
 
-        String[][] rates = CtrlView.ctrlDomain.searchRatingsOfCurrentUser(itemTitle);
+        String[][] rates;
+            rates = CtrlView.ctrlDomain.searchRatingsOfCurrentUser(itemTitle,isKnown);
         for(String[] rate : rates){
-            System.out.println(rate[1]);
 
 
             try {
@@ -65,9 +91,22 @@ public class ItemRatesView {
     }
 
 
-    public void initialize() {
+    private void setIsKnown(boolean isKnown){
+        this.isKnown = isKnown;
+        knownButton.setDisable(isKnown);
+        unknownButton.setDisable(! isKnown);
+        ItemRateView.setIsKnown(isKnown);
+        if(isKnown)
+            title.setText("KNOWN RATES");
+        else
+            title.setText("UNKNOWN RATES");
 
         loadItems("");
+    }
+
+
+    public void initialize() {
+        setIsKnown(true);
         try {
             backButton.setGraphic(new ImageView(new Image(Views.getPath("icons\\back.png").toExternalForm())));
             addRatesButton.setGraphic(new ImageView(new Image(Views.getPath("icons\\add.png").toExternalForm())));

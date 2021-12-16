@@ -1,6 +1,5 @@
 package com.recommender.recommenderapp.View.Views;
 
-import com.recommender.recommenderapp.Data.Utils.Utils;
 import com.recommender.recommenderapp.View.Controllers.CtrlView;
 import com.recommender.recommenderapp.View.Utils.Views;
 import javafx.application.Platform;
