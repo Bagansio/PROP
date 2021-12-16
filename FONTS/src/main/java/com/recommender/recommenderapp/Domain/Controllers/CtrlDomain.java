@@ -113,4 +113,20 @@ public class CtrlDomain {
         ctrlRecommendations.setDataset(tempDataset);
         ctrlUsers.setDataset(tempDataset);
     }
+
+    public void deleteRecommendation(String recommendationId){
+        ctrlRecommendations.deleteRecommendation(recommendationId);
+        ctrlRecommendations.saveRecommendations();
+    }
+
+    public void editScoreRecommendation(String recommendationId,int newScore){
+        ctrlRecommendations.editScoreRecommendation(recommendationId,newScore);
+        ctrlRecommendations.saveRecommendations();
+    }
+
+
+    public Map<String,String>[] searchRecommendations(String itemTitle){
+        return ctrlRecommendations.searchRatingsOfCurrentUser(itemId,getPosCurrentUser(isKnown));
+    }
+
 }

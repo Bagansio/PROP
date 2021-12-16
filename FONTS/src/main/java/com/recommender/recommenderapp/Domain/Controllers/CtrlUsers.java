@@ -198,4 +198,9 @@ public class CtrlUsers {
     public String getTempDataset(){
         return ctrlDataFactory.getICtrlData().getTempDataset(dataset);
     }
+
+    public String getCurrentUserId(){
+        return currentUser[0].getId();
+    }
+
 }

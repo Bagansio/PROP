@@ -6,10 +6,7 @@ import com.recommender.recommenderapp.Domain.Models.*;
 import com.recommender.recommenderapp.Domain.Utils.AlgorithmTypes;
 import com.recommender.recommenderapp.Domain.Utils.PrecisionTypes;
 
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Stream;
 
 public class CtrlRecommendations {
@@ -62,6 +59,14 @@ public class CtrlRecommendations {
         return  recommendations;
     }
 
+    public void deleteRecommendation(String recommendationId){
+        recommendations.remove(recommendationId);
+    }
+
+    public void editScoreRecommendation(String recommendationId,int newScore){
+        recommendations.get(recommendationId).setScore(newScore);
+    }
+
     public boolean saveRecommendations(){
         ICtrlData ctrlData = ctrlDataFactory.getICtrlData();
         return ctrlData.writeRecommendations(dataset,recommendations.values().toArray(new Recommendation[0]));
@@ -70,6 +75,26 @@ public class CtrlRecommendations {
     public boolean saveNewRecommendation(Recommendation recommendation){
         ICtrlData ctrlData = ctrlDataFactory.getICtrlData();
         return ctrlData.writeNewRecommendations(dataset,recommendation);
+    }
+
+    public Map<String,String>[]  searchRecommendationsOfCurrentUser(String itemTitle){
+        String currentUser = CtrlUsers.getInstance().getCurrentUserId();
+
+
+
+
+        List<Map<String,String>>  search = new ArrayList<>();
+
+        int i = 0;
+        for(Recommendation recommendation : recommendations.values()){
+            if(recommendation.getUser().getId() == currentUser && recommendation.searchRatings(itemTitle)) {
+                Map<String,String> recommendationData = new HashMap<>();
+                recommendationData.put("id",recommendation.getId());
+                recommendationData.put("itemId")
+                search.add()
+            }
+        }
+        return search;
     }
 
 }

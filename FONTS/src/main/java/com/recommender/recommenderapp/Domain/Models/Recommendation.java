@@ -220,6 +220,15 @@ public class Recommendation {
         return Algorithm.discountedCumulativeGain(recommendedItems, unknown);
     }
 
+    public boolean searchRatings(String itemTitle){
+        for(String item : recommendedItems.keySet()){
+            if(item.contains(itemTitle)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
 
     /*public void preprocessData(Map<String, User> userMap) {
         switch(this.algorithmType) {
