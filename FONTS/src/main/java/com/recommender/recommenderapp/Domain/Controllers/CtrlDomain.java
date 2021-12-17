@@ -125,8 +125,8 @@ public class CtrlDomain {
     }
 
 
-    public Map<String,String>[] searchRecommendations(String itemTitle){
-        return ctrlRecommendations.searchRatingsOfCurrentUser(itemId,getPosCurrentUser(isKnown));
+    public String[][] searchRecommendations(String itemTitle){
+        return ctrlRecommendations.searchRecommendationsOfCurrentUser(itemTitle);
     }
 
 }

@@ -77,24 +77,46 @@ public class CtrlRecommendations {
         return ctrlData.writeNewRecommendations(dataset,recommendation);
     }
 
-    public Map<String,String>[]  searchRecommendationsOfCurrentUser(String itemTitle){
+
+    /**
+     *
+     * @param itemTitle
+     * @return a Matrix of recommendations data, each row contains a recommendation
+     *         each column contains -> 0 recommendationID
+     *                              -> 1 AlgorithmType
+     *                              -> 2 PrecisionType
+     *                              -> 3 Rate/Score
+     *                              -> next items
+     */
+    public String[][]  searchRecommendationsOfCurrentUser(String itemTitle){
         String currentUser = CtrlUsers.getInstance().getCurrentUserId();
-
-
-
-
-        List<Map<String,String>>  search = new ArrayList<>();
-
-        int i = 0;
+        List<String[]> search = new ArrayList<>();
         for(Recommendation recommendation : recommendations.values()){
-            if(recommendation.getUser().getId() == currentUser && recommendation.searchRatings(itemTitle)) {
-                Map<String,String> recommendationData = new HashMap<>();
-                recommendationData.put("id",recommendation.getId());
-                recommendationData.put("itemId")
-                search.add()
+            if(recommendation.getUser().getId().equals(currentUser) && searchRatings(recommendation,itemTitle)) {
+                List<String> recommendationData = new ArrayList<>();
+
+                recommendationData.add(recommendation.getId());
+                recommendationData.add(recommendation.getAlgorithmType());
+                recommendationData.add(recommendation.getPrecisionType());
+                recommendationData.add(String.valueOf(recommendation.getScore()));
+                Map<String,Double> items = recommendation.getRecommendedItems();
+                for(String itemId : items.keySet()){
+                    recommendationData.add(CtrlItems.getInstance().getItems().get(itemId).getTitle() + "-" + String.format("%.3f",items.get(itemId)));
+                }
+                search.add(recommendationData.toArray(new String[0]));
             }
         }
-        return search;
-    }
 
+        return search.toArray(new String[0][]);
+    }
+    public boolean searchRatings(Recommendation recommendation, String itemTitle){
+        System.out.println(recommendation.getRecommendedItems().size());
+        for(String item : recommendation.getRecommendedItems().keySet()){
+            System.out.println(CtrlItems.getInstance().getItems().get(item).getTitle());
+            if(CtrlItems.getInstance().getItems().get(item).getTitle().contains(itemTitle)) {
+                return true;
+            }
+        }
+        return false;
+    }
 }

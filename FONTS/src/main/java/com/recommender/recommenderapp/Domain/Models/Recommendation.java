@@ -117,8 +117,8 @@ public class Recommendation {
      *
      * @return the set precision of the recommendation
      */
-    public PrecisionTypes getPrecisionType() {
-        return precisionType;
+    public String getPrecisionType() {
+        return precisionType.toString();
     }
 
     /**
@@ -220,13 +220,8 @@ public class Recommendation {
         return Algorithm.discountedCumulativeGain(recommendedItems, unknown);
     }
 
-    public boolean searchRatings(String itemTitle){
-        for(String item : recommendedItems.keySet()){
-            if(item.contains(itemTitle)) {
-                return true;
-            }
-        }
-        return false;
+    public void setRecommendedItems(Map<String,Double> recommendedItems){
+        this.recommendedItems = recommendedItems;
     }
 
 

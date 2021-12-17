@@ -8,9 +8,9 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/17" fx:controller="com.recommender.recommenderapp.View.Views.ItemRateView">
+<HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="625.0"  xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.recommender.recommenderapp.View.Views.RecommendationView">
    <children>
-      <Label fx:id="idLabel" alignment="CENTER" prefHeight="71.0" prefWidth="150.0" text="RecommendationId">
+      <Label fx:id="idLabel" alignment="CENTER" prefHeight="71.0" prefWidth="75.0" text="RecommendationId">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
@@ -20,17 +20,17 @@
             <Font name="System Bold" size="12.0" />
          </font>
       </Label>
-      <Label fx:id="itemIdLabel" alignment="CENTER" prefHeight="50.0" prefWidth="75.0" text="RecommendedItemId">
+      <Label fx:id="expectedRate" alignment="CENTER" prefHeight="50.0" prefWidth="175.0" text="ExpectedRateOfItem">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
       </Label>
-      <Label fx:id="rateLabel" alignment="CENTER" prefHeight="50.0" prefWidth="75.0" text="RATE">
+      <Label fx:id="rateLabel" alignment="CENTER" prefHeight="50.0" prefWidth="75.0" text="RATE" textAlignment="CENTER">
          <font>
             <Font name="System Bold Italic" size="12.0" />
          </font>
       </Label>
-      <HBox alignment="CENTER" prefHeight="50.0" prefWidth="150.0">
+      <HBox alignment="CENTER_RIGHT" prefHeight="50.0" prefWidth="175.0">
          <children>
             <Button fx:id="editButton" contentDisplay="CENTER" maxHeight="30.0" maxWidth="30.0" mnemonicParsing="false" onAction="#editRate" textAlignment="CENTER">
                <graphic>
@@ -41,8 +41,17 @@
                   </ImageView>
                </graphic>
                <HBox.margin>
-                  <Insets right="15.0" />
+                  <Insets />
                </HBox.margin></Button>
+            <Button fx:id="more" contentDisplay="CENTER" maxHeight="30.0" maxWidth="30.0" mnemonicParsing="false" onAction="#moreInfo" textAlignment="CENTER">
+               <graphic>
+                  <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@icons/more.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
             <Button fx:id="deleteButton" alignment="CENTER" mnemonicParsing="false" onAction="#deleteRecommendation">
                <graphic>
                   <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
@@ -52,7 +61,7 @@
                   </ImageView>
                </graphic>
                <HBox.margin>
-                  <Insets left="15.0" />
+                  <Insets left="8.0" />
                </HBox.margin></Button>
          </children>
       </HBox>

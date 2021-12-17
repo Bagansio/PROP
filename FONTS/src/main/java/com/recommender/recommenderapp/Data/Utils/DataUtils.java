@@ -201,6 +201,7 @@ public class DataUtils {
                 String[] rateInfo = rate.split("-");
                 rates.put(rateInfo[0],Double.parseDouble(rateInfo[1]));
             }
+            currentRecommendation.setRecommendedItems(rates);
             recommendations.put(currentRecommendation.getId(),currentRecommendation);
         }
         return recommendations;

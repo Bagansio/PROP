@@ -17,16 +17,11 @@ import java.util.Map;
 
 public class RecommendationsView {
 
-    private Boolean isKnown;
-
     @FXML
     public Text title;
 
     @FXML
     public Button backButton;
-
-    @FXML
-    public Button addRatesButton;
 
     @FXML
     public Button searchButton;
@@ -42,7 +37,7 @@ public class RecommendationsView {
 
 
     @FXML
-    public void searchItems(ActionEvent event){
+    public void searchRecommendations(ActionEvent event){
         loadRecommendations(searchText.getText());
     }
 
@@ -57,9 +52,8 @@ public class RecommendationsView {
 
         ratesBox.getChildren().clear();
 
-        Map<String,String>[] recommendations;
-        recommendations = CtrlView.ctrlDomain.searchRecommendations(itemTitle);
-        for(Map<String,String> recommendation : recommendations){
+        String[][] recommendations = CtrlView.ctrlDomain.searchRecommendations(itemTitle);
+        for(String[] recommendation : recommendations){
 
             try {
 
@@ -79,17 +73,16 @@ public class RecommendationsView {
 
 
     public void initialize() {
+        loadRecommendations("");
         try {
             backButton.setGraphic(new ImageView(new Image(Views.getPath("icons\\back.png").toExternalForm())));
-            addRatesButton.setGraphic(new ImageView(new Image(Views.getPath("icons\\add.png").toExternalForm())));
             searchButton.setGraphic(new ImageView(new Image(Views.getPath("icons\\search.png").toExternalForm())));
             profileButton.setGraphic(new ImageView(new Image(Views.getPath("icons\\user.png").toExternalForm())));
         }
         catch(Exception e)
         {
-
+            System.out.println(e.fillInStackTrace());
         }
-
     }
 
 }

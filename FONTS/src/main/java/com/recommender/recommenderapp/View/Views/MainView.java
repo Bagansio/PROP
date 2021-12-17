@@ -59,7 +59,7 @@ public class MainView {
      * @brief Creates an Alert that show the best item of a recommendation
      * @param recommendedItem
      */
-    private void recommendAlert(String recommendedItem){
+    private void recommendAlert(ActionEvent event,String recommendedItem){
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("RECOMMENDATION");
         alert.setHeaderText("WE RECOMMEND YOU:");
@@ -76,7 +76,8 @@ public class MainView {
         Optional<ButtonType> result = alert.showAndWait();
 
         if (result.get() == goRecommendations){
-            //change scene to recommendations
+
+            CtrlView.changeScene(event,"RecommendationsView");
         }
     }
 
@@ -93,7 +94,7 @@ public class MainView {
     @FXML
     public void recommend(ActionEvent event){
         String recommendedItem = CtrlView.ctrlDomain.recommend(algorithmCheckBox.getValue(),precisionCheckBox.getValue());
-        recommendAlert(recommendedItem);
+        recommendAlert(event,recommendedItem);
     }
 
     /**

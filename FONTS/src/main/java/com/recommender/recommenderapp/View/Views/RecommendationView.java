@@ -19,7 +19,7 @@ public class RecommendationView {
     public Label idLabel;
 
     @FXML
-    public Label itemIdLabel;
+    public Label expectedRate;
 
     @FXML
     public Label rateLabel;
@@ -30,13 +30,16 @@ public class RecommendationView {
     @FXML
     public Button deleteButton;
 
+    @FXML
+    public Button moreButton;
+
     /**
      *
      * @param event
      */
     @FXML
     public void deleteRecommendation(ActionEvent event){
-        Optional<ButtonType> result = Views.buildAlert(Alert.AlertType.CONFIRMATION,"Are you sure to delete the rate of " + titleLabel.getText() + " ?","DELETE RATE").showAndWait();
+        Optional<ButtonType> result = Views.buildAlert(Alert.AlertType.CONFIRMATION,"Are you sure to delete the rate of " + idLabel.getText() + " ?","DELETE RATE").showAndWait();
         if(result.get() == ButtonType.OK) {
             CtrlView.ctrlDomain.deleteRecommendation(idLabel.getId());
             ((VBox) idLabel.getParent().getParent()).getChildren().remove(idLabel.getParent()); // removes
@@ -55,7 +58,7 @@ public class RecommendationView {
                 if(newRate < 0 || newRate > 10) Views.buildAlert(Alert.AlertType.ERROR, "Rate should be between 0 and 10 \nExample: 5", "ERROR").showAndWait();
                 else{
                     rateLabel.setText(newRate.toString());
-                    CtrlView.ctrlDomain.editRateOfCurrentUser(idLabel.getText(),newRate,isKnown);
+
                 }
             } catch (Exception e) {
                 Views.buildAlert(Alert.AlertType.ERROR, "Error format of : " + result.get() + "\nExample: 5.0", "ERROR").showAndWait();
@@ -63,10 +66,17 @@ public class RecommendationView {
         }
     }
 
-    public void setData(Map<String,String> data){
-        itemTitleLabel.setText(data.get("itemTitle"));
-        idLabel.setText(data.get("id"));
-        rateLabel.setText(data.get("rate"));
-        itemIdLabel.setText(data.get("itemId"));
+
+    @FXML
+    public void moreInfo(ActionEvent event){
+
+    }
+
+    public void setData(String[] data){
+        idLabel.setText(data[0]);
+        rateLabel.setText(data[3]);
+        String[] itemData = data[4].split("-");
+        itemTitleLabel.setText(itemData[0]);
+        expectedRate.setText(itemData[1]);
     }
 }
