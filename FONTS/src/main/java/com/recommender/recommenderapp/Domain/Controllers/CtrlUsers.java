@@ -175,6 +175,7 @@ public class CtrlUsers {
 
 
     public void deleteRateOfCurrentUser(String itemId, int pos){
+
         currentUser[pos].deleteRate(itemId);
     }
 

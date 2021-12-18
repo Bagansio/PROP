@@ -66,7 +66,7 @@ public class CtrlView extends Application {
             loadScene(loader.load());
         }
         catch (Exception e){
-            System.out.println(ctrlDomain.searchRecommendations("").length);
+            System.out.println(e.toString());
             System.out.println(e.fillInStackTrace());
             e.fillInStackTrace();
         }

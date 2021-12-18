@@ -93,30 +93,50 @@ public class CtrlRecommendations {
         List<String[]> search = new ArrayList<>();
         for(Recommendation recommendation : recommendations.values()){
             if(recommendation.getUser().getId().equals(currentUser) && searchRatings(recommendation,itemTitle)) {
-                List<String> recommendationData = new ArrayList<>();
-
-                recommendationData.add(recommendation.getId());
-                recommendationData.add(recommendation.getAlgorithmType());
-                recommendationData.add(recommendation.getPrecisionType());
-                recommendationData.add(String.valueOf(recommendation.getScore()));
-                Map<String,Double> items = recommendation.getRecommendedItems();
-                for(String itemId : items.keySet()){
-                    recommendationData.add(CtrlItems.getInstance().getItems().get(itemId).getTitle() + "-" + String.format("%.3f",items.get(itemId)));
-                }
-                search.add(recommendationData.toArray(new String[0]));
+                search.add(getRecommendationData(recommendation));
             }
         }
 
         return search.toArray(new String[0][]);
     }
+
+
+
+
+    /**
+     *
+     * @param recommendation
+     * @return a Matrix of recommendations data, each row contains a recommendation
+     *         each column contains -> 0 recommendationID
+     *                              -> 1 AlgorithmType
+     *                              -> 2 PrecisionType
+     *                              -> 3 Rate/Score
+     *                              -> next items
+     */
+    public String[] getRecommendationData(Recommendation recommendation){
+
+        List<String> recommendationData = new ArrayList<>();
+
+        recommendationData.add(recommendation.getId());
+        recommendationData.add(recommendation.getAlgorithmType());
+        recommendationData.add(recommendation.getPrecisionType());
+        recommendationData.add(String.valueOf(recommendation.getScore()));
+        Map<String,Double> items = recommendation.getRecommendedItems();
+        for(String itemId : items.keySet()){
+            recommendationData.add(itemId + "-" + CtrlItems.getInstance().getItems().get(itemId).getTitle() + "-" + String.format("%.3f",items.get(itemId)));
+        }
+        return recommendationData.toArray(new String[0]);
+    }
     public boolean searchRatings(Recommendation recommendation, String itemTitle){
-        System.out.println(recommendation.getRecommendedItems().size());
         for(String item : recommendation.getRecommendedItems().keySet()){
-            System.out.println(CtrlItems.getInstance().getItems().get(item).getTitle());
             if(CtrlItems.getInstance().getItems().get(item).getTitle().contains(itemTitle)) {
                 return true;
             }
         }
         return false;
+    }
+
+    public Recommendation getRecommendation(String recommendation){
+        return recommendations.get(recommendation);
     }
 }

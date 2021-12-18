@@ -41,7 +41,7 @@ public class RecommendationView {
     public void deleteRecommendation(ActionEvent event){
         Optional<ButtonType> result = Views.buildAlert(Alert.AlertType.CONFIRMATION,"Are you sure to delete the rate of " + idLabel.getText() + " ?","DELETE RATE").showAndWait();
         if(result.get() == ButtonType.OK) {
-            CtrlView.ctrlDomain.deleteRecommendation(idLabel.getId());
+            CtrlView.ctrlDomain.deleteRecommendation(idLabel.getText());
             ((VBox) idLabel.getParent().getParent()).getChildren().remove(idLabel.getParent()); // removes
         }
     }
@@ -54,14 +54,14 @@ public class RecommendationView {
         Optional<String> result = dialog.showAndWait();
         if(result.isPresent() && ! result.get().equals("")) {
             try {
-                Double newRate = Double.parseDouble(result.get());
+                Integer newRate = Integer.parseInt(result.get());
                 if(newRate < 0 || newRate > 10) Views.buildAlert(Alert.AlertType.ERROR, "Rate should be between 0 and 10 \nExample: 5", "ERROR").showAndWait();
                 else{
                     rateLabel.setText(newRate.toString());
-
+                    CtrlView.ctrlDomain.editScoreRecommendation(idLabel.getText(),newRate);
                 }
             } catch (Exception e) {
-                Views.buildAlert(Alert.AlertType.ERROR, "Error format of : " + result.get() + "\nExample: 5.0", "ERROR").showAndWait();
+                Views.buildAlert(Alert.AlertType.ERROR, "Error format of : " + result.get() + "\nExample: 5", "ERROR").showAndWait();
             }
         }
     }
@@ -69,14 +69,15 @@ public class RecommendationView {
 
     @FXML
     public void moreInfo(ActionEvent event){
-
+        RecommendationInfoView.setRecommendationId(idLabel.getText());
+        CtrlView.changeScene(event,"RecommendationInfoView");
     }
 
     public void setData(String[] data){
         idLabel.setText(data[0]);
         rateLabel.setText(data[3]);
         String[] itemData = data[4].split("-");
-        itemTitleLabel.setText(itemData[0]);
-        expectedRate.setText(itemData[1]);
+        itemTitleLabel.setText(itemData[1]);
+        expectedRate.setText(itemData[2]);
     }
 }

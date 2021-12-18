@@ -129,4 +129,8 @@ public class CtrlDomain {
         return ctrlRecommendations.searchRecommendationsOfCurrentUser(itemTitle);
     }
 
+    public String[] getRecommendationData(String recommendationId){
+        return ctrlRecommendations.getRecommendationData(ctrlRecommendations.getRecommendation(recommendationId));
+    }
+
 }
