@@ -60,7 +60,7 @@ public abstract class Algorithm {
      * @param unknown -> user that contains the rating of all the unknown items involved in the Query function
      * @return the Normalized Discounted Cumulative Gain
      */
-    public Double discountedCumulativeGain(Map<String, Double> recommendedItems, User unknown) {
+    public static Double discountedCumulativeGain(Map<String, Double> recommendedItems, User unknown) {
         Map<String, Double> unknownOrderedRatings = new LinkedHashMap<>();
         Map<String, Double> unknownRatings = unknown.getRatings();
 

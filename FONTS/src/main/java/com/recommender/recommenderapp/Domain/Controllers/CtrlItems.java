@@ -13,11 +13,12 @@ import java.util.Map;
  */
 public class CtrlItems {
     private String dataset;
-    private final CtrlDataFactory  ctrlDataFactory = CtrlDataFactory.getInstance();
+    private final CtrlDataFactory  ctrlDataFactory;
     private Map<String,Item> items;
     private static CtrlItems _instance = new CtrlItems();
 
     private CtrlItems(){
+        ctrlDataFactory = CtrlDataFactory.getInstance();
     }
 
     public static CtrlItems getInstance(){
@@ -29,8 +30,12 @@ public class CtrlItems {
     }
 
     public void setDataset(String dataset) {
-        this.dataset = dataset;
+        this.dataset = ctrlDataFactory.getICtrlData().tempDatasetToNormal(dataset);
         items = null;
+    }
+
+    public String[] getDatasets(){
+        return ctrlDataFactory.getICtrlData().getDatasets();
     }
 
     public Map<String,Item> getItems(){

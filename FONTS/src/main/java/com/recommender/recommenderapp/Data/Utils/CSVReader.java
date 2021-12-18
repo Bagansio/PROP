@@ -18,7 +18,6 @@ import java.util.Scanner;
 public class CSVReader {
 
     private static final String DELIMITER = ",";
-    private static final String QUOTE = "\"";
 
 
     /**
@@ -58,19 +57,15 @@ public class CSVReader {
      * @param path -> path of file to read
      * @return A Matrix of String that contains each line of CSV file separated by the attributes of it
      */
-    public String[][] readFile(String path) throws Exception{
+    public String[][] readFile(String path) throws IOException{
         List<String[]> fileData = new ArrayList<>();
 
         File f = new File(path);
-        try (Scanner scanner = new Scanner(f)) {
+        Scanner scanner = new Scanner(f);
 
-            while(scanner.hasNextLine()) {
-                String line = scanner.nextLine();
-                fileData.add(line.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)", -1));
-            }
-        }
-        catch (Exception ex) {
-            ex.printStackTrace();
+        while(scanner.hasNextLine()) {
+            String line = scanner.nextLine();
+            fileData.add(line.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)", -1));
         }
         return fileData.toArray(new String[fileData.size()][]);
     }

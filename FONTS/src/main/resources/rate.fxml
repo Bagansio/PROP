@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
+
+
+<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="600.0" fx:controller="com.recommender.recommenderapp.View.Views.ItemRateView" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Label fx:id="titleLabel" alignment="CENTER" prefHeight="71.0" prefWidth="141.0" text="ItemTitle">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+      <Label fx:id="idLabel" alignment="CENTER" prefHeight="50.0" prefWidth="124.0" text="itemId">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+      <Label fx:id="rateLabel" alignment="CENTER" prefHeight="50.0" prefWidth="176.0" text="RATE">
+         <font>
+            <Font name="System Bold Italic" size="12.0" />
+         </font>
+      </Label>
+      <HBox alignment="CENTER" prefHeight="50.0" prefWidth="140.0">
+         <children>
+            <Button fx:id="editButton" contentDisplay="CENTER" mnemonicParsing="false" textAlignment="CENTER" />
+            <AnchorPane prefHeight="50.0" prefWidth="40.0" />
+            <Button fx:id="deleteButton" alignment="CENTER" mnemonicParsing="false" />
+         </children>
+      </HBox>
+   </children>
+</HBox>

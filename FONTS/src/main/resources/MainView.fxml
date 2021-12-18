@@ -42,11 +42,11 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.recommender.recommenderapp.View.Views.MainView">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/17" fx:controller="com.recommender.recommenderapp.View.Views.MainView">
   <children>
     <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="795.0" prefWidth="1272.0" VBox.vgrow="ALWAYS">
       <children>
-            <Button fx:id="recommendButton" layoutX="498.0" layoutY="400.0" mnemonicParsing="false" prefHeight="97.0" prefWidth="285.0" text="RECOMMEND" textFill="#f8f8f8" wrapText="true">
+            <Button fx:id="recommendButton" layoutX="498.0" layoutY="400.0" mnemonicParsing="false" onAction="#recommend" prefHeight="97.0" prefWidth="285.0" text="RECOMMEND" textFill="#f8f8f8" wrapText="true">
                <font>
                   <Font name="System Bold" size="24.0" />
                </font></Button>
@@ -67,9 +67,15 @@
                   <Font name="System Bold" size="12.0" />
                </font></Text>
             <Button fx:id="addRatesButton" layoutX="516.0" layoutY="619.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="97.0" />
-            <Button fx:id="editRatesButton" layoutX="660.0" layoutY="619.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="97.0" />
-            <Button fx:id="exitButton" layoutX="24.0" layoutY="28.0" mnemonicParsing="false" />
-            <Button fx:id="profileButton" layoutX="1192.0" layoutY="28.0" mnemonicParsing="false" />
+            <Button fx:id="editRatesButton" layoutX="660.0" layoutY="619.0" mnemonicParsing="false" onAction="#changeEditRatesView" prefHeight="60.0" prefWidth="97.0" />
+            <Button fx:id="exitButton" layoutX="24.0" layoutY="28.0" mnemonicParsing="false" onAction="#exit" />
+            <Button fx:id="profileButton" layoutX="1192.0" layoutY="28.0" mnemonicParsing="false" onAction="#goProfile" />
+            <ChoiceBox fx:id="precisionCheckBox" layoutX="675.0" layoutY="556.0" prefHeight="26.0" prefWidth="82.0" />
+            <Text layoutX="608.0" layoutY="574.0" strokeType="OUTSIDE" strokeWidth="0.0" text="PRECISION:">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Text>
       </children>
     </AnchorPane>
   </children>

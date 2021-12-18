@@ -1,6 +1,5 @@
 package com.recommender.recommenderapp;
 
-import com.recommender.recommenderapp.Data.Utils.Datasets;
 import com.recommender.recommenderapp.Domain.Controllers.CtrlItems;
 import com.recommender.recommenderapp.Domain.Controllers.CtrlUsers;
 import com.recommender.recommenderapp.Domain.Models.*;
@@ -21,7 +20,7 @@ public class MainDepr {
 
 
         System.out.println("Select a Dataset");
-        int i = 0;
+        int i = 0;/*
         for (Datasets dataset: Arrays.asList(Datasets.values())){
             System.out.print(i);
             System.out.print(". ");
@@ -79,6 +78,7 @@ public class MainDepr {
 
         }
         System.out.println("How many Known Users you will use");
+
         int numberKnownUsers = reader.nextInt();
 
 
@@ -165,6 +165,7 @@ public class MainDepr {
         //print: User dataset
         //print:  Item Id   Expected Rate   Calculated Rate  Precision
         // }
+        */
     }
 
 

@@ -1,11 +1,8 @@
 package test.Data.Utils;
 
 import com.recommender.recommenderapp.Data.Utils.CSVReader;
-import com.recommender.recommenderapp.Data.Utils.Datasets;
 import org.junit.*;
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;

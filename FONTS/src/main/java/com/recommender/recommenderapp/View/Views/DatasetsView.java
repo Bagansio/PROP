@@ -1,9 +1,7 @@
 package com.recommender.recommenderapp.View.Views;
 
 import com.recommender.recommenderapp.Data.Utils.Utils;
-import com.recommender.recommenderapp.Domain.Controllers.CtrlItems;
 import com.recommender.recommenderapp.View.Controllers.CtrlView;
-import com.recommender.recommenderapp.View.Utils.Styles;
 import com.recommender.recommenderapp.View.Utils.Views;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -35,14 +33,13 @@ public class DatasetsView {
      */
     @FXML
     public void loadDataset(ActionEvent event){
-        //loadButton.setStyle(Styles.getStyleBackgroundColor("black"));
         String dataset = datasetsChoiceBox.getValue();
+        System.out.println(dataset);
         if(CtrlView.ctrlDomain.loadData(dataset)){
-            CtrlView.changeScene("MainView");
-            System.out.println(CtrlView.ctrlDomain.getItems().size());
+            CtrlView.changeScene(event,"LoginUserView");
         }
         else
-            Views.buildErrorAlert("Error loading users and items of Dataset, check the files and load again").showAndWait();
+            Views.buildAlert(Alert.AlertType.ERROR,"Error loading users and items of Dataset, check the files and load again","ERROR").showAndWait();
 
     }
 
@@ -51,7 +48,7 @@ public class DatasetsView {
      * @brief handles the empty datasets Exception
      */
     private void emptyDatasetsException(){
-        Views.buildErrorAlert("Should add a dataset in: "+ Utils.PATH + "\n With the 4 files needed").showAndWait();
+        Views.buildAlert(Alert.AlertType.ERROR,"Should add a dataset in: "+ Utils.PATH + "\n With the 4 files needed","ERROR").showAndWait();
         Platform.exit();
         System.exit(0);
     }

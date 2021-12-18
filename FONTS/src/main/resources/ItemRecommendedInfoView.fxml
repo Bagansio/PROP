@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
+
+<HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="625.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/17" fx:controller="com.recommender.recommenderapp.View.Views.ItemRecommendedInfoView">
+   <children>
+      <Label fx:id="idLabel" alignment="CENTER" prefHeight="71.0" prefWidth="150.0" text="ID">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+      <Label fx:id="itemTitleLabel" alignment="CENTER" prefHeight="50.0" prefWidth="150.0" text="Title">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+      <Label fx:id="expectedRate" alignment="CENTER" prefHeight="50.0" prefWidth="150.0" text="CALCULATED RATE">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+   </children>
+</HBox>

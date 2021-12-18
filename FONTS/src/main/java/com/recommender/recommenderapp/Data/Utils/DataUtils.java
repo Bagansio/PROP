@@ -1,6 +1,7 @@
 package com.recommender.recommenderapp.Data.Utils;
 
 import com.recommender.recommenderapp.Domain.Models.Item;
+import com.recommender.recommenderapp.Domain.Models.Recommendation;
 import com.recommender.recommenderapp.Domain.Models.User;
 import com.recommender.recommenderapp.Exceptions.DirectoryDoesNotExist;
 
@@ -37,9 +38,11 @@ public class DataUtils {
     }
 
     public boolean existDataset(String path){
-        return existTemp(path) && new File(path + "\\" + Utils.ITEMS).exists();
+        boolean exists = existTemp(path);
+        if(path.contains(Utils.TEMP))
+            path = path.replace("\\"+Utils.TEMP,"");
+        return exists && new File(path + "\\" + Utils.ITEMS).exists();
     }
-
 
     /**
      * @param path
@@ -130,20 +133,6 @@ public class DataUtils {
         return users;
     }
 
-    private void writeLine(FileWriter writer, String line) throws IOException{
-        writer.write(line + Utils.LINE_BREAK);
-    }
-
-    public void writeFile(String path, String[] data) throws IOException{
-        File file = new File(path);
-        FileWriter writer = new FileWriter(file);
-
-        for(String line : data){
-            writeLine(writer,line);
-        }
-    }
-
-
 
     /**
      *
@@ -154,19 +143,16 @@ public class DataUtils {
         fileWriter.write("userId,rating,itemId" + Utils.LINE_BREAK);
     }
 
-
-    private void writeUserRates(FileWriter fileWriter, User[] users) throws IOException {
-
-        for(User user : users){
-            Map<String,Double> ratings = user.getRatings();
-            for(String itemId : ratings.keySet()){
-                fileWriter.write(user.getId() + "," + ratings.get(itemId) + "," + itemId);
-                fileWriter.write(Utils.LINE_BREAK);
-            }
+    private void writeUserRates(FileWriter fileWriter, User user) throws  IOException{
+        Map<String,Double> ratings = user.getRatings();
+        for(String itemId : ratings.keySet()){
+            fileWriter.write(user.getId() + "," + ratings.get(itemId) + "," + itemId);
+            fileWriter.write(Utils.LINE_BREAK);
         }
     }
 
-    private boolean createDir(String path){
+
+    public boolean createDir(String path){
         return new File(path).mkdir();
     }
 
@@ -175,19 +161,93 @@ public class DataUtils {
      * @param users
      * @throws IOException
      */
-    public void writeTempUsers(String path, String filename, User[] users) throws IOException {
+    public void writeTempUsers(String path, User[] users) throws IOException {
 
-        createDir(path);
-
-        File file = new File(path + "\\" + filename);
+        File file = new File(path);
 
         FileWriter fileWriter = new FileWriter(file);
 
         writeUserHeader(fileWriter);
 
-        writeUserRates(fileWriter, users);
+        for(User user: users)
+            writeUserRates(fileWriter,user);
 
         fileWriter.flush();
+    }
+
+
+    /**
+     * @brief Read Recommendation file.
+     * @param path The recommendation file path
+     * @param users Known Users
+     * @return A Map with recommendations;
+     * @throws Exception
+     */
+    public Map<String, Recommendation> readRecommendations(String path, Map<String,User> users) throws Exception{
+        Map<String, Recommendation> recommendations = new LinkedHashMap<>();
+
+        String[][] data = reader.readFile(path);
+
+
+        for (int i = 1; i < data.length; ++i) {
+            Recommendation currentRecommendation = new Recommendation(data[i][0],data[i][2]);
+            currentRecommendation.setUser(users.get(data[i][1]));
+            currentRecommendation.setScore(Integer.parseInt(data[i][3]));
+            currentRecommendation.setPrecisionType(data[i][4]);
+
+            Map<String,Double> rates = new LinkedHashMap<>();
+
+            for(String rate : data[i][5].split(";")){
+                String[] rateInfo = rate.split("-");
+                rates.put(rateInfo[0],Double.parseDouble(rateInfo[1]));
+            }
+            currentRecommendation.setRecommendedItems(rates);
+            recommendations.put(currentRecommendation.getId(),currentRecommendation);
+        }
+        return recommendations;
+    }
+
+    public void writeRecommendations(String path, Recommendation[] recommendations) throws IOException{
+
+        System.out.println(recommendations.length);
+
+        File file = new File(path);
+
+        FileWriter fileWriter = new FileWriter(file);
+
+
+        fileWriter.write("recommendationId,userId,algorithm,recommendationRate,precisionType,itemsId-rate" + Utils.LINE_BREAK);
+
+        for(Recommendation currentRecommendation : recommendations){
+            writeRecommendation(fileWriter,currentRecommendation);
+        }
+
+        fileWriter.flush();
+    }
+
+    private void writeRecommendation(FileWriter fileWriter, Recommendation recommendation) throws IOException{
+        fileWriter.write(recommendation.getId() + "," + recommendation.getUser().getId() + "," + recommendation.getAlgorithmType() + "," + recommendation.getScore()  +  ","  +  recommendation.getPrecisionType().toString() + ",");
+        Map<String, Double> rates = recommendation.getRecommendedItems();
+        for (String itemId : rates.keySet()){
+            fileWriter.write(itemId+"-"+rates.get(itemId)+";");
+        }
+        fileWriter.write(Utils.LINE_BREAK);
+    }
+
+    public void writeNewRecommendation(String path, Recommendation recommendation) throws IOException{
+
+        File file = new File(path);
+        if(! file.exists() || file.length() == 0){
+
+            writeRecommendations(path,new Recommendation[]{recommendation});
+        }
+        else {
+            FileWriter fileWriter = new FileWriter(file, true);
+
+            writeRecommendation(fileWriter, recommendation);
+
+            fileWriter.flush();
+        }
     }
 
 }

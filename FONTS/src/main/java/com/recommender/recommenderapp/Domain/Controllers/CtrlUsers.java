@@ -1,6 +1,5 @@
 package com.recommender.recommenderapp.Domain.Controllers;
 
-import com.recommender.recommenderapp.Data.Controllers.CtrlData;
 import com.recommender.recommenderapp.Domain.DataControllers.CtrlDataFactory;
 import com.recommender.recommenderapp.Domain.DataControllers.ICtrlData;
 import com.recommender.recommenderapp.Domain.Models.Item;
@@ -14,18 +13,18 @@ import java.util.Map;
  */
 public class CtrlUsers {
     private String dataset;
-    private Boolean useTemp = false;
-    private CtrlDataFactory ctrlDataFactory = CtrlDataFactory.getInstance();
+    private CtrlDataFactory ctrlDataFactory;
     private Map<String, User> users;
     private Map<String, User> knownUsers;
     private Map<String, User> unknownUsers;
-    private User currentUser;
+    private User[] currentUser;
 
     private static CtrlUsers _instance = new CtrlUsers();
 
 
     private CtrlUsers(){
-
+        ctrlDataFactory = CtrlDataFactory.getInstance();
+        currentUser = new User[2];
     }
 
     /**
@@ -60,19 +59,6 @@ public class CtrlUsers {
         return knownUsers;
     }
 
-    /**
-     *
-     * @param useTemp new condition to use temp files
-     * @return the condition value after try to change it
-     */
-    public boolean setUseTemp(boolean useTemp){
-        ICtrlData ctrlData = ctrlDataFactory.getICtrlData();
-        if(useTemp && ctrlData.existTemp(dataset)){
-            this.useTemp = true;
-        }
-        else this.useTemp = false;
-        return this.useTemp;
-    }
 
     /**
      *
@@ -93,9 +79,6 @@ public class CtrlUsers {
     public void setDataset(String dataset) {
 
         this.dataset = dataset;
-        users = null;
-        unknownUsers = null;
-        knownUsers = null;
     }
 
 
@@ -106,9 +89,9 @@ public class CtrlUsers {
         ICtrlData ctrlData = ctrlDataFactory.getICtrlData();
 
         Map<String, Item> items = CtrlItems.getInstance().getItems();
-        users = ctrlData.loadUsers(dataset,useTemp,items);
-        knownUsers = ctrlData.loadKnownUsers(dataset,useTemp,items);
-        unknownUsers = ctrlData.loadUnknownUsers(dataset,useTemp,items);
+        users = ctrlData.loadUsers(dataset,items);
+        knownUsers = ctrlData.loadKnownUsers(dataset,items);
+        unknownUsers = ctrlData.loadUnknownUsers(dataset,items);
         return users != null && knownUsers != null && unknownUsers != null;
     }
 
@@ -151,16 +134,106 @@ public class CtrlUsers {
 
 
     public boolean existsUser(String userId){
-        return knownUsers.containsKey(userId);
+        return knownUsers.containsKey(userId) || unknownUsers.containsKey(userId);
     }
 
     public boolean setCurrentUser(String userId) {
         boolean canSet = true;
         if(existsUser(userId)){
-            this.currentUser = knownUsers.get(userId);
+            this.currentUser[0] = knownUsers.get(userId);
+            this.currentUser[1] = unknownUsers.get(userId);
+            if(this.currentUser[0] == null)
+                this.currentUser[0] = new User(userId);
+            if(this.currentUser[1] == null)
+                this.currentUser[1] = new User(userId);
         }
         else
             canSet = false;
         return canSet;
+    }
+
+    public User getKnownCurrentUser(){
+        return currentUser[0];
+    }
+
+    public Map<String,Item> getUnknownItemsFromCurrentUser(){
+        return currentUser[1].getItems();
+    }
+
+
+    public String[][] searchRatingsOfCurrentUser(String itemId,int pos){
+        Map<String,Double> searchResult = currentUser[pos].searchRatings(itemId);
+        String[][] search = new String[searchResult.size()][3];
+
+        int i = 0;
+        for(String item : searchResult.keySet()){
+            search[i] = new String[]{currentUser[pos].getItem(item).getTitle(),item,String.valueOf(searchResult.get(item))};
+            ++i;
+        }
+        return search;
+    }
+
+
+    public void deleteRateOfCurrentUser(String itemId, int pos){
+
+        currentUser[pos].deleteRate(itemId);
+    }
+
+    public void editRateOfCurrentUser(String itemId, Double newRate, int pos){
+        currentUser[pos].rateItem(itemId,newRate);
+    }
+
+    public boolean saveUsersByBoolean(boolean isKnown){
+        if(ctrlDataFactory.getICtrlData().existTemp(dataset)) {
+            if (isKnown)
+                return saveKnownUsers();
+            else
+                return saveUnknownUsers();
+        }
+        else{
+            saveAll();
+            CtrlRecommendations.getInstance().saveRecommendations();
+        }
+        return true;
+    }
+
+    public String getTempDataset(){
+        return ctrlDataFactory.getICtrlData().getTempDataset(dataset);
+    }
+
+    public String getCurrentUserId(){
+        return currentUser[0].getId();
+    }
+
+
+    /**
+     *
+     * @param userId
+     * @return True  -> if doesn't exists a previous user with that id
+     *         False -> if not
+     */
+    public boolean createUser(String userId){
+        if(existsUser(userId))
+            return false;
+        User newUser = new User(userId);
+        knownUsers.put(userId,newUser);
+        unknownUsers.put(userId,newUser);
+        setCurrentUser(userId);
+        return true;
+    }
+
+    public boolean currentUserHasRatedItems(){
+        return currentUser[0].getRatings().size() > 0 && currentUser[1].getRatings().size() > 0;
+    }
+
+    public void editCurrentUserId(String newUserId){
+        String oldUserId = currentUser[0].getId();
+        currentUser[0].setId(newUserId);
+        currentUser[1].setId(newUserId);
+
+        knownUsers.remove(oldUserId);
+        unknownUsers.remove(oldUserId);
+        knownUsers.put(newUserId,currentUser[0]);
+        unknownUsers.put(newUserId,currentUser[1]);
     }
 }

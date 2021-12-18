@@ -1,19 +1,17 @@
 package com.recommender.recommenderapp.View.Controllers;
 
 import com.recommender.recommenderapp.Domain.Controllers.CtrlDomain;
-import com.recommender.recommenderapp.Domain.Controllers.CtrlItems;
-import com.recommender.recommenderapp.Domain.Controllers.CtrlUsers;
 import com.recommender.recommenderapp.View.Utils.Views;
-import com.recommender.recommenderapp.View.Views.DatasetsView;
 import javafx.application.Application;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.nio.file.Paths;
 
 /**
  * @author Alex
@@ -31,6 +29,8 @@ public class CtrlView extends Application {
      * @brief Main stage.
      */
     private static Stage stage;
+
+    private static Scene scene;
 
     /**
      * @brief Class creator.
@@ -58,14 +58,17 @@ public class CtrlView extends Application {
      * @brief Change the current scene for a new
      * @param fxml -> filename of new scene
      */
-    public static void changeScene(String fxml) {
+    public static void changeScene(ActionEvent event, String fxml) {
         try {
 
             FXMLLoader loader = new FXMLLoader(Views.getPath(fxml+".fxml"));
+            stage = (Stage)((Node)event.getSource()).getScene().getWindow();
             loadScene(loader.load());
         }
         catch (Exception e){
+            System.out.println(e.toString());
             System.out.println(e.fillInStackTrace());
+            e.fillInStackTrace();
         }
     }
 
@@ -76,7 +79,6 @@ public class CtrlView extends Application {
      * @throws IOException
      */
     private static void loadScene(Parent root) throws IOException {
-        stage.hide();
         Scene scene = new Scene(root, 1280, 800);
         scene.getStylesheets().add(Views.getPath("styles.css").toExternalForm());
         stage.setScene(scene);
