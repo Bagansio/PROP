@@ -26,7 +26,6 @@ public class CtrlRecommendations {
 
     public void setDataset(String dataset) {
         this.dataset = dataset;
-        recommendations = null;
     }
 
     public static CtrlRecommendations getInstance(){

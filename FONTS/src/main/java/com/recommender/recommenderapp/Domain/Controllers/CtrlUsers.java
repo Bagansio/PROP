@@ -192,6 +192,7 @@ public class CtrlUsers {
         }
         else{
             saveAll();
+            CtrlRecommendations.getInstance().saveRecommendations();
         }
         return true;
     }
@@ -223,5 +224,16 @@ public class CtrlUsers {
 
     public boolean currentUserHasRatedItems(){
         return currentUser[0].getRatings().size() > 0 && currentUser[1].getRatings().size() > 0;
+    }
+
+    public void editCurrentUserId(String newUserId){
+        String oldUserId = currentUser[0].getId();
+        currentUser[0].setId(newUserId);
+        currentUser[1].setId(newUserId);
+
+        knownUsers.remove(oldUserId);
+        unknownUsers.remove(oldUserId);
+        knownUsers.put(newUserId,currentUser[0]);
+        unknownUsers.put(newUserId,currentUser[1]);
     }
 }

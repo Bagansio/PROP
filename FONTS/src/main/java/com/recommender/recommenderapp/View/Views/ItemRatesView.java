@@ -45,6 +45,11 @@ public class ItemRatesView {
     public Button unknownButton;
 
     @FXML
+    public void goProfile(ActionEvent event){
+        Views.changeToProfile(event);
+    }
+
+    @FXML
     public void setKnown(ActionEvent event){
         setIsKnown(true);
     }

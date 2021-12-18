@@ -1,6 +1,8 @@
 package com.recommender.recommenderapp.View.Utils;
 
 import com.recommender.recommenderapp.Data.Utils.Utils;
+import com.recommender.recommenderapp.View.Controllers.CtrlView;
+import javafx.event.ActionEvent;
 import javafx.scene.control.Alert;
 
 import java.io.IOException;
@@ -44,5 +46,9 @@ public class Views {
      */
     public static URL getPath(String relativePath) throws IOException {
         return Paths.get(System.getProperty("user.dir") + "\\FONTS\\src\\main\\resources\\" + relativePath).toUri().toURL();
+    }
+
+    public static void changeToProfile(ActionEvent event){
+        CtrlView.changeScene(event, "ProfileView");
     }
 }

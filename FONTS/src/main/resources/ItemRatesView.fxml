@@ -52,7 +52,7 @@
       <children>
             <Accordion layoutX="553.0" layoutY="388.0" />
             <Button fx:id="backButton" layoutX="24.0" layoutY="28.0" mnemonicParsing="false" onAction="#back" />
-            <Button fx:id="profileButton" layoutX="1192.0" layoutY="28.0" mnemonicParsing="false" />
+            <Button fx:id="profileButton" layoutX="1192.0" layoutY="28.0" mnemonicParsing="false" onAction="#goProfile" />
             <HBox layoutX="325.0" layoutY="371.0" prefHeight="430.0" prefWidth="631.0">
                <children>
                   <ScrollPane prefHeight="426.0" prefWidth="626.0" style="-fx-border-color: black; -fx-border-width: 2;" stylesheets="@styles.css">

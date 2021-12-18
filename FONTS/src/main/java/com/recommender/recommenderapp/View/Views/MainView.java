@@ -47,6 +47,11 @@ public class MainView {
         }
     }
 
+    @FXML
+    public void goProfile(ActionEvent event){
+        Views.changeToProfile(event);
+    }
+
     /**
             * Creates an instance of MainView
      */

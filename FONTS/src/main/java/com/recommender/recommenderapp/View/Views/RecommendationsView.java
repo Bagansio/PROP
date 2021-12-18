@@ -37,6 +37,11 @@ public class RecommendationsView {
 
 
     @FXML
+    public void goProfile(ActionEvent event){
+        Views.changeToProfile(event);
+    }
+
+    @FXML
     public void searchRecommendations(ActionEvent event){
         loadRecommendations(searchText.getText());
     }

@@ -91,7 +91,6 @@ public class CtrlDomain {
     public void deleteRateOfCurrentUser(String itemId,boolean isKnown){
         ctrlUsers.deleteRateOfCurrentUser(itemId,getPosCurrentUser(isKnown));
         changeToTempDataset();
-        ctrlUsers.saveUsersByBoolean(isKnown);
     }
 
     private int getPosCurrentUser(boolean isKnown) {
@@ -104,7 +103,6 @@ public class CtrlDomain {
     public void editRateOfCurrentUser(String itemId, Double newRate, boolean isKnown){
         ctrlUsers.editRateOfCurrentUser(itemId,newRate,getPosCurrentUser(isKnown));
         changeToTempDataset();
-        ctrlUsers.saveUsersByBoolean(isKnown);
     }
 
     public boolean existsUser(String userId){
@@ -116,6 +114,7 @@ public class CtrlDomain {
         String tempDataset = ctrlUsers.getTempDataset();
         ctrlRecommendations.setDataset(tempDataset);
         ctrlUsers.setDataset(tempDataset);
+        saveAll();
     }
 
     public void deleteRecommendation(String recommendationId){
@@ -138,7 +137,20 @@ public class CtrlDomain {
     }
 
 
+    public boolean saveAll(){
+        return ctrlUsers.saveAll() && ctrlRecommendations.saveRecommendations();
+    }
+
     public boolean createUser(String userId){
         return ctrlUsers.createUser(userId);
+    }
+
+    public String getCurrentUserId(){
+        return ctrlUsers.getCurrentUserId();
+    }
+
+    public void editCurrentUserId(String newUserId){
+        ctrlUsers.editCurrentUserId(newUserId);
+        changeToTempDataset();
     }
 }
