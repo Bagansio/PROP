@@ -33,3 +33,4 @@ recommendationId,userId,algorithm,recommendationRate,precisionType,itemsId-rate
 36,43448,CollaborativeFiltering,0,imprecise,296-4.48440366972477;150-4.017564402810304;380-3.5635103926097;
 37,43448,CollaborativeFiltering,0,imprecise,296-4.4466357308584685;150-3.9616336633663365;165-3.6840390879478826;
 38,43448,CollaborativeFiltering,0,imprecise,296-4.273049645390071;150-3.9327731092436973;165-3.877659574468085;
+39,hola,CollaborativeFiltering,0,imprecise,

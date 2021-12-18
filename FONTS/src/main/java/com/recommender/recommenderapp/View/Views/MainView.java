@@ -93,8 +93,13 @@ public class MainView {
      */
     @FXML
     public void recommend(ActionEvent event){
-        String recommendedItem = CtrlView.ctrlDomain.recommend(algorithmCheckBox.getValue(),precisionCheckBox.getValue());
-        recommendAlert(event,recommendedItem);
+        if(CtrlView.ctrlDomain.currentUserHasRatedItems()) {
+            String recommendedItem = CtrlView.ctrlDomain.recommend(algorithmCheckBox.getValue(), precisionCheckBox.getValue());
+            recommendAlert(event, recommendedItem);
+        }
+        else{
+            Views.buildAlert(Alert.AlertType.ERROR,"YOU HAVE NOT ANY KNOWN RATES OR UNKNOWN RATES","ERROR").showAndWait();
+        }
     }
 
     /**

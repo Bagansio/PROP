@@ -204,4 +204,24 @@ public class CtrlUsers {
         return currentUser[0].getId();
     }
 
+
+    /**
+     *
+     * @param userId
+     * @return True  -> if doesn't exists a previous user with that id
+     *         False -> if not
+     */
+    public boolean createUser(String userId){
+        if(existsUser(userId))
+            return false;
+        User newUser = new User(userId);
+        knownUsers.put(userId,newUser);
+        unknownUsers.put(userId,newUser);
+        setCurrentUser(userId);
+        return true;
+    }
+
+    public boolean currentUserHasRatedItems(){
+        return currentUser[0].getRatings().size() > 0 && currentUser[1].getRatings().size() > 0;
+    }
 }

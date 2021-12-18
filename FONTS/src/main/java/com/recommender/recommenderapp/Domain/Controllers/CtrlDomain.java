@@ -79,6 +79,10 @@ public class CtrlDomain {
         return ctrlItems.getItems().get(itemId).getTitle();
     }
 
+    public boolean currentUserHasRatedItems(){
+        return ctrlUsers.currentUserHasRatedItems();
+    }
+
     public String[][] searchRatingsOfCurrentUser(String itemId,boolean isKnown){
         return ctrlUsers.searchRatingsOfCurrentUser(itemId,getPosCurrentUser(isKnown));
     }
@@ -133,4 +137,8 @@ public class CtrlDomain {
         return ctrlRecommendations.getRecommendationData(ctrlRecommendations.getRecommendation(recommendationId));
     }
 
+
+    public boolean createUser(String userId){
+        return ctrlUsers.createUser(userId);
+    }
 }

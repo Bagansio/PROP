@@ -38,7 +38,7 @@ public class LoginUserView {
 
     @FXML
     public void register(ActionEvent event){
-
+        CtrlView.changeScene(event,"RegisterView");
     }
 
     /**
