@@ -11,6 +11,7 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
+import java.io.File;
 import java.io.IOException;
 
 /**
@@ -82,7 +83,7 @@ public class CtrlView extends Application {
         Scene scene = new Scene(root, 1280, 800);
         scene.getStylesheets().add(Views.getPath("styles.css").toExternalForm());
         stage.setScene(scene);
-        stage.getIcons().add(new Image(Views.getPath("icons\\iconSmall.png").toExternalForm()));
+        stage.getIcons().add(new Image(Views.getPath("icons" + File.separator +"iconSmall.png").toExternalForm()));
         stage.show();
     }
 

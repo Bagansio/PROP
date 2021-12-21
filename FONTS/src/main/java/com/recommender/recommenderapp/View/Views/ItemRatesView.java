@@ -13,6 +13,8 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 
+import java.io.File;
+
 public class ItemRatesView {
 
     private Boolean isKnown;
@@ -113,10 +115,10 @@ public class ItemRatesView {
     public void initialize() {
         setIsKnown(true);
         try {
-            backButton.setGraphic(new ImageView(new Image(Views.getPath("icons\\back.png").toExternalForm())));
-            addRatesButton.setGraphic(new ImageView(new Image(Views.getPath("icons\\add.png").toExternalForm())));
-            searchButton.setGraphic(new ImageView(new Image(Views.getPath("icons\\search.png").toExternalForm())));
-            profileButton.setGraphic(new ImageView(new Image(Views.getPath("icons\\user.png").toExternalForm())));
+            backButton.setGraphic(new ImageView(new Image(Views.getPath("icons"+ File.separator +"back.png").toExternalForm())));
+            addRatesButton.setGraphic(new ImageView(new Image(Views.getPath("icons"+ File.separator +"add.png").toExternalForm())));
+            searchButton.setGraphic(new ImageView(new Image(Views.getPath("icons" + File.separator + "search.png").toExternalForm())));
+            profileButton.setGraphic(new ImageView(new Image(Views.getPath("icons" + File.separator +"user.png").toExternalForm())));
         }
         catch(Exception e)
         {

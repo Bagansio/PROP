@@ -5,6 +5,7 @@ import com.recommender.recommenderapp.View.Controllers.CtrlView;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Alert;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.nio.file.Paths;
@@ -45,7 +46,7 @@ public class Views {
      * @throws IOException
      */
     public static URL getPath(String relativePath) throws IOException {
-        return Paths.get(System.getProperty("user.dir") + "\\FONTS\\src\\main\\resources\\" + relativePath).toUri().toURL();
+        return Paths.get(System.getProperty("user.dir") + File.separator + "FONTS" + File.separator + "src" + File.separator + "main" + File.separator+ "resources" + File.separator + relativePath).toUri().toURL();
     }
 
     public static void changeToProfile(ActionEvent event){

@@ -13,6 +13,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 
+import java.io.File;
 import java.util.Map;
 
 public class RecommendationsView {
@@ -80,9 +81,9 @@ public class RecommendationsView {
     public void initialize() {
         loadRecommendations("");
         try {
-            backButton.setGraphic(new ImageView(new Image(Views.getPath("icons\\back.png").toExternalForm())));
-            searchButton.setGraphic(new ImageView(new Image(Views.getPath("icons\\search.png").toExternalForm())));
-            profileButton.setGraphic(new ImageView(new Image(Views.getPath("icons\\user.png").toExternalForm())));
+            backButton.setGraphic(new ImageView(new Image(Views.getPath("icons" + File.separator + "back.png").toExternalForm())));
+            searchButton.setGraphic(new ImageView(new Image(Views.getPath("icons" + File.separator+ "search.png").toExternalForm())));
+            profileButton.setGraphic(new ImageView(new Image(Views.getPath("icons"+ File.separator + "user.png").toExternalForm())));
         }
         catch(Exception e)
         {

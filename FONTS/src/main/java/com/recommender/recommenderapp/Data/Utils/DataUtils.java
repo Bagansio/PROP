@@ -31,17 +31,17 @@ public class DataUtils {
 
     public boolean existTemp(String path){
         boolean exists =  new File(path).exists();
-        exists &= new File(path + "\\" + Utils.KNOWN_USERS).exists();
-        exists &= new File(path + "\\" + Utils.USERS).exists();
-        exists &= new File(path + "\\" + Utils.UNKNOWN_USERS).exists();
+        exists &= new File(path + File.separator + Utils.KNOWN_USERS).exists();
+        exists &= new File(path + File.separator + Utils.USERS).exists();
+        exists &= new File(path + File.separator + Utils.UNKNOWN_USERS).exists();
         return exists;
     }
 
     public boolean existDataset(String path){
         boolean exists = existTemp(path);
         if(path.contains(Utils.TEMP))
-            path = path.replace("\\"+Utils.TEMP,"");
-        return exists && new File(path + "\\" + Utils.ITEMS).exists();
+            path = path.replace(File.separator +Utils.TEMP,"");
+        return exists && new File(path + File.separator + Utils.ITEMS).exists();
     }
 
     /**
