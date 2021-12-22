@@ -1,3 +1,4 @@
+
 package com.recommender.recommenderapp.View.Views;
 
 import com.recommender.recommenderapp.View.Controllers.CtrlView;
@@ -9,25 +10,21 @@ import javafx.scene.layout.VBox;
 
 import java.util.Optional;
 
-
 /**
  * @author Alex
  */
-public class ItemRecommendedInfoView {
+public class AttributeInfoView {
+
 
     @FXML
-    public Label itemTitleLabel;
+    public Label valueLabel;
 
     @FXML
     public Label idLabel;
 
-    @FXML
-    public Label expectedRate;
-
 
     public void setData(String[] data){
+        valueLabel.setText(data[1]);
         idLabel.setText(data[0]);
-        itemTitleLabel.setText(data[1]);
-        expectedRate.setText(data[2]);
     }
 }

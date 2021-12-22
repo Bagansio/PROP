@@ -13,8 +13,13 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
 
+import java.io.File;
 import java.util.Optional;
 
+
+/**
+ * @author Melanie
+ */
 public class MainView {
 
     @FXML
@@ -56,7 +61,7 @@ public class MainView {
             * Creates an instance of MainView
      */
     public MainView(){
-        System.out.println("Using Main VIEW");
+
     }
 
 
@@ -70,7 +75,7 @@ public class MainView {
         alert.setHeaderText("WE RECOMMEND YOU:");
         alert.setContentText(recommendedItem);
         try {
-            alert.getDialogPane().setGraphic(new ImageView(new Image(Views.getPath("icons\\iconBig.png").toExternalForm())));
+            alert.getDialogPane().setGraphic(new ImageView(new Image(Views.getPath("icons" + File.separator + "iconBig.png").toExternalForm())));
         }
         catch(Exception e){
             //nothing not needed
@@ -86,6 +91,8 @@ public class MainView {
         }
     }
 
+    @FXML
+    public void add(ActionEvent event) {CtrlView.changeScene(event,"ItemAddView");}
 
     @FXML
     public void changeEditRatesView(ActionEvent event){
@@ -137,10 +144,10 @@ public class MainView {
         loadPrecisions();
 
         try {
-            addRatesButton.setGraphic(new ImageView(new Image(Views.getPath("icons\\addSmall.png").toExternalForm())));
-            editRatesButton.setGraphic(new ImageView(new Image(Views.getPath("icons\\editSmall.png").toExternalForm())));
-            exitButton.setGraphic(new ImageView(new Image(Views.getPath("icons\\exit.png").toExternalForm())));
-            profileButton.setGraphic(new ImageView(new Image(Views.getPath("icons\\user.png").toExternalForm())));
+            addRatesButton.setGraphic(new ImageView(new Image(Views.getPath("icons"+ File.separator +"addSmall.png").toExternalForm())));
+            editRatesButton.setGraphic(new ImageView(new Image(Views.getPath("icons"+ File.separator +"editSmall.png").toExternalForm())));
+            exitButton.setGraphic(new ImageView(new Image(Views.getPath("icons"+ File.separator+ "exit.png").toExternalForm())));
+            profileButton.setGraphic(new ImageView(new Image(Views.getPath("icons"+File.separator +"user.png").toExternalForm())));
         }
         catch(Exception e)
         {

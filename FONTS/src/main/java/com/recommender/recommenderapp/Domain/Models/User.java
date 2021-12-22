@@ -78,6 +78,17 @@ public class User {
 
     /**
      *
+     * @param itemId-> identifier of the item that will be rated by the user
+     * @param itemRate
+     */
+    public void addRate(String itemId, Double itemRate){
+        if (! ratings.containsKey(itemId)) {
+            ratings.put(itemId,itemRate);
+        }
+
+    }
+    /**
+     *
      * @return identifier of the user
      */
     public String getId() {

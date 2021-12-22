@@ -8,6 +8,10 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
+
+/**
+ * @author Melanie
+ */
 public class DatasetsView {
 
 
@@ -25,7 +29,6 @@ public class DatasetsView {
      * Creates an instance of DatasetsView
      */
     public DatasetsView(){
-        System.out.println("Using Datasets VIEW");
     }
 
     /**
@@ -34,7 +37,6 @@ public class DatasetsView {
     @FXML
     public void loadDataset(ActionEvent event){
         String dataset = datasetsChoiceBox.getValue();
-        System.out.println(dataset);
         if(CtrlView.ctrlDomain.loadData(dataset)){
             CtrlView.changeScene(event,"LoginUserView");
         }

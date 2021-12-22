@@ -9,6 +9,10 @@ import com.recommender.recommenderapp.Domain.Utils.PrecisionTypes;
 import java.util.*;
 import java.util.stream.Stream;
 
+
+/**
+ * @author Alex
+ */
 public class CtrlRecommendations {
     private String dataset;
     private Map<String, Recommendation> recommendations;

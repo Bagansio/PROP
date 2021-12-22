@@ -9,6 +9,10 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
+
+/**
+ * @author Melanie
+ */
 public class RegisterView {
 
 
@@ -55,6 +59,6 @@ public class RegisterView {
      * Creates an instance of LoginUserView
      */
     public RegisterView(){
-        System.out.println("Using Register VIEW");
+
     }
 }

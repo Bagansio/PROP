@@ -6,6 +6,10 @@ import com.recommender.recommenderapp.Domain.Utils.PrecisionTypes;
 import java.util.*;
 import java.util.stream.Collectors;
 
+
+/**
+ * @author Artur
+ */
 public class Recommendation {
     private String id;
     private User user;

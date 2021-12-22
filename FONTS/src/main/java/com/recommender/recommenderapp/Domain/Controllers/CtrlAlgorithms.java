@@ -8,9 +8,15 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.stream.Stream;
 
+
+/**
+ *
+ * @author Alex
+ */
 public class CtrlAlgorithms {
     private ContentBasedFiltering contentBasedFiltering = new ContentBasedFiltering();
     private NewCollaborativeFiltering collaborativeFiltering = new NewCollaborativeFiltering();
+    private HybridFiltering hybridFiltering = new HybridFiltering();
     private static CtrlAlgorithms _instance = new CtrlAlgorithms();
 
     private CtrlAlgorithms(){
@@ -40,6 +46,7 @@ public class CtrlAlgorithms {
     public void preprocessingData(Map<String, Item> itemMap, Map<String, User> userMap){
         collaborativeFiltering.preprocessingData(itemMap, userMap);
         contentBasedFiltering.preprocessingData(itemMap, userMap);
+        hybridFiltering.setAlgorithms(contentBasedFiltering,collaborativeFiltering);
     }
 
     public Recommendation recommend(String algorithm,String precision, User currentUser, Map<String,Item> unknownItems){
@@ -55,16 +62,13 @@ public class CtrlAlgorithms {
                 recommendation.executeQuery(unknownItems,collaborativeFiltering,3);
                 //rec = collaborativeFiltering.query(currentUser,unknownItems,3);
                 break;
+            case HybridApproach:
+                recommendation.executeQuery(unknownItems,hybridFiltering,3);
             default:
                 break;
         }
 
         Map<String,Double> rec = recommendation.getRecommendedItems();
-        System.out.println("USING " + algorithm);
-        for(String item : rec.keySet()){
-            System.out.println(item + ": " + rec.get(item));
-        }
-        System.out.println("---------------");
         return recommendation;
 
     }

@@ -19,7 +19,7 @@ public class CtrlData implements ICtrlData {
 
 
     public boolean existTemp(String dataset){
-        String path = getPath(dataset) + "\\" + Utils.TEMP;
+        String path = getPath(dataset) + File.separator + Utils.TEMP;
         return utils.existTemp(path);
     }
 
@@ -27,7 +27,7 @@ public class CtrlData implements ICtrlData {
 
     private String pathTemp(String filename){
         if(! filename.contains(Utils.TEMP))
-            filename = Utils.TEMP + "\\" + filename;
+            filename = Utils.TEMP + File.separator + filename;
 
         return filename;
     }
@@ -60,7 +60,7 @@ public class CtrlData implements ICtrlData {
 
 
     private Map<String, User> loadUsers(String dataset, String filename, Map<String,Item> items){
-        String path = getPath(dataset) + "\\" + filename;
+        String path = getPath(dataset) + File.separator + filename;
         Map<String,User> users = null;
         try {
             users = utils.getUsers(path, items);
@@ -97,10 +97,10 @@ public class CtrlData implements ICtrlData {
     private boolean saveUsers(String dataset, String filename, User[] users){
         String path = getPath(dataset);
         if(! path.contains(Utils.TEMP))
-            path += "\\" + Utils.TEMP;
+            path += File.separator + Utils.TEMP;
         try {
             utils.createDir(path);
-            path += "\\" + filename;
+            path += File.separator + filename;
             utils.writeTempUsers(path,users);
         }
         catch(IOException e){
@@ -149,7 +149,7 @@ public class CtrlData implements ICtrlData {
      * @return The path to a dataset
      */
     private String getPath(String dataset){
-        return  Utils.PATH + "\\" + dataset + "\\" ;
+        return  Utils.PATH + File.separator + dataset + File.separator ;
     }
 
 
@@ -175,8 +175,8 @@ public class CtrlData implements ICtrlData {
             if(utils.existDataset(f.getPath())){
                 datasets.add(f.getName());
             }
-            if(utils.existDataset(f.getPath() + "\\" + Utils.TEMP)){
-                datasets.add(f.getName() + "\\" + Utils.TEMP);
+            if(utils.existDataset(f.getPath() + File.separator + Utils.TEMP)){
+                datasets.add(f.getName() + File.separator + Utils.TEMP);
             }
             ++i;
         }
@@ -216,7 +216,7 @@ public class CtrlData implements ICtrlData {
     public boolean writeRecommendations(String dataset, Recommendation[] recommendations){
         String path = getPath(dataset);
 
-        path += "\\" + Utils.RECOMMENDATIONS;
+        path += File.separator + Utils.RECOMMENDATIONS;
 
         boolean written = true;
         try {
@@ -239,7 +239,7 @@ public class CtrlData implements ICtrlData {
      */
     public boolean writeNewRecommendations(String dataset, Recommendation recommendation){
         String path = getPath(dataset);
-        path += "\\" + Utils.RECOMMENDATIONS;
+        path += File.separator + Utils.RECOMMENDATIONS;
 
         boolean written = true;
         try {
@@ -252,12 +252,12 @@ public class CtrlData implements ICtrlData {
     }
 
     public String tempDatasetToNormal(String dataset){
-        return dataset.replace("\\" + Utils.TEMP,"");
+        return dataset.replace(File.separator + Utils.TEMP,"");
     }
 
     public String getTempDataset(String dataset){
-        if(! dataset.contains("\\" + Utils.TEMP))
-            dataset += "\\" + Utils.TEMP;
+        if(! dataset.contains(File.separator + Utils.TEMP))
+            dataset += File.separator + Utils.TEMP;
         return dataset;
     }
 

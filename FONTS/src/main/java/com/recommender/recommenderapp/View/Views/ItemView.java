@@ -13,10 +13,11 @@ import java.util.Optional;
 /**
  * @author Alex
  */
-public class ItemRateView {
-
+public class ItemView {
 
     private static boolean isKnown;
+
+    private String[] data;
 
     @FXML
     public Label titleLabel;
@@ -24,23 +25,20 @@ public class ItemRateView {
     @FXML
     public Label idLabel;
 
-    @FXML
-    public Label rateLabel;
 
     @FXML
-    public Button editButton;
+    public Button addButton;
 
     @FXML
-    public Button deleteButton;
+    public Button moreButton;
 
     public static void setIsKnown(boolean isKnown){
-        ItemRateView.isKnown = isKnown;
+        ItemView.isKnown = isKnown;
     }
-
     /**
      *
      * @param event
-     */
+     *//*
     @FXML
     public void deleteRate(ActionEvent event){
         Optional<ButtonType> result = Views.buildAlert(Alert.AlertType.CONFIRMATION,"Are you sure to delete the rate of " + titleLabel.getText() + " ?","DELETE RATE").showAndWait();
@@ -49,30 +47,47 @@ public class ItemRateView {
             ((VBox) idLabel.getParent().getParent()).getChildren().remove(idLabel.getParent()); // removes
         }
     }
+    */
+    @FXML
+    public void more(ActionEvent event){
+        ItemInfoView.setData(data);
+        ItemInfoView.setIsKnown(isKnown);
+        CtrlView.changeScene(event,"ItemInfoView");
+    }
 
     @FXML
-    public void editRate(ActionEvent event){
+    public void add(ActionEvent event){
         TextInputDialog dialog = new TextInputDialog();
-        dialog.setTitle("Edit Rate");
-        dialog.setHeaderText("Edit rate of \n" + titleLabel.getText() + "\nExample 5.5");
+        dialog.setTitle("Add Rate");
+        dialog.setHeaderText("Add rate of \n" + titleLabel.getText() + "\nExample 5.5");
         Optional<String> result = dialog.showAndWait();
-        if(result.isPresent() && ! result.get().equals("")) {
+        if(result.isPresent()) {
             try {
-                Double newRate = Double.parseDouble(result.get());
+                Double newRate = 0.0;
+                if(! result.get().equals(""))
+                    newRate = Double.parseDouble(result.get());
+
                 if(newRate < 0) Views.buildAlert(Alert.AlertType.ERROR, "Rate should be positive \nExample: 5", "ERROR").showAndWait();
                 else{
-                    rateLabel.setText(newRate.toString());
-                    CtrlView.ctrlDomain.editRateOfCurrentUser(idLabel.getText(),newRate,isKnown);
+                    ((VBox) idLabel.getParent().getParent()).getChildren().remove(idLabel.getParent()); // removes
+                    CtrlView.ctrlDomain.addRateOfCurrentUser(idLabel.getText(),newRate, isKnown);
                 }
             } catch (Exception e) {
                 Views.buildAlert(Alert.AlertType.ERROR, "Error format of : " + result.get() + "\nExample: 5.0", "ERROR").showAndWait();
             }
         }
     }
+/*
+/*
+    @FXML
+    public void editRate(ActionEvent event){
+
+    }
+    */
 
     public void setData(String[] data){
-        titleLabel.setText(data[0]);
-        idLabel.setText(data[1]);
-        rateLabel.setText(data[2]);
+        this.data = data;
+        titleLabel.setText(data[1]);
+        idLabel.setText(data[0]);
     }
 }
