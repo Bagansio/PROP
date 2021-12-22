@@ -1,14 +1,14 @@
-#addRatesButton, #editRatesButton , #exitButton , #more, #profileButton, #searchButton, #backButton, #editButton, #editUserIdButton, #deleteButton, #historyButton{
+#addRatesButton, #editRatesButton , #exitButton , #addButton, #moreButton, #more, #profileButton, #searchButton, #backButton, #editButton, #editUserIdButton, #deleteButton, #historyButton{
     -fx-background-color: transparent;
 }
 
-#addRatesButton:hover, #editRatesButton:hover, #exitButton:hover , #more:hover, #profileButton:hover, #searchButton:hover, #editUserIdButton:hover, #historyButton:hover, #backButton:hover, #editButton:hover, #deleteButton:hover{
+#addRatesButton:hover, #editRatesButton:hover, #exitButton:hover , #addButton:hover, #moreButton:hover, #more:hover, #profileButton:hover, #searchButton:hover, #editUserIdButton:hover, #historyButton:hover, #backButton:hover, #editButton:hover, #deleteButton:hover{
    -fx-background-color: #dedede;
 }
 
 
 
-#addRatesButton:pressed, #editRatesButton:pressed, #exitButton:pressed, #more:pressed, #profileButton:pressed, #searchButton:pressed, #editUserIdButton:pressed, #historyButton:pressed, #backButton:pressed, #editButton:pressed, #deleteButton:pressed{
+#addRatesButton:pressed, #editRatesButton:pressed, #exitButton:pressed, #addButton:pressed, #moreButton:pressed ,#more:pressed, #profileButton:pressed, #searchButton:pressed, #editUserIdButton:pressed, #historyButton:pressed, #backButton:pressed, #editButton:pressed, #deleteButton:pressed{
     -fx-background-color:  #b8b8b8;
 }
 

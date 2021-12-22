@@ -208,8 +208,7 @@ public class DataUtils {
     }
 
     public void writeRecommendations(String path, Recommendation[] recommendations) throws IOException{
-
-        System.out.println(recommendations.length);
+        
 
         File file = new File(path);
 

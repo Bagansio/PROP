@@ -4,6 +4,7 @@ import com.recommender.recommenderapp.Data.Utils.Utils;
 import com.recommender.recommenderapp.Domain.DataControllers.ICtrlData;
 import com.recommender.recommenderapp.Domain.Models.Item;
 import com.recommender.recommenderapp.Domain.Models.Recommendation;
+import com.recommender.recommenderapp.Domain.Models.User;
 import com.recommender.recommenderapp.Domain.Utils.AlgorithmTypes;
 import com.recommender.recommenderapp.Domain.Utils.PrecisionTypes;
 
@@ -151,6 +152,17 @@ public class CtrlDomain {
 
     public void editCurrentUserId(String newUserId){
         ctrlUsers.editCurrentUserId(newUserId);
+        changeToTempDataset();
+    }
+
+
+    public String[][] searchItems(String itemId, boolean isKnown){
+        User[] currentUser = ctrlUsers.getCurrentUser();
+        return ctrlItems.searchItems(itemId, currentUser);
+    }
+
+    public void addRateOfCurrentUser(String itemId, double newRate, boolean isKnown){
+        ctrlUsers.addRateCurrent(ctrlItems.getItems().get(itemId), newRate, getPosCurrentUser(isKnown));
         changeToTempDataset();
     }
 }

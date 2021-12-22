@@ -4,7 +4,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-<HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="625.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/17" fx:controller="com.recommender.recommenderapp.View.Views.ItemRecommendedInfoView">
+<HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="625.0" xmlns:fx="http://javafx.com/fxml/1"  fx:controller="com.recommender.recommenderapp.View.Views.ItemRecommendedInfoView">
    <children>
       <Label fx:id="idLabel" alignment="CENTER" prefHeight="71.0" prefWidth="150.0" text="ID">
          <font>

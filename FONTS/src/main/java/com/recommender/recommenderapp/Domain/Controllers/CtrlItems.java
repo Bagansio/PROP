@@ -3,7 +3,10 @@ package com.recommender.recommenderapp.Domain.Controllers;
 import com.recommender.recommenderapp.Domain.DataControllers.CtrlDataFactory;
 import com.recommender.recommenderapp.Domain.DataControllers.ICtrlData;
 import com.recommender.recommenderapp.Domain.Models.Item;
+import com.recommender.recommenderapp.Domain.Models.User;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -49,5 +52,35 @@ public class CtrlItems {
         ICtrlData loader = ctrlDataFactory.getICtrlData();
         items = loader.loadItems(dataset);
         return items != null;
+    }
+
+    public String[][] searchItems(String itemId, User[] currentUser){
+        List<String[]> search = new ArrayList<>();
+        for(Item item : items.values()){
+            boolean userHas = currentUser[0].getItem(item.getId()) != null || currentUser[1].getItem(item.getId()) != null;
+            if(! userHas && (item.getId().contains(itemId)|| item.getTitle().contains(itemId))){
+                List<String> itemData = new ArrayList<>();
+                itemData.add(item.getId());
+                itemData.add(item.getTitle());
+                for(String attribute : item.getDoubleAttributes().keySet()){
+                    itemData.add(attribute+"-"+item.getDoubleAttributes().get(attribute));
+                }
+                for(String attribute : item.getStringAttributes().keySet()){
+                    itemData.add(attribute+"-"+item.getStringAttributes().get(attribute));
+                }
+                for(String attribute : item.getIntAttributes().keySet()){
+                    itemData.add(attribute+"-"+item.getIntAttributes().get(attribute));
+                }
+                for(String attribute : item.getSetAttributes().keySet()){
+                    String attributeData = attribute + "-";
+                    for(String data : item.getSetAttributes().get(attribute)){
+                        attributeData += data + ";";
+                    }
+                    itemData.add(attributeData);
+                }
+                search.add(itemData.toArray(new String[0]));
+            }
+        }
+        return search.toArray(new String[0][]);
     }
 }

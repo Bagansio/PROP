@@ -15,9 +15,9 @@ import javafx.scene.text.Text;
 
 import java.io.File;
 
-public class ItemRatesView {
+public class ItemAddView {
 
-    private Boolean isKnown;
+    private boolean isKnown;
 
     @FXML
     public Text title;
@@ -25,8 +25,6 @@ public class ItemRatesView {
     @FXML
     public Button backButton;
 
-    @FXML
-    public Button addRatesButton;
 
     @FXML
     public Button searchButton;
@@ -35,7 +33,7 @@ public class ItemRatesView {
     public Button profileButton;
 
     @FXML
-    public VBox ratesBox;
+    public VBox addBox;
 
     @FXML
     public TextField searchText;
@@ -46,10 +44,6 @@ public class ItemRatesView {
     @FXML
     public Button unknownButton;
 
-    @FXML
-    public void goProfile(ActionEvent event){
-        Views.changeToProfile(event);
-    }
 
     @FXML
     public void setKnown(ActionEvent event){
@@ -62,7 +56,10 @@ public class ItemRatesView {
     }
 
     @FXML
-    public void add(ActionEvent event){CtrlView.changeScene(event,"ItemAddView");}
+    public void goProfile(ActionEvent event){
+        Views.changeToProfile(event);
+    }
+
 
     @FXML
     public void searchItems(ActionEvent event){
@@ -78,21 +75,22 @@ public class ItemRatesView {
 
     public void loadItems(String itemTitle){
 
-        ratesBox.getChildren().clear();
+        addBox.getChildren().clear();
 
-        String[][] rates;
-            rates = CtrlView.ctrlDomain.searchRatingsOfCurrentUser(itemTitle,isKnown);
-        for(String[] rate : rates){
+        String[][] items;
+        items = CtrlView.ctrlDomain.searchItems(itemTitle,isKnown);
+        System.out.println(items.length);
+        for(String[] item : items){
 
 
             try {
 
-                FXMLLoader fxmlLoader = new FXMLLoader(Views.getPath("ItemRateView.fxml"));
+                FXMLLoader fxmlLoader = new FXMLLoader(Views.getPath("ItemView.fxml"));
                 HBox hBox = fxmlLoader.load();
 
-                ItemRateView itemRateView = fxmlLoader.getController();
-                itemRateView.setData(rate);
-                ratesBox.getChildren().add(hBox);
+                ItemView itemView = fxmlLoader.getController();
+                itemView.setData(item);
+                addBox.getChildren().add(hBox);
             }
             catch(Exception e){
                 System.out.println(e.fillInStackTrace());
@@ -101,11 +99,13 @@ public class ItemRatesView {
     }
 
 
+
+
     private void setIsKnown(boolean isKnown){
         this.isKnown = isKnown;
         knownButton.setDisable(isKnown);
         unknownButton.setDisable(! isKnown);
-        ItemRateView.setIsKnown(isKnown);
+        ItemView.setIsKnown(isKnown);
         if(isKnown)
             title.setText("KNOWN RATES");
         else
@@ -117,9 +117,9 @@ public class ItemRatesView {
 
     public void initialize() {
         setIsKnown(true);
+        loadItems("");
         try {
             backButton.setGraphic(new ImageView(new Image(Views.getPath("icons"+ File.separator +"back.png").toExternalForm())));
-            addRatesButton.setGraphic(new ImageView(new Image(Views.getPath("icons"+ File.separator +"add.png").toExternalForm())));
             searchButton.setGraphic(new ImageView(new Image(Views.getPath("icons" + File.separator + "search.png").toExternalForm())));
             profileButton.setGraphic(new ImageView(new Image(Views.getPath("icons" + File.separator +"user.png").toExternalForm())));
         }

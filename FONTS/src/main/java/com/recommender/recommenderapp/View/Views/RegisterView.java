@@ -55,6 +55,6 @@ public class RegisterView {
      * Creates an instance of LoginUserView
      */
     public RegisterView(){
-        System.out.println("Using Register VIEW");
+
     }
 }

@@ -217,6 +217,7 @@ public class CtrlUsers {
             return false;
         User newUser = new User(userId);
         knownUsers.put(userId,newUser);
+        newUser = new User(userId);
         unknownUsers.put(userId,newUser);
         setCurrentUser(userId);
         return true;
@@ -235,5 +236,15 @@ public class CtrlUsers {
         unknownUsers.remove(oldUserId);
         knownUsers.put(newUserId,currentUser[0]);
         unknownUsers.put(newUserId,currentUser[1]);
+    }
+
+
+    public User[] getCurrentUser(){
+        return currentUser;
+    }
+
+    public void addRateCurrent(Item item, Double rate, int pos){
+        currentUser[pos].addItem(item);
+        currentUser[pos].addRate(item.getId(),rate);
     }
 }

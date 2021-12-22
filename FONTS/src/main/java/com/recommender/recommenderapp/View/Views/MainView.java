@@ -57,7 +57,7 @@ public class MainView {
             * Creates an instance of MainView
      */
     public MainView(){
-        System.out.println("Using Main VIEW");
+
     }
 
 
@@ -87,6 +87,8 @@ public class MainView {
         }
     }
 
+    @FXML
+    public void add(ActionEvent event) {CtrlView.changeScene(event,"ItemAddView");}
 
     @FXML
     public void changeEditRatesView(ActionEvent event){

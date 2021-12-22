@@ -38,7 +38,7 @@ public class ProfileView {
             * Creates an instance of MainView
      */
     public ProfileView(){
-        System.out.println("Using Profile VIEW");
+
     }
 
     @FXML
@@ -66,7 +66,7 @@ public class ProfileView {
     public void history(ActionEvent event) { CtrlView.changeScene(event,"RecommendationsView");}
 
     @FXML
-    public void add(ActionEvent event){}
+    public void add(ActionEvent event){CtrlView.changeScene(event,"ItemAddView");}
 
     public void initialize() {
         userIdLabel.setText(CtrlView.ctrlDomain.getCurrentUserId());

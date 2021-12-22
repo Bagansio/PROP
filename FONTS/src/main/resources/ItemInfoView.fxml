@@ -45,32 +45,27 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.recommender.recommenderapp.View.Views.RecommendationInfoView">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.recommender.recommenderapp.View.Views.ItemInfoView">
   <children>
     <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="795.0" prefWidth="1272.0" VBox.vgrow="ALWAYS">
       <children>
             <Accordion layoutX="553.0" layoutY="388.0" />
             <Button fx:id="backButton" layoutX="24.0" layoutY="28.0" mnemonicParsing="false" onAction="#back" />
-            <Button fx:id="profileButton" layoutX="1192.0" layoutY="28.0" mnemonicParsing="false" />
+            <Button fx:id="profileButton" layoutX="1192.0" layoutY="28.0" mnemonicParsing="false" onAction="#goProfile" />
             <HBox layoutX="325.0" layoutY="499.0" prefHeight="300.0" prefWidth="631.0">
                <children>
                   <ScrollPane prefHeight="300.0" prefWidth="631.0" style="-fx-border-color: black; -fx-border-width: 2;" stylesheets="@styles.css">
                      <content>
                         <VBox prefHeight="300.0" prefWidth="625.0">
                            <children>
-                              <HBox alignment="CENTER" prefHeight="40.0" prefWidth="625.0" style="-fx-background-color: e4e4e4;">
+                              <HBox alignment="CENTER_LEFT" prefHeight="40.0" prefWidth="625.0" style="-fx-background-color: e4e4e4;">
                                  <children>
-                                    <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="17.0" prefWidth="150.0" text="ID">
+                                    <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="17.0" prefWidth="141.0" text="ID">
                                        <font>
                                           <Font name="System Bold" size="12.0" />
                                        </font>
                                     </Label>
-                                    <Label alignment="CENTER" prefHeight="17.0" prefWidth="150.0" text="TITLE">
-                                       <font>
-                                          <Font name="System Bold" size="12.0" />
-                                       </font>
-                                    </Label>
-                                    <Label alignment="CENTER" prefHeight="35.0" prefWidth="150.0" text="CALCULATED RATE">
+                                    <Label alignment="CENTER" prefHeight="17.0" prefWidth="417.0" text="VALUE">
                                        <font>
                                           <Font name="System Bold" size="12.0" />
                                        </font>
@@ -86,14 +81,14 @@
             </HBox>
             <HBox alignment="CENTER" layoutY="71.0" prefHeight="100.0" prefWidth="1280.0">
                <children>
-                  <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+                  <VBox alignment="CENTER" prefHeight="194.0" prefWidth="179.0">
                      <children>
                         <ImageView fitHeight="90.0" fitWidth="119.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@icons/iconBig.png" />
                            </image>
                         </ImageView>
-                        <Text fx:id="title" strokeType="OUTSIDE" strokeWidth="0.0" text="RECOMMENDATION" textAlignment="CENTER">
+                        <Text fx:id="title" strokeType="OUTSIDE" strokeWidth="0.0" text="ITEM" textAlignment="CENTER">
                            <font>
                               <Font size="25.0" />
                            </font>
@@ -101,9 +96,18 @@
                               <Insets bottom="30.0" />
                            </VBox.margin>
                         </Text>
+                        <Button fx:id="addButton" mnemonicParsing="false" onAction="#add">
+                           <graphic>
+                              <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@icons/addSmall.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
                         <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                            <children>
-                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="ID: ">
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0">
                                  <font>
                                     <Font name="System Bold" size="18.0" />
                                  </font>
@@ -113,18 +117,15 @@
                                     <Font name="System Bold" size="18.0" />
                                  </font>
                               </Label>
-                              <Button fx:id="deleteButton" alignment="CENTER" mnemonicParsing="false" onAction="#deleteRecommendation">
-                                 <graphic>
-                                    <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
-                                       <image>
-                                          <Image url="@icons/delete.png" />
-                                       </image>
-                                    </ImageView>
-                                 </graphic>
-                                 <HBox.margin>
-                                    <Insets left="15.0" />
-                                 </HBox.margin>
-                              </Button>
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                           <children>
+                              <Label fx:id="titleLabel" text="title">
+                                 <font>
+                                    <Font name="System Bold" size="18.0" />
+                                 </font>
+                              </Label>
                            </children>
                         </HBox>
                      </children>
@@ -133,52 +134,8 @@
             </HBox>
             <VBox alignment="CENTER" layoutY="375.0" prefHeight="80.0" prefWidth="1280.0">
                <children>
-                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
-                     <children>
-                        <Label prefHeight="17.0" prefWidth="100.0" text="SCORE:">
-                           <font>
-                              <Font name="System Bold" size="12.0" />
-                           </font>
-                        </Label>
-                        <Label fx:id="rateLabel" prefHeight="17.0" prefWidth="125.0">
-                           <font>
-                              <Font name="System Bold" size="12.0" />
-                           </font></Label>
-                        <Button fx:id="editButton" contentDisplay="CENTER" maxHeight="25.0" maxWidth="25.0" mnemonicParsing="false" onAction="#editRate" textAlignment="CENTER">
-                           <graphic>
-                              <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@icons/editSmall.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                        </Button>
-                     </children>
-                  </HBox>
-                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
-                     <children>
-                        <Label prefHeight="17.0" prefWidth="100.0" text="PRECISION:">
-                           <font>
-                              <Font name="System Bold" size="12.0" />
-                           </font>
-                        </Label>
-                        <Label fx:id="precisionLabel" prefHeight="17.0" prefWidth="175.0" />
-                     </children>
-                  </HBox>
-                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
-                     <children>
-                        <Label prefHeight="17.0" prefWidth="100.0" text="ALGORITHM:">
-                           <font>
-                              <Font name="System Bold" size="12.0" />
-                           </font>
-                        </Label>
-                        <Label fx:id="algorithmLabel" prefHeight="17.0" prefWidth="175.0" />
-                     </children>
-                     <padding>
-                        <Insets bottom="15.0" />
-                     </padding>
-                  </HBox>
-                  <Label prefHeight="27.0" prefWidth="67.0" text="ITEMS" textAlignment="CENTER">
+                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" />
+                  <Label prefHeight="27.0" prefWidth="111.0" text="ATTRIBUTES" textAlignment="CENTER">
                      <font>
                         <Font name="System Bold" size="18.0" />
                      </font>

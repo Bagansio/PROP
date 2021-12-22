@@ -46,7 +46,7 @@ public class LoginUserView {
      * Creates an instance of LoginUserView
      */
     public LoginUserView(){
-        System.out.println("Using LoginUser VIEW");
+
     }
 
     /**
