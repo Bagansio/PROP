@@ -109,6 +109,10 @@ public class RecommendationInfoView {
         }
     }
 
+    @FXML
+    public void goProfile(ActionEvent event){
+        Views.changeToProfile(event);
+    }
 
 
     public void initialize() {

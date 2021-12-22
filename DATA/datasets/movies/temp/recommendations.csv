@@ -1,0 +1,3 @@
+recommendationId,userId,algorithm,recommendationRate,precisionType,itemsId-rate
+1,43448,CollaborativeFiltering,0,imprecise,296-4.50235294117647;150-3.81044776119403;380-3.721875;
+2,43448,CollaborativeFiltering,0,imprecise,296-4.212435233160622;150-3.9403846153846156;595-3.58974358974359;
