@@ -15,6 +15,10 @@ import javafx.scene.text.Text;
 
 import java.io.File;
 
+
+/**
+ * @author  Alex
+ */
 public class ItemAddView {
 
     private boolean isKnown;

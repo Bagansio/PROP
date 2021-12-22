@@ -4,7 +4,6 @@ import com.recommender.recommenderapp.Data.Utils.Utils;
 import com.recommender.recommenderapp.Domain.Controllers.CtrlItems;
 import com.recommender.recommenderapp.Domain.Controllers.CtrlUsers;
 import com.recommender.recommenderapp.View.Controllers.CtrlView;
-import com.recommender.recommenderapp.View.Utils.Styles;
 import com.recommender.recommenderapp.View.Utils.Views;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -13,6 +12,10 @@ import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
+
+/**
+ * @author Melanie
+ */
 public class LoginUserView {
 
 

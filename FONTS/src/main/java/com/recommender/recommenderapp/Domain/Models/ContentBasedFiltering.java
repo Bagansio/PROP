@@ -7,7 +7,7 @@ import java.util.stream.Collectors;
 /**
  * Represents the Content Based Filtering Algorithm.
  * @version 1.0, 20/11/21
- * @author Victor
+ * @author Alex
  */
 public class ContentBasedFiltering extends Algorithm{
 

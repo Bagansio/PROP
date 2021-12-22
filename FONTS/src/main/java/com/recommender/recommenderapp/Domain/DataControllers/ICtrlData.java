@@ -8,6 +8,10 @@ import com.recommender.recommenderapp.Exceptions.DirectoryDoesNotExist;
 
 import java.util.Map;
 
+
+/**
+ * @author Alex
+ */
 public interface ICtrlData {
 
     public boolean existTemp(String dataset);

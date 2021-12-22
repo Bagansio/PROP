@@ -11,6 +11,10 @@ import javafx.scene.image.ImageView;
 
 import java.util.Optional;
 
+
+/**
+ * @author Melanie
+ */
 public class ProfileView {
 
     @FXML

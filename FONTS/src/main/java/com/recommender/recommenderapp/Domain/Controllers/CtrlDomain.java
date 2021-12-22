@@ -12,6 +12,10 @@ import java.util.Arrays;
 import java.util.Map;
 import java.util.stream.Stream;
 
+
+/**
+ * @author  Alex
+ */
 public class CtrlDomain {
     private boolean useTemp;
     private CtrlItems ctrlItems = CtrlItems.getInstance();

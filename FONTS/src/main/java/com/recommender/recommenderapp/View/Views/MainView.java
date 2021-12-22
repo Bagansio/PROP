@@ -16,6 +16,10 @@ import javafx.scene.layout.VBox;
 import java.io.File;
 import java.util.Optional;
 
+
+/**
+ * @author Melanie
+ */
 public class MainView {
 
     @FXML

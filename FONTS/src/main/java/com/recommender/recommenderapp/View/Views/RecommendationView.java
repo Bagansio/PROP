@@ -10,6 +10,10 @@ import javafx.scene.layout.VBox;
 import java.util.Map;
 import java.util.Optional;
 
+
+/**
+ * @author Alex
+ */
 public class RecommendationView {
 
     @FXML

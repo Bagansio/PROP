@@ -9,6 +9,10 @@ import javafx.scene.layout.VBox;
 
 import java.util.Optional;
 
+
+/**
+ * @author Alex
+ */
 public class ItemView {
 
     private static boolean isKnown;

@@ -1,5 +1,9 @@
 package com.recommender.recommenderapp.Exceptions;
 
+
+/**
+ * @author Alex
+ */
 public class DirectoryDoesNotExist extends Exception{
 
     private String path;

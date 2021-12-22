@@ -31,6 +31,13 @@
             </Attribute>
           </value>
         </entry>
+        <entry key="\DATA\datasets\series\items.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
         <entry key="\DATA\datasets\series\ratings.test.known.csv">
           <value>
             <Attribute>

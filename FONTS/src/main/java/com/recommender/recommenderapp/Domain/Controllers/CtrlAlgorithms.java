@@ -8,6 +8,11 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.stream.Stream;
 
+
+/**
+ *
+ * @author Alex
+ */
 public class CtrlAlgorithms {
     private ContentBasedFiltering contentBasedFiltering = new ContentBasedFiltering();
     private NewCollaborativeFiltering collaborativeFiltering = new NewCollaborativeFiltering();

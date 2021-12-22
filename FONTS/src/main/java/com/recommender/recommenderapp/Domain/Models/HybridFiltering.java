@@ -5,6 +5,10 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+
+/**
+ * @author  Alex
+ */
 public class HybridFiltering extends Algorithm{
 
     ContentBasedFiltering contentBasedFiltering;

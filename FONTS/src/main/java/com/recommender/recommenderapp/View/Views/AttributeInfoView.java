@@ -10,6 +10,9 @@ import javafx.scene.layout.VBox;
 
 import java.util.Optional;
 
+/**
+ * @author Alex
+ */
 public class AttributeInfoView {
 
 

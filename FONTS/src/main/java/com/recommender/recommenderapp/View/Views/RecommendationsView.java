@@ -15,7 +15,9 @@ import javafx.scene.text.Text;
 
 import java.io.File;
 import java.util.Map;
-
+/**
+ * @author Alex
+ */
 public class RecommendationsView {
 
     @FXML

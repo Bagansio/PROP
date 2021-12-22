@@ -14,6 +14,10 @@ import javafx.scene.layout.VBox;
 import java.io.File;
 import java.util.Optional;
 
+
+/**
+ * @author Alex
+ */
 public class ItemInfoView {
 
     private static String[] data;

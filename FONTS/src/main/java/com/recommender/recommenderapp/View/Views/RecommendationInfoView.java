@@ -16,6 +16,10 @@ import javafx.scene.text.Text;
 import java.io.File;
 import java.util.Optional;
 
+
+/**
+ * @author Alex
+ */
 public class RecommendationInfoView {
 
     private static String recommendationId;
