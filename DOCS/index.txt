@@ -1,7 +1,27 @@
 .
-├───Class Diagrams
-├───drivers
-└───Memory
-    └───datasets
-        ├───movies
-        └───series
+├── Capa de datos.pdf
+├── Capa de presentación.pdf
+├── Casos de uso.pdf
+├── Class Diagrams
+│   ├── Data Layer Class Diagram.png
+│   ├── Domain Controllers Class Diagram.png
+│   ├── Domain Model Class Diagram.png
+│   ├── Presentation Layer Class Diagram.png
+│   └── UML-Layers.png
+├── Diagrama de clases.pdf
+├── Dominio.pdf
+├── Estructuras de datos y algoritmos.pdf
+├── Funcionalidades.pdf
+├── Juegos de prueba.pdf
+├── Manual de usuario.pdf
+├── Relación clases.pdf
+├── drivers
+│   ├── DriverCollaborativeFiltering.txt
+│   ├── DriverContentBasedFiltering.txt
+│   ├── DriverItem.txt
+│   ├── DriverRecommendation.txt
+│   ├── DriverUser.txt
+│   └── DriverUserGroup.txt
+└── index.txt
+
+2 directories, 22 files

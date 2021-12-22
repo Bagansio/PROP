@@ -1,0 +1,16 @@
+.
+├── datasets
+│   ├── movies
+│   │   ├── items.csv
+│   │   ├── ratings.db.csv
+│   │   ├── ratings.test.known.csv
+│   │   ├── ratings.test.unknown.csv
+│   │   └── recommendations.csv
+│   └── series
+│       ├── items.csv
+│       ├── ratings.db.csv
+│       ├── ratings.test.known.csv
+│       └── ratings.test.unknown.csv
+└── index.txt
+
+3 directories, 10 files

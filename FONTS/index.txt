@@ -2,43 +2,101 @@
 ├── index.txt
 └── src
     ├── main
-    │   └── java
-    │       ├── Exceptions
-    │       ├── com
-    │       │   └── recommender
-    │       │       └── recommenderapp
-    │       │           ├── Data
-    │       │           │   ├── Controllers
-    │       │           │   │   ├── CtrlCSVItemList.java
-    │       │           │   │   └── CtrlCSVUsers.java
-    │       │           │   └── Utils
-    │       │           │       ├── CSVReader.java
-    │       │           │       ├── Datasets.java
-    │       │           │       ├── ItemsCSVUtils.java
-    │       │           │       └── UserCSVUtils.java
-    │       │           ├── Domain
-    │       │           │   ├── Controllers
-    │       │           │   │   ├── CtrlItemList.java
-    │       │           │   │   └── CtrlUsers.java
-    │       │           │   ├── DataControllers
-    │       │           │   │   ├── CtrlDataFactory.java
-    │       │           │   │   ├── ICtrlCSVItemList.java
-    │       │           │   │   └── ICtrlCSVUser.java
-    │       │           │   ├── Models
-    │       │           │   │   ├── Algorithm.java
-    │       │           │   │   ├── ContentBasedFiltering.java
-    │       │           │   │   ├── Item.java
-    │       │           │   │   ├── NewCollaborativeFiltering.java
-    │       │           │   │   ├── Recommendation.java
-    │       │           │   │   ├── User.java
-    │       │           │   │   └── UserGroup.java
-    │       │           │   └── Utils
-    │       │           │       └── ItemTypes.java
-    │       │           ├── Main.java
-    │       │           └── Main.mf
-    │       └── module-info.java
+    │   ├── java
+    │   │   ├── com
+    │   │   │   └── recommender
+    │   │   │       └── recommenderapp
+    │   │   │           ├── Data
+    │   │   │           │   ├── Controllers
+    │   │   │           │   │   └── CtrlData.java
+    │   │   │           │   └── Utils
+    │   │   │           │       ├── CSVReader.java
+    │   │   │           │       ├── DataUtils.java
+    │   │   │           │       └── Utils.java
+    │   │   │           ├── Domain
+    │   │   │           │   ├── Controllers
+    │   │   │           │   │   ├── CtrlAlgorithms.java
+    │   │   │           │   │   ├── CtrlDomain.java
+    │   │   │           │   │   ├── CtrlItems.java
+    │   │   │           │   │   ├── CtrlRecommendations.java
+    │   │   │           │   │   └── CtrlUsers.java
+    │   │   │           │   ├── DataControllers
+    │   │   │           │   │   ├── CtrlDataFactory.java
+    │   │   │           │   │   └── ICtrlData.java
+    │   │   │           │   ├── Models
+    │   │   │           │   │   ├── Algorithm.java
+    │   │   │           │   │   ├── ContentBasedFiltering.java
+    │   │   │           │   │   ├── HybridFiltering.java
+    │   │   │           │   │   ├── Item.java
+    │   │   │           │   │   ├── NewCollaborativeFiltering.java
+    │   │   │           │   │   ├── Recommendation.java
+    │   │   │           │   │   ├── User.java
+    │   │   │           │   │   └── UserGroup.java
+    │   │   │           │   └── Utils
+    │   │   │           │       ├── AlgorithmTypes.java
+    │   │   │           │       ├── ItemTypes.java
+    │   │   │           │       └── PrecisionTypes.java
+    │   │   │           ├── Exceptions
+    │   │   │           │   └── DirectoryDoesNotExist.java
+    │   │   │           ├── Main.java
+    │   │   │           ├── Main.mf
+    │   │   │           └── View
+    │   │   │               ├── Controllers
+    │   │   │               │   └── CtrlView.java
+    │   │   │               ├── Utils
+    │   │   │               │   └── Views.java
+    │   │   │               └── Views
+    │   │   │                   ├── AttributeInfoView.java
+    │   │   │                   ├── DatasetsView.java
+    │   │   │                   ├── ItemAddView.java
+    │   │   │                   ├── ItemInfoView.java
+    │   │   │                   ├── ItemRateView.java
+    │   │   │                   ├── ItemRatesView.java
+    │   │   │                   ├── ItemRecommendedInfoView.java
+    │   │   │                   ├── ItemView.java
+    │   │   │                   ├── LoginUserView.java
+    │   │   │                   ├── MainView.java
+    │   │   │                   ├── ProfileView.java
+    │   │   │                   ├── RecommendationInfoView.java
+    │   │   │                   ├── RecommendationView.java
+    │   │   │                   ├── RecommendationsView.java
+    │   │   │                   └── RegisterView.java
+    │   │   └── module-info.java
+    │   └── resources
+    │       ├── AttributeInfoView.fxml
+    │       ├── DatasetsView.fxml
+    │       ├── ItemAddView.fxml
+    │       ├── ItemInfoView.fxml
+    │       ├── ItemRateView.fxml
+    │       ├── ItemRatesView.fxml
+    │       ├── ItemRecommendedInfoView.fxml
+    │       ├── ItemView.fxml
+    │       ├── LoginUserView.fxml
+    │       ├── MainView.fxml
+    │       ├── ProfileView.fxml
+    │       ├── RecommendationInfoView.fxml
+    │       ├── RecommendationView.fxml
+    │       ├── RecommendationsView.fxml
+    │       ├── RegisterView.fxml
+    │       ├── icons
+    │       │   ├── add.png
+    │       │   ├── addSmall.png
+    │       │   ├── back.png
+    │       │   ├── delete.png
+    │       │   ├── editBig.png
+    │       │   ├── editSmall.png
+    │       │   ├── exit.png
+    │       │   ├── history.png
+    │       │   ├── iconBig.png
+    │       │   ├── iconSmall.png
+    │       │   ├── more.png
+    │       │   ├── search.png
+    │       │   └── user.png
+    │       └── styles.css
     └── test
         └── java
+            ├── fakes
+            │   └── FakeAlgorithm.java
             ├── stubs
             │   ├── StubsCollaborativeFiltering.java
             │   ├── StubsContentBasedFiltering.java
@@ -51,7 +109,6 @@
                 │   └── Utils
                 │       └── CSVReaderTest.java
                 └── Domain
-                    ├── Controllers
                     └── Models
                         ├── DriverCollaborativeFiltering.java
                         ├── DriverCollaborativeFiltering.mf
@@ -60,12 +117,15 @@
                         ├── DriverItem.mf
                         ├── DriverRecommendation.java
                         ├── DriverRecommendation.mf
+                        ├── DriverRecommendationUnitary.java
                         ├── DriverUser.java
                         ├── DriverUser.mf
                         ├── DriverUserGroup.java
                         ├── DriverUserGroup.mf
                         ├── DriverUserUnitary.java
+                        ├── JUnitRecommendation.java
+                        ├── JUnitRecommendation.mf
                         ├── JUnitUser.java
                         └── JUnitUser.mf
 
-24 directories, 44 files
+30 directories, 98 files
