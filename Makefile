@@ -1,6 +1,7 @@
 
 SRCAPP = FONTS/src/main/java/com/recommender/recommenderapp
 SRCTEST = FONTS/src/test/java
+MODS = javafx.controls,javafx.fxml
 TARGET = target
 EXE = EXE
 LIBS = libs/junit-4.13.2.jar:libs/hamcrest-core-1.3.jar
@@ -13,15 +14,21 @@ clean:
 	rm -r $(EXE)
 
 build:
-	javac -cp  $(LIBS) -d target $(SRCAPP)/Domain/Models/*.java \
-	                          $(SRCAPP)/Domain/DataControllers/*.java \
-	                          $(SRCAPP)/Domain/Controllers/*.java \
-	                          $(SRCAPP)/Domain/Utils/*.java \
-	                          $(SRCAPP)/Data/Controllers/*.java \
-	                          $(SRCAPP)/Data/Utils/*.java \
-	                          $(SRCAPP)/*.java \
-	                          $(SRCTEST)/stubs/*.java \
-	                          $(SRCTEST)/test/Domain/Models/*.java
+	javac -cp  $(LIBS)  --module-path libs/$(HOSTOS)  --add-modules $(MODS)   -d target $(SRCAPP)/Domain/Models/*.java \
+																				$(SRCAPP)/Data/Controllers/*.java \
+																				$(SRCAPP)/Exceptions/*.java \
+																				$(SRCAPP)/Domain/Controllers/*.java \
+																				$(SRCAPP)/Domain/Utils/*.java \
+																				$(SRCAPP)/Data/Controllers/*.java \
+																				$(SRCAPP)/Domain/DataControllers/*.java \
+																				$(SRCAPP)/Data/Utils/*.java \
+																				$(SRCAPP)/View/Controllers/*.java \
+																				$(SRCAPP)/View/Utils/*.java \
+																				$(SRCAPP)/View/Views/*.java \
+																				$(SRCAPP)/*.java \
+																				$(SRCTEST)/stubs/*.java \
+																				$(SRCTEST)/test/Domain/Models/*.java \
+																				$(SRCTEST)/fakes/*.java
 
 
 
@@ -82,3 +89,13 @@ compile_all:
 	make compile_test_UserUnitary
 
 
+ifeq ($(OS),Windows_NT)
+HOSTOS := Windows
+else
+UNAME_S := $(shell uname -s)
+	ifeq ($(UNAME_S),Darwin)
+HOSTOS := MacOS
+	else
+HOSTOS := Linux
+	endif
+endif
