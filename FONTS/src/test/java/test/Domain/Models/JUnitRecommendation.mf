@@ -1,0 +1,4 @@
+Manifest-Version: 1.0
+Main-Class: test.Domain.Models.JUnitRecommendation
+Class-Path: libs/junit-4.13.2.jar libs/hamcrest-core-1.3.jar
+Created-By: Alex Moa , Artur Farriols Raimí, Víctor Muñoz Fajardo, Mélanie Scaténa
