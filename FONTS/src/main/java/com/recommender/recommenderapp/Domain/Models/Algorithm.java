@@ -17,7 +17,7 @@ public abstract class Algorithm {
     /**
      * creates an instance of the class
      */
-    Algorithm() {
+    public Algorithm() {
         this.kmeans = 3;
         this.knn = 10;
     }
